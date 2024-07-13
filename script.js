@@ -48,8 +48,7 @@ function convertFormat() {
     output += `  - name: 🔥 ChatGPT
     type: select
     proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连\n`;
+      - 🚀 节点选择\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
         const match = line.match(regex);
@@ -61,7 +60,6 @@ function convertFormat() {
     output += `  - name: Ⓜ️ 微软服务
     type: select
     proxies:
-      - 🎯 全球直连
       - 🚀 节点选择\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
@@ -74,7 +72,6 @@ function convertFormat() {
     output += `  - name: 🍎 苹果服务
     type: select
     proxies:
-      - 🚀 节点选择
       - 🎯 全球直连\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
