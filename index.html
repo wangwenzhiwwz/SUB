@@ -12,34 +12,34 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
-            background: #f9f9f9; /* 浅白色背景 */
-            color: #333; /* 深灰色文本 */
+            background: #f9f9f9;
+            color: #333;
         }
 
         .navbar {
-            position: fixed; /* 固定导航栏 */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: white; /* 白色背景 */
-            padding: 15px 30px; /* 增加内边距 */
+            background-color: white;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000; /* 确保在最上层 */
+            z-index: 1000;
         }
 
         .navbar h1 {
             margin: 0;
-            font-size: 1em; /* 增加标题字体大小 */
-            color: #000; /* 黑色标题 */
+            font-size: 1em;
+            color: #000;
         }
 
         .navbar a {
-            color: #000; /* 黑色链接 */
+            color: #000;
             text-decoration: none;
-            margin-left: 30px; /* 增加链接间距 */
+            margin-left: 30px;
             font-size: 1em;
         }
 
@@ -49,57 +49,43 @@
 
         .container {
             display: flex;
-            flex-direction: column; /* 列布局以支持小屏幕 */
+            flex-direction: column;
             width: 90%;
-            max-width: 1200px; /* 容器最大宽度 */
-            margin: 100px auto; /* 增加顶部间距以避免被导航栏遮挡 */
-            background: white; /* 白色背景 */
-            padding: 40px; /* 增加内边距 */
+            max-width: 1200px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
             border-radius: 12px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
 
-        @media (min-width: 600px) {
-            .container {
-                flex-direction: row; /* 大屏幕上使用行布局 */
-            }
-
-            .input-section, .output-section {
-                width: 65%; /* 每个部分占用 65% 的宽度 */
-                margin-right: 20px; /* 增加右边距 */
-            }
-
-            .output-section {
-                margin-right: 0; /* 取消右边距以防止溢出 */
-            }
-        }
-
         .input-section, .output-section {
-            width: 100%; /* 默认占满宽度 */
+            width: 100%;
+            margin: 10px 0;
         }
 
         textarea {
             width: 100%;
-            height: 200px; /* 增加高度 */
+            height: 200px;
             margin: 10px 0;
             padding: 10px;
             font-size: 16px;
-            border: 1px solid #ccc; /* 边框颜色 */
+            border: 1px solid #ccc;
             border-radius: 8px;
             resize: vertical;
             box-sizing: border-box;
             transition: border-color 0.3s;
-            color: #000; /* 黑色文本 */
-            background-color: #fff; /* 白色背景 */
+            color: #000;
+            background-color: #fff;
         }
 
         textarea:focus {
-            border-color: #000; /* 聚焦时黑色边框 */
+            border-color: #000;
             outline: none;
         }
 
         button {
-            margin: 5px;
+            margin: 5px 0;
             padding: 12px 20px;
             font-size: 16px;
             border: none;
@@ -110,19 +96,48 @@
         }
 
         .convert-btn {
-            background-color: #000; /* 黑色按钮 */
+            background-color: #000;
+            width: 100%;
         }
 
         .convert-btn:hover {
-            background-color: #333; /* 深灰色悬停 */
+            background-color: #333;
         }
 
         .copy-btn {
-            background-color: #555; /* 深灰色按钮 */
+            background-color: #555;
+            width: 100%;
         }
 
         .copy-btn:hover {
-            background-color: #333; /* 更深灰色悬停 */
+            background-color: #333;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (min-width: 600px) {
+            .container {
+                flex-direction: row;
+            }
+            .input-section, .output-section {
+                width: 48%;
+                margin-right: 20px;
+            }
+            .output-section {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 599px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar h1 {
+                margin-bottom: 10px;
+            }
+            .input-section, .output-section {
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
@@ -219,12 +234,11 @@
             }
 
             function copyToClipboard() {
-    const outputText = document.getElementById('outputText');
-    outputText.select();
-    outputText.setSelectionRange(0, 99999); // For mobile devices
-    document.execCommand('copy');
-}
-
+                const outputText = document.getElementById('outputText');
+                outputText.select();
+                outputText.setSelectionRange(0, 99999);
+                document.execCommand('copy');
+            }
 
             document.getElementById('convertFormat').addEventListener('click', convertFormat);
             document.getElementById('copyToClipboard').addEventListener('click', copyToClipboard);
