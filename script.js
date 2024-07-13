@@ -15,10 +15,11 @@ function convertFormat() {
         }
     });
 
-    output += `proxy-groups:
+   output += `proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
+      - ♻️ 自动选择
       - DIRECT\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
@@ -28,8 +29,21 @@ function convertFormat() {
             output += `      - ${name}\n`;
         }
     });
+    output += `  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:\n`;
+    lines.forEach(line => {
+        const regex = /#(.+)$/;
+        const match = line.match(regex);
+        if (match) {
+            const name = match[1];
+            output += `      - ${name}\n`;
+        }
+    });
    
-    
     output += `  - name: 🔥 ChatGPT
     type: select
     proxies:
@@ -46,10 +60,20 @@ function convertFormat() {
     output += `  - name: Ⓜ️ 微软服务
     type: select
     proxies:
+      - 🎯 全球直连
       - 🚀 节点选择\n`;
+    lines.forEach(line => {
+        const regex = /#(.+)$/;
+        const match = line.match(regex);
+        if (match) {
+            const name = match[1];
+            output += `      - ${name}\n`;
+        }
+    });
     output += `  - name: 🍎 苹果服务
     type: select
     proxies:
+      - 🚀 节点选择
       - 🎯 全球直连\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
@@ -79,7 +103,6 @@ function convertFormat() {
             output += `      - ${name}\n`;
         }
     });
-
     document.getElementById('outputText').value = output;
 }
 
