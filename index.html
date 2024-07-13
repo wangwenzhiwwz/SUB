@@ -16,10 +16,10 @@
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start; 
+            min-height: 100vh;
             padding: 20px;
-            box-sizing: border-box; /* 包含内边距在宽度计算中 */
+            box-sizing: border-box;
         }
 
         .navbar {
@@ -38,7 +38,7 @@
 
         .navbar h1 {
             margin: 0;
-            font-size: 1em;
+            font-size: 1em; /* 增加标题字体大小 */
             color: #000;
         }
 
@@ -57,10 +57,10 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            max-width: 600px; /* 调整最大宽度 */
-            margin: 100px auto;
+            max-width: 1500px; /* 增加最大宽度 */
+            margin: 80px auto; 
             background: white;
-            padding: 20px; /* 调整内边距 */
+            padding: 20px; 
             border-radius: 12px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
@@ -73,7 +73,7 @@
 
         textarea {
             width: 100%;
-            height: 150px; /* 调整高度以适应小屏幕 */
+            height: 200px; 
             margin: 10px 0;
             padding: 10px;
             font-size: 16px;
@@ -119,16 +119,15 @@
             background-color: #333;
         }
 
-        /* Media Queries for responsiveness */
         @media (min-width: 600px) {
             .container {
                 flex-direction: row;
                 justify-content: space-between;
-                padding: 20px; /* 调整内边距 */
+                padding: 20px;
             }
             .input-section, .output-section {
                 width: 48%; /* 每个部分占用48% */
-                margin: 0 10px; /* 增加间距 */
+                margin: 0 10px; 
             }
             .input-section {
                 margin-right: 0;
