@@ -14,6 +14,12 @@
             margin: 0;
             background: #f9f9f9;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box; /* 包含内边距在宽度计算中 */
         }
 
         .navbar {
@@ -50,13 +56,14 @@
         .container {
             display: flex;
             flex-direction: column;
-            width: 90%;
-            max-width: 1200px;
+            width: 100%;
+            max-width: 600px; /* 调整最大宽度 */
             margin: 100px auto;
             background: white;
-            padding: 40px;
+            padding: 20px; /* 调整内边距 */
             border-radius: 12px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
         }
 
         .input-section, .output-section {
@@ -66,7 +73,7 @@
 
         textarea {
             width: 100%;
-            height: 200px;
+            height: 150px; /* 调整高度以适应小屏幕 */
             margin: 10px 0;
             padding: 10px;
             font-size: 16px;
@@ -93,11 +100,11 @@
             cursor: pointer;
             color: white;
             transition: background-color 0.3s ease, transform 0.2s;
+            width: 100%; /* 按钮宽度100% */
         }
 
         .convert-btn {
             background-color: #000;
-            width: 100%;
         }
 
         .convert-btn:hover {
@@ -106,7 +113,6 @@
 
         .copy-btn {
             background-color: #555;
-            width: 100%;
         }
 
         .copy-btn:hover {
@@ -117,26 +123,15 @@
         @media (min-width: 600px) {
             .container {
                 flex-direction: row;
+                justify-content: space-between;
+                padding: 20px; /* 调整内边距 */
             }
             .input-section, .output-section {
-                width: 48%;
-                margin-right: 20px;
+                width: 48%; /* 每个部分占用48% */
+                margin: 0 10px; /* 增加间距 */
             }
-            .output-section {
+            .input-section {
                 margin-right: 0;
-            }
-        }
-
-        @media (max-width: 599px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .navbar h1 {
-                margin-bottom: 10px;
-            }
-            .input-section, .output-section {
-                margin: 10px 0;
             }
         }
     </style>
