@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="https://wangwenzhi.eu.org/images/favicon_io/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-16x16.png">
-	<link rel="manifest" href="https://wangwenzhi.eu.org/images/favicon_io/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="https://wangwenzhi.eu.org/images/favicon_io/site.webmanifest">
     <title>SUB.WWZ.iM</title>
     <style>
         body {
@@ -129,7 +129,7 @@
 <body>
     <div class="navbar">
         <h1>
-            <a href="https://sub.wwz.im/"></a> SUB.WWZ.iM 节点转换</a>
+            <a href="https://sub.wwz.im/">SUB.WWZ.iM 节点转换</a>
         </h1>
         <div>
             <a href="https://www.wwz.im/" target="_blank">WWZ.iM</a>
@@ -139,13 +139,96 @@
     <div class="container">
         <div class="input-section">
             <textarea id="inputText" placeholder="输入 hysteria2 链接，每行一个..."></textarea>
-            <button class="convert-btn" onclick="convertFormat()">转换格式</button>
+            <button id="convertFormat" class="convert-btn">转换格式</button>
         </div>
         <div class="output-section">
             <textarea id="outputText" readonly placeholder="转换后的内容..."></textarea>
-            <button class="copy-btn" onclick="copyToClipboard()">复制结果</button>
+            <button id="copyToClipboard" class="copy-btn">复制结果</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function convertFormat() {
+                const inputText = document.getElementById('inputText').value.trim();
+                const lines = inputText.split('\n');
+                let output = 'proxies:\n';
+
+                const hysteriaRegex = /^hysteria2:\/\/([^@]+)@([^:]+):(\d+)\/\?sni=([^&]+)&insecure=\d+#(.+)$/;
+                const nameRegex = /#(.+)$/;
+
+                lines.forEach(line => {
+                    const match = line.match(hysteriaRegex);
+                    if (match) {
+                        const [_, password, server, port, sni, name] = match;
+                        const proxy = `  - {"name":"${name}","type":"hysteria2","server":"${server}","port":${port},"password":"${password}","sni":"${sni}","skip-cert-verify":true}\n`;
+                        output += proxy;
+                    }
+                });
+
+                output += `proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - DIRECT\n`;
+
+                lines.forEach(line => {
+                    const match = line.match(nameRegex);
+                    if (match) {
+                        const name = match[1];
+                        output += `      - ${name}\n`;
+                    }
+                });
+
+                output += `  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:\n`;
+
+                lines.forEach(line => {
+                    const match = line.match(nameRegex);
+                    if (match) {
+                        const name = match[1];
+                        output += `      - ${name}\n`;
+                    }
+                });
+
+                const proxyGroups = [
+                    { name: "🔥 ChatGPT", proxies: ["🚀 节点选择"] },
+                    { name: "Ⓜ️ 微软服务", proxies: ["🚀 节点选择"] },
+                    { name: "🍎 苹果服务", proxies: ["🎯 全球直连"] },
+                    { name: "🎯 全球直连", proxies: ["DIRECT", "🚀 节点选择", "♻️ 自动选择"] },
+                    { name: "🐟 漏网之鱼", proxies: ["🚀 节点选择", "🎯 全球直连", "♻️ 自动选择"] }
+                ];
+
+                proxyGroups.forEach(group => {
+                    output += `  - name: ${group.name}\n    type: select\n    proxies:\n`;
+                    group.proxies.forEach(proxy => output += `      - ${proxy}\n`);
+                    lines.forEach(line => {
+                        const match = line.match(nameRegex);
+                        if (match) {
+                            const name = match[1];
+                            output += `      - ${name}\n`;
+                        }
+                    });
+                });
+
+                document.getElementById('outputText').value = output;
+            }
+
+            function copyToClipboard() {
+    const outputText = document.getElementById('outputText');
+    outputText.select();
+    outputText.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand('copy');
+}
+
+
+            document.getElementById('convertFormat').addEventListener('click', convertFormat);
+            document.getElementById('copyToClipboard').addEventListener('click', copyToClipboard);
+        });
+    </script>
 </body>
 </html>
