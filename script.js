@@ -15,7 +15,8 @@ function convertFormat() {
         }
     });
 
-   output += `proxy-groups:
+
+ output += `proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
@@ -47,6 +48,8 @@ function convertFormat() {
     output += `  - name: 🔥 ChatGPT
     type: select
     proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
         const match = line.match(regex);
@@ -71,6 +74,7 @@ function convertFormat() {
     output += `  - name: 🍎 苹果服务
     type: select
     proxies:
+      - 🚀 节点选择
       - 🎯 全球直连\n`;
     lines.forEach(line => {
         const regex = /#(.+)$/;
@@ -100,6 +104,8 @@ function convertFormat() {
             output += `      - ${name}\n`;
         }
     });
+
+    
     document.getElementById('outputText').value = output;
 }
 
