@@ -160,7 +160,39 @@
             function convertFormat() {
                 const inputText = document.getElementById('inputText').value.trim();
                 const lines = inputText.split('\n');
-                let output = 'proxies:\n';
+                let output = `
+####################################
+# 创建者：WWZ
+# 客户端：Clash.Meta
+# 创建时间：2024-07-10 00:44:52
+####################################
+# !!当前配置文件请使用基于 Clash.Meta 内核程序
+mixed-port: 7890
+allow-lan: true
+log-level: info
+external-controller: 0.0.0.0:9090
+dns:
+  enabled: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  default-nameserver:
+    - 223.5.5.5
+    - 114.114.114.114
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - '*.mcdn.bilivideo.cn'
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback-filter:
+    geoip: false
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+
+proxies:\n`;
 
                 const hysteriaRegex = /^hysteria2:\/\/([^@]+)@([^:]+):(\d+)\/\?sni=([^&]+)&insecure=\d+#(.+)$/;
                 const nameRegex = /#(.+)$/;
@@ -174,12 +206,7 @@
                     }
                 });
 
-                output += `proxy-groups:
-  - name: 🚀 节点选择
-    type: select
-    proxies:
-      - ♻️ 自动选择
-      - DIRECT\n`;
+                output += `proxy-groups:\n  - name: 🚀 节点选择\n    type: select\n    proxies:\n      - ♻️ 自动选择\n      - DIRECT\n`;
 
                 lines.forEach(line => {
                     const match = line.match(nameRegex);
@@ -189,12 +216,7 @@
                     }
                 });
 
-                output += `  - name: ♻️ 自动选择
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
-    proxies:\n`;
+                output += `  - name: ♻️ 自动选择\n    type: url-test\n    url: http://www.gstatic.com/generate_204\n    interval: 300\n    tolerance: 50\n    proxies:\n`;
 
                 lines.forEach(line => {
                     const match = line.match(nameRegex);
@@ -223,6 +245,51 @@
                         }
                     });
                 });
+
+                // 添加尾部固定内容
+                output += `
+rules:
+# 本地/局域网地址
+# 参考：https://en.wikipedia.org/wiki/Reserved_IP_addresses
+# ACL4SSR标志 如没有，代表不是用ACL4SSR规则
+# 本地/局域网地址
+# Router managed 路由器管理域名
+  - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
+  - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
+  - DOMAIN-SUFFIX,ip6-loopback,🎯 全球直连
+
+# 内容：OpenAi Bard anthropic
+  - DOMAIN-KEYWORD,chatgpt,🔥 ChatGPT
+  - DOMAIN-KEYWORD,openai,🔥 ChatGPT
+
+# Microsoft Services
+# optimized from https://gist.github.com/TTTPOB/ce93fb3b04ba2f21880b09427442d831
+# source: https://docs.microsoft.com/en-us/office365/enterprise/urls-and-ip-address-ranges
+  - DOMAIN-KEYWORD,1drv,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,trafficmanager.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,uservoice.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,virtualearth.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,yammerusercontent.com,Ⓜ️ 微软服务
+
+# Apple
+# 一般国内Apple肯定正常,不需要开代理
+  - DOMAIN-SUFFIX,apple.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,aaplimg.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,akadns.net,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple-cloudkit.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple-mapkit.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple.co,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple.com,🍎 苹果服务
+  - IP-CIDR,205.180.175.0/24,🍎 苹果服务,no-resolve
+
+# 代理列表
+# VikACG
+  - DOMAIN-SUFFIX,x.com,🚀 节点选择
+  - DOMAIN-SUFFIX,1password.com,🚀 节点选择
+  - DOMAIN-SUFFIX,adguard.org,🚀 节点选择
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
+`;
 
                 document.getElementById('outputText').value = output;
             }
