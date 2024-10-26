@@ -281,6 +281,7 @@ proxies:\n`;
 
                 const proxyGroups = [
                     { name: "🧸 OpenAI", proxies: ["🚀 节点选择"] },
+                    { name: "🎵 TikTok", proxies: ["🚀 节点选择"] },
                     { name: "Ⓜ️ 微软服务", proxies: ["🚀 节点选择"] },
                     { name: "🍎 苹果服务", proxies: ["🎯 全球直连"] },
                     { name: "🎯 全球直连", proxies: ["DIRECT", "🚀 节点选择", "♻️ 自动选择"] },
@@ -386,6 +387,45 @@ rules:
   - IP-CIDR,24.199.123.28/32,🧸 OpenAI,no-resolve
   - IP-CIDR,64.23.132.171/32,🧸 OpenAI,no-resolve
   - IP-ASN,20473,🧸 OpenAI,no-resolve
+
+
+# NAME: TikTok
+# AUTHOR: blackmatrix7
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+# UPDATED: 2024-08-05 02:10:46
+# DOMAIN: 3
+# DOMAIN-KEYWORD: 2
+# DOMAIN-SUFFIX: 22
+# PROCESS-NAME: 1
+# TOTAL: 28
+  - DOMAIN,lf16-effectcdn.byteeffecttos-g.com,🎵 TikTok
+  - DOMAIN,lf16-pkgcdn.pitaya-clientai.com,🎵 TikTok
+  - DOMAIN,p16-tiktokcdn-com.akamaized.net,🎵 TikTok
+  - DOMAIN-SUFFIX,bytedapm.com,🎵 TikTok
+  - DOMAIN-SUFFIX,bytegecko-i18n.com,🎵 TikTok
+  - DOMAIN-SUFFIX,byteoversea.com,🎵 TikTok
+  - DOMAIN-SUFFIX,capcut.com,🎵 TikTok
+  - DOMAIN-SUFFIX,ibytedtos.com,🎵 TikTok
+  - DOMAIN-SUFFIX,ibyteimg.com,🎵 TikTok
+  - DOMAIN-SUFFIX,ipstatp.com,🎵 TikTok
+  - DOMAIN-SUFFIX,isnssdk.com,🎵 TikTok
+  - DOMAIN-SUFFIX,muscdn.com,🎵 TikTok
+  - DOMAIN-SUFFIX,musical.ly,🎵 TikTok
+  - DOMAIN-SUFFIX,sgpstatp.com,🎵 TikTok
+  - DOMAIN-SUFFIX,snssdk.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tik-tokapi.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktok.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokcdn-us.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokcdn.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokd.net,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokd.org,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokmusic.app,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokv.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokv.us,🎵 TikTok
+  - DOMAIN-SUFFIX,ttwebview.com,🎵 TikTok
+  - DOMAIN-KEYWORD,musical.ly,🎵 TikTok
+  - DOMAIN-KEYWORD,tiktok,🎵 TikTok
+  - PROCESS-NAME,com.zhiliaoapp.musically,🎵 TikTok
 
 
 # Microsoft Services
