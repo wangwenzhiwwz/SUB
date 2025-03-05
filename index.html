@@ -3,167 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert Hysteria2 links to Clash.Meta effortlessly with SUB.WWZ.iM">
     <link rel="apple-touch-icon" sizes="180x180" href="https://wangwenzhi.eu.org/images/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="https://wangwenzhi.eu.org/images/favicon_io/site.webmanifest">
     <title>SUB.WWZ.iM</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap');
+
+        :root {
+            --black: #1d1d1f;
+            --gray: #86868b;
+            --light-gray: #f5f5f7;
+            --white: #ffffff;
+            --accent: #06c;
+            --text-dark: #000000;
+            --text-light: #ffffff;
+            --transition: all 0.3s ease;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --input-bg: #fafafa;
+            --scrollbar-thumb: rgba(0, 0, 0, 0.3);
+            --scrollbar-track: transparent;
+            --button-bg: #e8e8ed; /* Light gray for button */
+            --button-hover: #d1d1d6; /* Darker gray on hover */
+            --button-text: #1d1d1f; /* Black text */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --black: #ffffff;
+                --gray: #a1a1a6;
+                --light-gray: #1c2526;
+                --white: #121212;
+                --accent: #0a84ff;
+                --text-dark: #ffffff;
+                --text-light: #000000;
+                --shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+                --input-bg: #2c2c2e;
+                --scrollbar-thumb: rgba(255, 255, 255, 0.3);
+                --scrollbar-track: transparent;
+                --button-bg: #2c2c2e; /* Dark gray for button */
+                --button-hover: #3a3a3c; /* Lighter gray on hover */
+                --button-text: #ffffff; /* White text */
+            }
+        }
+
+        * {
             margin: 0;
-            background: #f9f9f9;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; 
-            min-height: 100vh;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        .navbar {
-            position: fixed;
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            box-shadow: var(--shadow);
         }
 
-        .navbar h1 {
-            margin: 0;
-            font-size: 1em; /* 增加标题字体大小 */
-            color: #000;
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .navbar a {
-            color: #000;
+        nav .logo-img {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+        }
+
+        nav a {
+            color: var(--black);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 1em;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
-        .navbar a:hover {
-            text-decoration: underline;
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        nav .links a {
+            margin-left: 30px;
         }
 
         .container {
+            max-width: 1080px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
-            width: 100%;
-            max-width: 1500px; /* 增加最大宽度 */
-            margin: 80px auto; 
-            background: white;
-            padding: 20px; 
-            border-radius: 12px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            box-sizing: border-box;
+            gap: 40px;
+            position: relative;
         }
 
-        .input-section, .output-section {
-            width: 100%;
-            margin: 10px 0;
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--black);
+            margin: 0;
+        }
+
+        .section.input {
+            background: var(--input-bg);
+            padding: 20px;
+            border-radius: 12px;
         }
 
         textarea {
             width: 100%;
-            height: 200px; 
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            min-width: 100%;
+            padding: 15px;
+            font-size: 14px;
+            border: 1px solid #e0e0e0; /* Softer border */
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--text-dark);
             resize: vertical;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-            color: #000;
-            background-color: #fff;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: "SF Pro Display", monospace;
+            line-height: 1.4;
+            overflow-y: auto;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            margin-top: 10px; /* Lower scrollbar start */
+            margin-bottom: 10px; /* Consistent bottom spacing */
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            textarea::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .section.input textarea {
+            height: 170px; /* 7 lines */
+            background: linear-gradient(to bottom, #ffffff, #f9f9f9); /* Subtle gradient */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .section.input textarea {
+                background: linear-gradient(to bottom, #1c2526, #2c2c2e);
+            }
+        }
+
+        .section.output textarea {
+            height: 300px;
         }
 
         textarea:focus {
-            border-color: #000;
+            border-color: var(--accent);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
         }
 
-        button {
-            margin: 5px 0;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
+        textarea:hover {
+            border-color: var(--gray);
+        }
+
+        .copy-button {
+            align-self: flex-end;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--button-text);
+            background: var(--button-bg);
+            border: 1px solid #d1d1d6; /* Subtle border */
             border-radius: 8px;
             cursor: pointer;
-            color: white;
-            transition: background-color 0.3s ease, transform 0.2s;
-            width: 100%; /* 按钮宽度100% */
+            transition: var(--transition);
         }
 
-        .convert-btn {
-            background-color: #000;
+        .copy-button:hover {
+            background: var(--button-hover);
+            border-color: #b8b8bd;
         }
 
-        .convert-btn:hover {
-            background-color: #333;
+        .toast {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--black);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 10;
         }
 
-        .copy-btn {
-            background-color: #555;
+        .toast.show {
+            opacity: 1;
         }
 
-        .copy-btn:hover {
-            background-color: #333;
+        footer {
+            background: var(--light-gray);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 13px;
+            line-height: 1.38462;
         }
 
-        @media (min-width: 600px) {
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .footer-copyright {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        .footer-links a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 0 10px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gray);
+            text-decoration: underline;
+        }
+
+        .footer-links span {
+            display: inline-block;
+            width: 1px;
+            height: 13px;
+            background: var(--gray);
+            margin: 0 10px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            nav {
+                background: rgba(18, 18, 18, 0.95);
+            }
+            textarea {
+                border-color: #3a3a3c;
+            }
+            .section h2 {
+                color: var(--white);
+            }
+            .toast {
+                background: var(--gray);
+                color: var(--text-light);
+            }
+            .footer-links a {
+                color: var(--gray);
+            }
+            .footer-links a:hover {
+                color: var(--black);
+            }
+            .footer-links span {
+                background: var(--gray);
+            }
+        }
+
+        @media (max-width: 768px) {
             .container {
-                flex-direction: row;
-                justify-content: space-between;
                 padding: 20px;
+                gap: 30px;
+                margin: 20px auto;
             }
-            .input-section, .output-section {
-                width: 48%; /* 每个部分占用48% */
-                margin: 0 10px; 
+            .section.input {
+                padding: 15px;
             }
-            .input-section {
-                margin-right: 0;
+            .section h2 {
+                font-size: 16px;
+            }
+            textarea {
+                font-size: 13px;
+            }
+            .section.input textarea {
+                height: 150px;
+            }
+            .section.output textarea {
+                height: 200px;
+            }
+            .copy-button {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .toast {
+                bottom: 10px;
+                width: calc(100% - 40px);
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-links span {
+                display: none;
+            }
+            .footer-links a {
+                padding: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1>
-            <a href="https://sub.wwz.im/">SUB.WWZ.iM 节点转换</a>
-        </h1>
-        <div>
-            <a href="https://www.wwz.im/" target="_blank">WWZ.iM</a>
-            <a href="https://app.wwz.im/" target="_blank">APP</a>
+    <nav>
+        <div class="logo-container">
+            <img src="https://wangwenzhi.eu.org/images/favicon_io/apple-touch-icon.png" alt="Logo" class="logo-img">
+            <a href="https://sub.wwz.im/" class="logo-text">SUB.WWZ.iM</a>
         </div>
-    </div>
-    <div class="container">
-        <div class="input-section">
-            <textarea id="inputText" placeholder="输入 hysteria2 链接，每行一个..."></textarea>
-            <button id="convertFormat" class="convert-btn">转换格式</button>
+        <div class="links">
+            <a href="https://www.wwz.im/" target="_blank" rel="noopener">WWZ.iM</a>
+            <a href="https://app.wwz.im/" target="_blank" rel="noopener">App</a>
         </div>
-        <div class="output-section">
-            <textarea id="outputText" readonly placeholder="转换后的内容..."></textarea>
-            <button id="copyToClipboard" class="copy-btn">复制结果</button>
+    </nav>
+
+    <main class="container">
+        <div class="section input">
+            <h2>Input Hysteria2 Links</h2>
+            <textarea id="inputText" placeholder="Enter Hysteria2 links, one per line..." aria-label="Input Hysteria2 links"></textarea>
         </div>
-    </div>
+        <div class="section output">
+            <h2>Converted Clash.Meta Config</h2>
+            <textarea id="outputText" placeholder="Click anywhere to copy the converted config..." readonly aria-label="Converted output"></textarea>
+            <button class="copy-button" onclick="document.getElementById('outputText').click()">Copy</button>
+        </div>
+        <div id="toast" class="toast">Copied to clipboard!</div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-copyright">Designed by WWZ.iM © 2025</div>
+            <div class="footer-links">
+                <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/index.html" target="_blank" rel="noopener">Clash</a>
+                <span></span>
+                <a href="https://github.com/wangwenzhiwwz/Clash6/edit/main/index.html" target="_blank" rel="noopener">Clash6</a>
+                <span></span>
+                <a href="https://github.com/wangwenzhiwwz/UlefoneVPS/edit/main/_worker.js" target="_blank" rel="noopener">VPS_Ulefone</a>
+                <span></span>
+                <a href="https://github.com/wangwenzhiwwz/UlefoneVPN/edit/main/_worker.js" target="_blank" rel="noopener">VPN_Ulefone</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputText = document.getElementById('inputText');
+            const outputText = document.getElementById('outputText');
+            const toast = document.getElementById('toast');
+
             function convertFormat() {
-                const inputText = document.getElementById('inputText').value.trim();
-                const lines = inputText.split('\n');
+                const input = inputText.value.trim();
+                if (!input) {
+                    outputText.value = '';
+                    return;
+                }
+
+                const lines = input.split('\n');
+                const hysteriaRegex = /^hysteria2:\/\/([^@]+)@([^:]+):(\d+)\/\?sni=([^&]+)&insecure=\d+#(.+)$/;
+                const nameRegex = /#(.+)$/;
+
+                const now = new Date();
                 let output = `####################################
 # 创建者：WWZ.iM
 # 客户端：Clash.Meta
-# 创建时间：2025/2/7
+# 创建时间：${now.toLocaleString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}
 ####################################
 # !!当前配置文件请使用基于 Clash.Meta 内核程序
 mixed-port: 7890
@@ -198,7 +460,6 @@ dns:
     - time5.*.com
     - time6.*.com
     - time7.*.com
-    - ntp.*.com
     - ntp.*.com
     - ntp1.*.com
     - ntp2.*.com
@@ -247,36 +508,24 @@ dns:
 
 proxies:\n`;
 
-                const hysteriaRegex = /^hysteria2:\/\/([^@]+)@([^:]+):(\d+)\/\?sni=([^&]+)&insecure=\d+#(.+)$/;
-                const nameRegex = /#(.+)$/;
-
                 lines.forEach(line => {
                     const match = line.match(hysteriaRegex);
                     if (match) {
                         const [_, password, server, port, sni, name] = match;
-                        const proxy = `  - {"name":"${name}","type":"hysteria2","server":"${server}","port":${port},"password":"${password}","sni":"${sni}","skip-cert-verify":true}\n`;
-                        output += proxy;
+                        output += `  - {"name":"${name}","type":"hysteria2","server":"${server}","port":${port},"password":"${password}","sni":"${sni}","skip-cert-verify":true}\n`;
                     }
                 });
 
                 output += `proxy-groups:\n  - name: 🚀 节点选择\n    type: select\n    proxies:\n      - ♻️ 自动选择\n      - DIRECT\n`;
-
                 lines.forEach(line => {
                     const match = line.match(nameRegex);
-                    if (match) {
-                        const name = match[1];
-                        output += `      - ${name}\n`;
-                    }
+                    if (match) output += `      - ${match[1]}\n`;
                 });
 
                 output += `  - name: ♻️ 自动选择\n    type: url-test\n    url: http://connect.rom.miui.com/generate_204\n    interval: 300\n    tolerance: 50\n    proxies:\n`;
-
                 lines.forEach(line => {
                     const match = line.match(nameRegex);
-                    if (match) {
-                        const name = match[1];
-                        output += `      - ${name}\n`;
-                    }
+                    if (match) output += `      - ${match[1]}\n`;
                 });
 
                 const proxyGroups = [
@@ -294,21 +543,15 @@ proxies:\n`;
                     group.proxies.forEach(proxy => output += `      - ${proxy}\n`);
                     lines.forEach(line => {
                         const match = line.match(nameRegex);
-                        if (match) {
-                            const name = match[1];
-                            output += `      - ${name}\n`;
-                        }
+                        if (match) output += `      - ${match[1]}\n`;
                     });
                 });
 
-                // 添加尾部固定内容
                 output += `
 rules:
 # 本地/局域网地址
 # 参考：https://en.wikipedia.org/wiki/Reserved_IP_addresses
 # ACL4SSR标志 如没有，代表不是用ACL4SSR规则
-# 本地/局域网地址
-# Router managed 路由器管理域名
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-loopback,🎯 全球直连
@@ -346,12 +589,6 @@ rules:
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
 # UPDATED: 2024-07-03 16:18:28
-# DOMAIN: 8
-# DOMAIN-KEYWORD: 1
-# DOMAIN-SUFFIX: 24
-# IP-ASN: 1
-# IP-CIDR: 2
-# TOTAL: 36
   - DOMAIN,browser-intake-datadoghq.com,🧸 OpenAI
   - DOMAIN,chat.openai.com.cdn.cloudflare.net,🧸 OpenAI
   - DOMAIN,gemini.google.com,🧸 OpenAI
@@ -389,16 +626,10 @@ rules:
   - IP-CIDR,64.23.132.171/32,🧸 OpenAI,no-resolve
   - IP-ASN,20473,🧸 OpenAI,no-resolve
 
-
 # NAME: TikTok
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
 # UPDATED: 2024-08-05 02:10:46
-# DOMAIN: 3
-# DOMAIN-KEYWORD: 2
-# DOMAIN-SUFFIX: 22
-# PROCESS-NAME: 1
-# TOTAL: 28
   - DOMAIN,lf16-effectcdn.byteeffecttos-g.com,🎵 TikTok
   - DOMAIN,lf16-pkgcdn.pitaya-clientai.com,🎵 TikTok
   - DOMAIN,p16-tiktokcdn-com.akamaized.net,🎵 TikTok
@@ -428,7 +659,6 @@ rules:
   - DOMAIN-KEYWORD,tiktok,🎵 TikTok
   - PROCESS-NAME,com.zhiliaoapp.musically,🎵 TikTok
 
-
 # YouTube
   - DOMAIN,yt3.ggpht.com,📺 YouTube
   - DOMAIN,youtubei.googleapis.com,📺 YouTube
@@ -439,16 +669,12 @@ rules:
   - DOMAIN-SUFFIX,ggpht.com,📺 YouTube
   - DOMAIN-SUFFIX,youtu.be,📺 YouTube
   - DOMAIN-SUFFIX,music.youtube.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
   - DOMAIN-SUFFIX,youtubeeducation.com,📺 YouTube
   - DOMAIN-SUFFIX,yt.be,📺 YouTube
   - DOMAIN-KEYWORD,youtube,📺 YouTube
   - DOMAIN-KEYWORD,youtubei,📺 YouTube
 
-
 # Microsoft Services
-# optimized from https://gist.github.com/TTTPOB/ce93fb3b04ba2f21880b09427442d831
-# source: https://docs.microsoft.com/en-us/office365/enterprise/urls-and-ip-address-ranges
   - DOMAIN-KEYWORD,1drv,Ⓜ️ 微软服务
   - DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务
   - DOMAIN-KEYWORD,outlook,Ⓜ️ 微软服务
@@ -528,7 +754,6 @@ rules:
   - DOMAIN-SUFFIX,yammerusercontent.com,Ⓜ️ 微软服务
 
 # Apple
-# 一般国内Apple肯定正常,不需要开代理
   - DOMAIN,apple.comscoreresearch.com,🍎 苹果服务
   - DOMAIN-SUFFIX,aaplimg.com,🍎 苹果服务
   - DOMAIN-SUFFIX,akadns.net,🍎 苹果服务
@@ -781,7 +1006,6 @@ rules:
   - DOMAIN-SUFFIX,2mdn.net,🚀 节点选择
   - DOMAIN-SUFFIX,app-measurement.net,🚀 节点选择
   - DOMAIN-SUFFIX,g.co,🚀 节点选择
-  - DOMAIN-SUFFIX,ggpht.com,🚀 节点选择
   - DOMAIN-SUFFIX,goo.gl,🚀 节点选择
   - DOMAIN-SUFFIX,googleapis.cn,🚀 节点选择
   - DOMAIN-SUFFIX,googleapis.com,🚀 节点选择
@@ -893,7 +1117,6 @@ rules:
   - DOMAIN-SUFFIX,telegra.ph,🚀 节点选择
   - DOMAIN-SUFFIX,telegram.me,🚀 节点选择
   - DOMAIN-SUFFIX,telegram.org,🚀 节点选择
-
 
 # 直连列表
 # MyList
@@ -1046,18 +1269,30 @@ rules:
   - MATCH,🐟 漏网之鱼
 `;
 
-                document.getElementById('outputText').value = output;
+                outputText.value = output;
             }
 
-            function copyToClipboard() {
-                const outputText = document.getElementById('outputText');
-                outputText.select();
-                outputText.setSelectionRange(0, 99999);
-                document.execCommand('copy');
+            async function copyToClipboard() {
+                try {
+                    await navigator.clipboard.writeText(outputText.value);
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                    alert('Copy failed. Please copy manually.');
+                }
             }
 
-            document.getElementById('convertFormat').addEventListener('click', convertFormat);
-            document.getElementById('copyToClipboard').addEventListener('click', copyToClipboard);
+            let debounceTimeout;
+            inputText.addEventListener('input', () => {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => {
+                    convertFormat();
+                }, 300);
+            });
+
+            outputText.addEventListener('click', copyToClipboard);
+            convertFormat(); // Initial call
         });
     </script>
 </body>
