@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert Hysteria2 links to Clash.Meta effortlessly with SUB.WWZ.iM">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://wangwenzhi.eu.org/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="https://wangwenzhi.eu.org/images/favicon_io/site.webmanifest">
+    <title>SUB.WWZ.iM</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap');
+
+        :root {
+            --black: #1d1d1f;
+            --gray: #86868b;
+            --light-gray: #f5f5f7;
+            --white: #ffffff;
+            --accent: #06c;
+            --text-dark: #000000;
+            --text-light: #ffffff;
+            --transition: all 0.3s ease;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --input-bg: #fafafa;
+            --scrollbar-thumb: rgba(0, 0, 0, 0.3);
+            --scrollbar-track: transparent;
+            --button-bg: #e8e8ed; /* Light gray for button */
+            --button-hover: #d1d1d6; /* Darker gray on hover */
+            --button-text: #1d1d1f; /* Black text */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --black: #ffffff;
+                --gray: #a1a1a6;
+                --light-gray: #1c2526;
+                --white: #121212;
+                --accent: #0a84ff;
+                --text-dark: #ffffff;
+                --text-light: #000000;
+                --shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+                --input-bg: #2c2c2e;
+                --scrollbar-thumb: rgba(255, 255, 255, 0.3);
+                --scrollbar-track: transparent;
+                --button-bg: #2c2c2e; /* Dark gray for button */
+                --button-hover: #3a3a3c; /* Lighter gray on hover */
+                --button-text: #ffffff; /* White text */
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav .logo-img {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+        }
+
+        nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        nav .links a {
+            margin-left: 30px;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--black);
+            margin: 0;
+        }
+
+        .section.input {
+            background: var(--input-bg);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        textarea {
+            width: 100%;
+            min-width: 100%;
+            padding: 15px;
+            font-size: 14px;
+            border: 1px solid #e0e0e0; /* Softer border */
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--text-dark);
+            resize: vertical;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: "SF Pro Display", monospace;
+            line-height: 1.4;
+            overflow-y: auto;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            margin-top: 10px; /* Lower scrollbar start */
+            margin-bottom: 10px; /* Consistent bottom spacing */
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            textarea::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .section.input textarea {
+            height: 170px; /* 7 lines */
+            background: linear-gradient(to bottom, #ffffff, #f9f9f9); /* Subtle gradient */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .section.input textarea {
+                background: linear-gradient(to bottom, #1c2526, #2c2c2e);
+            }
+        }
+
+        .section.output textarea {
+            height: 300px;
+        }
+
+        textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+        }
+
+        textarea:hover {
+            border-color: var(--gray);
+        }
+
+        .copy-button {
+            align-self: flex-end;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--button-text);
+            background: var(--button-bg);
+            border: 1px solid #d1d1d6; /* Subtle border */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .copy-button:hover {
+            background: var(--button-hover);
+            border-color: #b8b8bd;
+        }
+
+        .toast {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--black);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 10;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        footer {
+            background: var(--light-gray);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 13px;
+            line-height: 1.38462;
+        }
+
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .footer-copyright {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        .footer-links a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 0 10px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gray);
+            text-decoration: underline;
+        }
+
+        .footer-links span {
+            display: inline-block;
+            width: 1px;
+            height: 13px;
+            background: var(--gray);
+            margin: 0 10px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            nav {
+                background: rgba(18, 18, 18, 0.95);
+            }
+            textarea {
+                border-color: #3a3a3c;
+            }
+            .section h2 {
+                color: var(--white);
+            }
+            .toast {
+                background: var(--gray);
+                color: var(--text-light);
+            }
+            .footer-links a {
+                color: var(--gray);
+            }
+            .footer-links a:hover {
+                color: var(--black);
+            }
+            .footer-links span {
+                background: var(--gray);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                gap: 30px;
+                margin: 20px auto;
+            }
+            .section.input {
+                padding: 15px;
+            }
+            .section h2 {
+                font-size: 16px;
+            }
+            textarea {
+                font-size: 13px;
+            }
+            .section.input textarea {
+                height: 150px;
+            }
+            .section.output textarea {
+                height: 200px;
+            }
+            .copy-button {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .toast {
+                bottom: 10px;
+                width: calc(100% - 40px);
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-links span {
+                display: none;
+            }
+            .footer-links a {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="https://wangwenzhi.eu.org/images/favicon_io/apple-touch-icon.png" alt="Logo" class="logo-img">
+            <a href="https://sub.wwz.im/" class="logo-text">SUB.WWZ.iM</a>
+        </div>
+        <div class="links">
+            <a href="https://www.wwz.im/" target="_blank" rel="noopener">WWZ.iM</a>
+            <a href="https://app.wwz.im/" target="_blank" rel="noopener">App</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="section input">
+            <h2>Input Hysteria2 Links</h2>
+            <textarea id="inputText" placeholder="Enter Hysteria2 links, one per line..." aria-label="Input Hysteria2 links"></textarea>
+        </div>
+        <div class="section output">
+            <h2>Converted Clash.Meta Config</h2>
+            <textarea id="outputText" placeholder="Click anywhere to copy the converted config..." readonly aria-label="Converted output"></textarea>
+            <button class="copy-button" onclick="document.getElementById('outputText').click()">Copy</button>
+        </div>
+        <div id="toast" class="toast">Copied to clipboard!</div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-copyright">Designed by WWZ.iM © 2025</div>
+            <div class="footer-links">
+                <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/index.html" target="_blank" rel="noopener">Clash</a>
+                <span></span>
+                <a href="https://github.com/wangwenzhiwwz/Clash6/edit/main/index.html" target="_blank" rel="noopener">Clash6</a>
+                <span></span>
+                <a href="https://github.com/wangwenzhiwwz/UlefoneVPS/edit/main/_worker.js" target="_blank" rel="noopener">VPS_Ulefone</a>
+                <span></span>
+                <a href="https://github.com/wangwenzhiwwz/UlefoneVPN/edit/main/_worker.js" target="_blank" rel="noopener">VPN_Ulefone</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputText = document.getElementById('inputText');
+            const outputText = document.getElementById('outputText');
+            const toast = document.getElementById('toast');
+
+            function convertFormat() {
+                const input = inputText.value.trim();
+                if (!input) {
+                    outputText.value = '';
+                    return;
+                }
+
+                const lines = input.split('\n');
+                const hysteriaRegex = /^hysteria2:\/\/([^@]+)@([^:]+):(\d+)\/\?sni=([^&]+)&insecure=\d+#(.+)$/;
+                const nameRegex = /#(.+)$/;
+
+                const now = new Date();
+                let output = `####################################
+# 创建者：WWZ.iM
+# 客户端：Clash.Meta
+# 创建时间：${now.toLocaleString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+####################################
+# !!当前配置文件请使用基于 Clash.Meta 内核程序
+mixed-port: 7890
+allow-lan: true
+log-level: info
+external-controller: 0.0.0.0:9090
+dns:
+  enabled: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  default-nameserver:
+    - 223.5.5.5
+    - 114.114.114.114
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - '*.linksys.com'
+    - '*.linksyssmartwifi.com'
+    - swscan.apple.com
+    - mesu.apple.com
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - '*.time.edu.cn'
+    - '*.ntp.org.cn'
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - +.music.163.com
+    - '*.126.net'
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - '*.kuwo.cn'
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - +.y.qq.com
+    - +.music.tc.qq.com
+    - aqqmusic.tc.qq.com
+    - +.stream.qqmusic.qq.com
+    - '*.xiami.com'
+    - +.music.migu.cn
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - xbox.*.microsoft.com
+    - +.xboxlive.com
+    - localhost.ptlogin2.qq.com
+    - proxy.golang.org
+    - stun.*.*
+    - stun.*.*.*
+    - '*.mcdn.bilivideo.cn'
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback-filter:
+    geoip: false
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      
+proxies:\n`;
+
+                lines.forEach(line => {
+                    const match = line.match(hysteriaRegex);
+                    if (match) {
+                        const [_, password, server, port, sni, name] = match;
+                        output += `  - {"name":"${name}","type":"hysteria2","server":"${server}","port":${port},"password":"${password}","sni":"${sni}","skip-cert-verify":true}\n`;
+                    }
+                });
+
+                output += `proxy-groups:\n  - name: 🚀 节点选择\n    type: select\n    proxies:\n      - ♻️ 自动选择\n      - DIRECT\n`;
+                lines.forEach(line => {
+                    const match = line.match(nameRegex);
+                    if (match) output += `      - ${match[1]}\n`;
+                });
+
+                output += `  - name: ♻️ 自动选择\n    type: url-test\n    url: http://connect.rom.miui.com/generate_204\n    interval: 300\n    tolerance: 50\n    proxies:\n`;
+                lines.forEach(line => {
+                    const match = line.match(nameRegex);
+                    if (match) output += `      - ${match[1]}\n`;
+                });
+
+                const proxyGroups = [
+                    { name: "🧸 OpenAI", proxies: ["🚀 节点选择"] },
+                    { name: "🎵 TikTok", proxies: ["🚀 节点选择"] },
+                    { name: "📺 YouTube", proxies: ["🚀 节点选择"] },
+                    { name: "Ⓜ️ 微软服务", proxies: ["🚀 节点选择"] },
+                    { name: "🍎 苹果服务", proxies: ["🎯 全球直连"] },
+                    { name: "🎯 全球直连", proxies: ["DIRECT"] },
+                    { name: "🐟 漏网之鱼", proxies: ["🚀 节点选择"] }
+                ];
+
+                proxyGroups.forEach(group => {
+                    output += `  - name: ${group.name}\n    type: select\n    proxies:\n`;
+                    group.proxies.forEach(proxy => output += `      - ${proxy}\n`);
+                    lines.forEach(line => {
+                        const match = line.match(nameRegex);
+                        if (match) output += `      - ${match[1]}\n`;
+                    });
+                });
+
+                output += `
+rules:
+# 本地/局域网地址
+# 参考：https://en.wikipedia.org/wiki/Reserved_IP_addresses
+# ACL4SSR标志 如没有，代表不是用ACL4SSR规则
+  - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
+  - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
+  - DOMAIN-SUFFIX,ip6-loopback,🎯 全球直连
+  - DOMAIN-SUFFIX,lan,🎯 全球直连
+  - DOMAIN-SUFFIX,local,🎯 全球直连
+  - DOMAIN-SUFFIX,localhost,🎯 全球直连
+  - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,100.64.0.0/10,🎯 全球直连,no-resolve
+  - IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
+  - IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
+  - IP-CIDR,198.18.0.0/16,🎯 全球直连,no-resolve
+  - IP-CIDR,224.0.0.0/4,🎯 全球直连,no-resolve
+  - IP-CIDR6,::1/128,🎯 全球直连,no-resolve
+  - IP-CIDR6,fc00::/7,🎯 全球直连,no-resolve
+  - IP-CIDR6,fe80::/10,🎯 全球直连,no-resolve
+  - IP-CIDR6,fd00::/8,🎯 全球直连,no-resolve
+  - DOMAIN,router.asus.com,🎯 全球直连
+  - DOMAIN-SUFFIX,hiwifi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,miwifi.com,🎯 全球直连
+
+# NAME: OpenAI
+# AUTHOR: blackmatrix7
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+# UPDATED: 2024-07-03 16:18:28
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net,🧸 OpenAI
+  - DOMAIN,gemini.google.com,🧸 OpenAI
+  - DOMAIN,openai-api.arkoselabs.com,🧸 OpenAI
+  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,🧸 OpenAI
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,🧸 OpenAI
+  - DOMAIN,production-openaicom-storage.azureedge.net,🧸 OpenAI
+  - DOMAIN-SUFFIX,ai.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,auth0.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,chatgpt.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud,🧸 OpenAI
+  - DOMAIN-SUFFIX,host.livekit.cloud,🧸 OpenAI
+  - DOMAIN-SUFFIX,identrust.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,intercom.io,🧸 OpenAI
+  - DOMAIN-SUFFIX,intercomcdn.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,launchdarkly.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,oaistatic.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,oaiusercontent.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,observeit.net,🧸 OpenAI
+  - DOMAIN-SUFFIX,openai.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,🧸 OpenAI
+  - DOMAIN-SUFFIX,openaicom.imgix.net,🧸 OpenAI
+  - DOMAIN-SUFFIX,sentry.io,🧸 OpenAI
+  - DOMAIN-SUFFIX,stripe.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,turn.livekit.cloud,🧸 OpenAI
+  - DOMAIN-KEYWORD,openai,🧸 OpenAI
+  - IP-CIDR,24.199.123.28/32,🧸 OpenAI,no-resolve
+  - IP-CIDR,64.23.132.171/32,🧸 OpenAI,no-resolve
+  - IP-ASN,20473,🧸 OpenAI,no-resolve
+
+# NAME: TikTok
+# AUTHOR: blackmatrix7
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+# UPDATED: 2024-08-05 02:10:46
+  - DOMAIN,lf16-effectcdn.byteeffecttos-g.com,🎵 TikTok
+  - DOMAIN,lf16-pkgcdn.pitaya-clientai.com,🎵 TikTok
+  - DOMAIN,p16-tiktokcdn-com.akamaized.net,🎵 TikTok
+  - DOMAIN-SUFFIX,bytedapm.com,🎵 TikTok
+  - DOMAIN-SUFFIX,bytegecko-i18n.com,🎵 TikTok
+  - DOMAIN-SUFFIX,byteoversea.com,🎵 TikTok
+  - DOMAIN-SUFFIX,capcut.com,🎵 TikTok
+  - DOMAIN-SUFFIX,ibytedtos.com,🎵 TikTok
+  - DOMAIN-SUFFIX,ibyteimg.com,🎵 TikTok
+  - DOMAIN-SUFFIX,ipstatp.com,🎵 TikTok
+  - DOMAIN-SUFFIX,isnssdk.com,🎵 TikTok
+  - DOMAIN-SUFFIX,muscdn.com,🎵 TikTok
+  - DOMAIN-SUFFIX,musical.ly,🎵 TikTok
+  - DOMAIN-SUFFIX,sgpstatp.com,🎵 TikTok
+  - DOMAIN-SUFFIX,snssdk.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tik-tokapi.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktok.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokcdn-us.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokcdn.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokd.net,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokd.org,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokmusic.app,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokv.com,🎵 TikTok
+  - DOMAIN-SUFFIX,tiktokv.us,🎵 TikTok
+  - DOMAIN-SUFFIX,ttwebview.com,🎵 TikTok
+  - DOMAIN-KEYWORD,musical.ly,🎵 TikTok
+  - DOMAIN-KEYWORD,tiktok,🎵 TikTok
+  - PROCESS-NAME,com.zhiliaoapp.musically,🎵 TikTok
+
+# YouTube
+  - DOMAIN,yt3.ggpht.com,📺 YouTube
+  - DOMAIN,youtubei.googleapis.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
+  - DOMAIN-SUFFIX,ytimg.com,📺 YouTube
+  - DOMAIN-SUFFIX,googlevideo.com,📺 YouTube
+  - DOMAIN-SUFFIX,ggpht.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
+  - DOMAIN-SUFFIX,music.youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtubeeducation.com,📺 YouTube
+  - DOMAIN-SUFFIX,yt.be,📺 YouTube
+  - DOMAIN-KEYWORD,youtube,📺 YouTube
+  - DOMAIN-KEYWORD,youtubei,📺 YouTube
+
+# Microsoft Services
+  - DOMAIN-KEYWORD,1drv,Ⓜ️ 微软服务
+  - DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务
+  - DOMAIN-KEYWORD,outlook,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,aadrm.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,acompli.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,acompli.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,aka.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,akadns.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,aspnetcdn.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,assets-yammer.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,azure.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,azure.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,azureedge.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,azurerms.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,bing.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,cloudapp.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,cloudappsecurity.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,edgesuite.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,gfx.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,hotmail.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,live.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,live.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,lync.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msappproxy.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msauth.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msauthimages.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msecnd.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msedge.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msft.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msftauth.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msftauthimages.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msftidentity.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msidentity.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msn.cn,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msn.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msocdn.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,msocsp.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,mstea.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,o365weve.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,oaspapps.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,office.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,office.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,office365.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,officeppe.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,omniroot.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,onedrive.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,onenote.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,onenote.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,onestore.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,outlook.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,outlookmobile.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,phonefactor.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,public-trust.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sfbassets.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sfx.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sharepoint.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sharepointonline.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,skype.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,skypeassets.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,skypeforbusiness.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,staffhub.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,svc.ms,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sway-cdn.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sway-extensions.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,sway.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,trafficmanager.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,uservoice.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,virtualearth.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,visualstudio.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,windows-ppe.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,windows.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,windows.net,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,windowsazure.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,windowsupdate.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,wunderlist.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,yammer.com,Ⓜ️ 微软服务
+  - DOMAIN-SUFFIX,yammerusercontent.com,Ⓜ️ 微软服务
+
+# Apple
+  - DOMAIN,apple.comscoreresearch.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,aaplimg.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,akadns.net,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple-cloudkit.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple-mapkit.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple.co,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple.com.cn,🍎 苹果服务
+  - DOMAIN-SUFFIX,apple.news,🍎 苹果服务
+  - DOMAIN-SUFFIX,appstore.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,cdn-apple.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,crashlytics.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,icloud-content.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,icloud.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,icloud.com.cn,🍎 苹果服务
+  - DOMAIN-SUFFIX,itunes.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,me.com,🍎 苹果服务
+  - DOMAIN-SUFFIX,mzstatic.com,🍎 苹果服务
+  - IP-CIDR,17.0.0.0/8,🍎 苹果服务,no-resolve
+  - IP-CIDR,63.92.224.0/19,🍎 苹果服务,no-resolve
+  - IP-CIDR,65.199.22.0/23,🍎 苹果服务,no-resolve
+  - IP-CIDR,139.178.128.0/18,🍎 苹果服务,no-resolve
+  - IP-CIDR,144.178.0.0/19,🍎 苹果服务,no-resolve
+  - IP-CIDR,144.178.36.0/22,🍎 苹果服务,no-resolve
+  - IP-CIDR,144.178.48.0/20,🍎 苹果服务,no-resolve
+  - IP-CIDR,192.35.50.0/24,🍎 苹果服务,no-resolve
+  - IP-CIDR,198.183.17.0/24,🍎 苹果服务,no-resolve
+  - IP-CIDR,205.180.175.0/24,🍎 苹果服务,no-resolve
+
+# 代理列表
+# VikACG
+  - DOMAIN-SUFFIX,wwz.im,🚀 节点选择
+  - DOMAIN-SUFFIX,x.com,🚀 节点选择
+  - DOMAIN-SUFFIX,adguard.org,🚀 节点选择
+  - DOMAIN-SUFFIX,bit.no.com,🚀 节点选择
+  - DOMAIN-SUFFIX,btlibrary.me,🚀 节点选择
+  - DOMAIN-SUFFIX,behance.net,🚀 节点选择
+  - DOMAIN-SUFFIX,artlist.io,🚀 节点选择
+  - DOMAIN-SUFFIX,cloudcone.com,🚀 节点选择
+  - DOMAIN-SUFFIX,linkedin.com,🚀 节点选择
+  - DOMAIN-SUFFIX,notion.so,🚀 节点选择
+  - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
+  - DOMAIN-SUFFIX,ping.pe,🚀 节点选择
+  - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
+  - DOMAIN-SUFFIX,unsplash.com,🚀 节点选择
+  - DOMAIN-SUFFIX,eu,🚀 节点选择
+  - DOMAIN-SUFFIX,hk,🚀 节点选择
+  - DOMAIN-SUFFIX,jp,🚀 节点选择
+  - DOMAIN-SUFFIX,kr,🚀 节点选择
+  - DOMAIN-SUFFIX,sg,🚀 节点选择
+  - DOMAIN-SUFFIX,tw,🚀 节点选择
+  - DOMAIN-SUFFIX,uk,🚀 节点选择
+  - DOMAIN-SUFFIX,us,🚀 节点选择
+  - DOMAIN-KEYWORD,wangwenzhi,🚀 节点选择
+  - DOMAIN-KEYWORD,avtb,🚀 节点选择
+  - DOMAIN-KEYWORD,blogspot,🚀 节点选择
+  - DOMAIN-KEYWORD,dropbox,🚀 节点选择
+  - DOMAIN-KEYWORD,facebook,🚀 节点选择
+  - DOMAIN-KEYWORD,fbcdn,🚀 节点选择
+  - DOMAIN-KEYWORD,github,🚀 节点选择
+  - DOMAIN-KEYWORD,gmail,🚀 节点选择
+  - DOMAIN-KEYWORD,google,🚀 节点选择
+  - DOMAIN-KEYWORD,instagram,🚀 节点选择
+  - DOMAIN-KEYWORD,porn,🚀 节点选择
+  - DOMAIN-KEYWORD,sci-hub,🚀 节点选择
+  - DOMAIN-KEYWORD,spotify,🚀 节点选择
+  - DOMAIN-KEYWORD,telegram,🚀 节点选择
+  - DOMAIN-KEYWORD,twitter,🚀 节点选择
+  - DOMAIN-KEYWORD,whatsapp,🚀 节点选择
+  - DOMAIN-KEYWORD,youtube,🚀 节点选择
+  - DOMAIN-SUFFIX,adobedtm.com,🚀 节点选择
+  - DOMAIN-SUFFIX,android.com,🚀 节点选择
+  - DOMAIN-SUFFIX,apkpure.com,🚀 节点选择
+  - DOMAIN-SUFFIX,bandwagonhost.com,🚀 节点选择
+  - DOMAIN-SUFFIX,bing.com,🚀 节点选择
+  - DOMAIN-SUFFIX,blogger.com,🚀 节点选择
+  - DOMAIN-SUFFIX,box.com,🚀 节点选择
+  - DOMAIN-SUFFIX,cachefly.net,🚀 节点选择
+  - DOMAIN-SUFFIX,cdnst.net,🚀 节点选择
+  - DOMAIN-SUFFIX,cloudfront.net,🚀 节点选择
+  - DOMAIN-SUFFIX,hulu.com,🚀 节点选择
+  - DOMAIN-SUFFIX,macrumors.com,🚀 节点选择
+  - DOMAIN-SUFFIX,medium.com,🚀 节点选择
+  - DOMAIN-SUFFIX,mega.nz,🚀 节点选择
+  - DOMAIN-SUFFIX,megaupload.com,🚀 节点选择
+  - DOMAIN-SUFFIX,messenger.com,🚀 节点选择
+  - DOMAIN-SUFFIX,overcast.fm,🚀 节点选择
+  - DOMAIN-SUFFIX,openvpn.net,🚀 节点选择
+  - DOMAIN-SUFFIX,quora.com,🚀 节点选择
+  - DOMAIN-SUFFIX,thefacebook.com,🚀 节点选择
+  - DOMAIN-SUFFIX,trustasiassl.com,🚀 节点选择
+  - DOMAIN-SUFFIX,tumblr.co,🚀 节点选择
+  - DOMAIN-SUFFIX,tumblr.com,🚀 节点选择
+  - DOMAIN-SUFFIX,tvb.com,🚀 节点选择
+  - DOMAIN-SUFFIX,v2ex.com,🚀 节点选择
+  - DOMAIN-SUFFIX,vimeo.com,🚀 节点选择
+  - DOMAIN-SUFFIX,amazon.co.jp,🚀 节点选择
+  - DOMAIN-SUFFIX,amazon.com,🚀 节点选择
+  - DOMAIN-SUFFIX,amazonaws.com,🚀 节点选择
+  - DOMAIN-KEYWORD,uk-live,🚀 节点选择
+  - DOMAIN-SUFFIX,quay.io,🚀 节点选择
+  - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
+  - DOMAIN-SUFFIX,redhat.com,🚀 节点选择
+  - DOMAIN-SUFFIX,sonatype.org,🚀 节点选择
+  - DOMAIN-SUFFIX,sourcegraph.com,🚀 节点选择
+  - DOMAIN-SUFFIX,spring.io,🚀 节点选择
+  - DOMAIN-SUFFIX,spring.net,🚀 节点选择
+  - DOMAIN-SUFFIX,stackoverflow.com,🚀 节点选择
+  - DOMAIN-SUFFIX,discord.co,🚀 节点选择
+  - DOMAIN-SUFFIX,discord.com,🚀 节点选择
+  - DOMAIN-SUFFIX,discord.gg,🚀 节点选择
+  - DOMAIN-SUFFIX,discord.media,🚀 节点选择
+  - DOMAIN-SUFFIX,discordapp.com,🚀 节点选择
+  - DOMAIN-SUFFIX,discordapp.net,🚀 节点选择
+  - DOMAIN-SUFFIX,facebook.com,🚀 节点选择
+  - DOMAIN-SUFFIX,fb.com,🚀 节点选择
+  - DOMAIN-SUFFIX,fb.me,🚀 节点选择
+  - DOMAIN-SUFFIX,fbcdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,fbcdn.net,🚀 节点选择
+  - DOMAIN-SUFFIX,github.com,🚀 节点选择
+  - DOMAIN-SUFFIX,github.io,🚀 节点选择
+  - DOMAIN-SUFFIX,githubapp.com,🚀 节点选择
+  - DOMAIN-SUFFIX,githubassets.com,🚀 节点选择
+  - DOMAIN-SUFFIX,githubusercontent.com,🚀 节点选择
+  - DOMAIN-SUFFIX,g.co,🚀 节点选择
+  - DOMAIN-SUFFIX,goo.gl,🚀 节点选择
+  - DOMAIN-SUFFIX,googleapis.cn,🚀 节点选择
+  - DOMAIN-SUFFIX,googleapis.com,🚀 节点选择
+  - DOMAIN-SUFFIX,gstatic.cn,🚀 节点选择
+  - DOMAIN-SUFFIX,gstatic.com,🚀 节点选择
+  - DOMAIN-SUFFIX,gvt0.com,🚀 节点选择
+  - DOMAIN-SUFFIX,gvt1.com,🚀 节点选择
+  - DOMAIN-SUFFIX,gvt2.com,🚀 节点选择
+  - DOMAIN-SUFFIX,gvt3.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🚀 节点选择
+  - DOMAIN-SUFFIX,youtu.be,🚀 节点选择
+  - DOMAIN-SUFFIX,youtube-nocookie.com,🚀 节点选择
+  - DOMAIN-SUFFIX,youtube.com,🚀 节点选择
+  - DOMAIN-SUFFIX,yt.be,🚀 节点选择
+  - DOMAIN-SUFFIX,ytimg.com,🚀 节点选择
+  - DOMAIN-SUFFIX,cdninstagram.com,🚀 节点选择
+  - DOMAIN-SUFFIX,instagram.com,🚀 节点选择
+  - DOMAIN-SUFFIX,instagr.am,🚀 节点选择
+  - DOMAIN-SUFFIX,kakao.com,🚀 节点选择
+  - DOMAIN-SUFFIX,kakao.co.kr,🚀 节点选择
+  - DOMAIN-SUFFIX,kakaocdn.net,🚀 节点选择
+  - DOMAIN-SUFFIX,lin.ee,🚀 节点选择
+  - DOMAIN-SUFFIX,line-apps.com,🚀 节点选择
+  - DOMAIN-SUFFIX,line-cdn.net,🚀 节点选择
+  - DOMAIN-SUFFIX,line-scdn.net,🚀 节点选择
+  - DOMAIN-SUFFIX,line.me,🚀 节点选择
+  - DOMAIN-SUFFIX,line.naver.jp,🚀 节点选择
+  - DOMAIN-KEYWORD,1drv,🚀 节点选择
+  - DOMAIN-KEYWORD,onedrive,🚀 节点选择
+  - DOMAIN-KEYWORD,skydrive,🚀 节点选择
+  - DOMAIN-SUFFIX,livefilestore.com,🚀 节点选择
+  - DOMAIN-SUFFIX,oneclient.sfx.ms,🚀 节点选择
+  - DOMAIN-SUFFIX,onedrive.com,🚀 节点选择
+  - DOMAIN-SUFFIX,onedrive.live.com,🚀 节点选择
+  - DOMAIN-SUFFIX,photos.live.com,🚀 节点选择
+  - DOMAIN-KEYWORD,porn,🚀 节点选择
+  - DOMAIN-SUFFIX,phncdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,phprcdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,pornhub.com,🚀 节点选择
+  - DOMAIN-SUFFIX,pornhubpremium.com,🚀 节点选择
+  - DOMAIN-SUFFIX,sb-cd.com,🚀 节点选择
+  - DOMAIN-SUFFIX,spankbang.com,🚀 节点选择
+  - DOMAIN-SUFFIX,t66y.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xhamster.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xnxx-cdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xnxx.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xvideos-cdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xvideos.com,🚀 节点选择
+  - DOMAIN-SUFFIX,ypncdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,pixiv.net,🚀 节点选择
+  - DOMAIN-SUFFIX,pximg.net,🚀 节点选择
+  - DOMAIN-SUFFIX,tap.io,🚀 节点选择
+  - DOMAIN-SUFFIX,taptap.tw,🚀 节点选择
+  - DOMAIN-SUFFIX,twitch.tv,🚀 节点选择
+  - DOMAIN-SUFFIX,t.co,🚀 节点选择
+  - DOMAIN-SUFFIX,twimg.co,🚀 节点选择
+  - DOMAIN-SUFFIX,twimg.com,🚀 节点选择
+  - DOMAIN-SUFFIX,twimg.org,🚀 节点选择
+  - DOMAIN-SUFFIX,t.me,🚀 节点选择
+  - DOMAIN-SUFFIX,telegra.ph,🚀 节点选择
+  - DOMAIN-SUFFIX,telegram.me,🚀 节点选择
+  - DOMAIN-SUFFIX,telegram.org,🚀 节点选择
+
+# 直连列表
+# MyList
+# CN域名直连(中国|公司|网络)
+# 中国国内常见域名关键词直连
+# AccelerateDirectSites
+  - DOMAIN-SUFFIX,cn,🎯 全球直连
+  - DOMAIN-SUFFIX,xn--fiqs8s,🎯 全球直连
+  - DOMAIN-SUFFIX,xn--55qx5d,🎯 全球直连
+  - DOMAIN-SUFFIX,xn--io0a7i,🎯 全球直连
+  - DOMAIN-KEYWORD,-cn,🎯 全球直连
+  - DOMAIN-KEYWORD,360buy,🎯 全球直连
+  - DOMAIN-KEYWORD,alicdn,🎯 全球直连
+  - DOMAIN-KEYWORD,alimama,🎯 全球直连
+  - DOMAIN-KEYWORD,alipay,🎯 全球直连
+  - DOMAIN-KEYWORD,appzapp,🎯 全球直连
+  - DOMAIN-KEYWORD,baidupcs,🎯 全球直连
+  - DOMAIN-KEYWORD,bilibili,🎯 全球直连
+  - DOMAIN-KEYWORD,chinacache,🎯 全球直连
+  - DOMAIN-KEYWORD,duobao,🎯 全球直连
+  - DOMAIN-KEYWORD,dingtalk,🎯 全球直连
+  - DOMAIN-KEYWORD,teambition,🎯 全球直连
+  - DOMAIN-KEYWORD,jdpay,🎯 全球直连
+  - DOMAIN-KEYWORD,moke,🎯 全球直连
+  - DOMAIN-KEYWORD,qhimg,🎯 全球直连
+  - DOMAIN-KEYWORD,vpimg,🎯 全球直连
+  - DOMAIN-KEYWORD,xiami,🎯 全球直连
+  - DOMAIN-KEYWORD,xiaomi,🎯 全球直连
+  - DOMAIN-SUFFIX,1688.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliapp.org,🎯 全球直连
+  - DOMAIN-SUFFIX,alibaba.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alibabacloud.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alibabausercontent.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alicdn.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alicloudccp.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliexpress.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliimg.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alikunlun.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alipay.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alipayobjects.com,🎯 全球直连
+  - DOMAIN-SUFFIX,alisoft.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliyun.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliyuncdn.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliyuncs.com,🎯 全球直连
+  - DOMAIN-SUFFIX,aliyundrive.com,🎯 全球直连
+  - DOMAIN-SUFFIX,amap.com,🎯 全球直连
+  - DOMAIN-SUFFIX,autonavi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,dingtalk.com,🎯 全球直连
+  - DOMAIN-SUFFIX,soku.com,🎯 全球直连
+  - DOMAIN-SUFFIX,taobao.com,🎯 全球直连
+  - DOMAIN-SUFFIX,taobaocdn.com,🎯 全球直连
+  - DOMAIN-SUFFIX,xiami.com,🎯 全球直连
+  - DOMAIN-SUFFIX,xiami.net,🎯 全球直连
+  - DOMAIN-SUFFIX,youku.com,🎯 全球直连
+  - DOMAIN-SUFFIX,baidu.com,🎯 全球直连
+  - DOMAIN-SUFFIX,baidubcr.com,🎯 全球直连
+  - DOMAIN-SUFFIX,baidupcs.com,🎯 全球直连
+  - DOMAIN-SUFFIX,baidustatic.com,🎯 全球直连
+  - DOMAIN-SUFFIX,biliapi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,biliapi.net,🎯 全球直连
+  - DOMAIN-SUFFIX,bilibili.com,🎯 全球直连
+  - DOMAIN-SUFFIX,biligame.com,🎯 全球直连
+  - DOMAIN-SUFFIX,biligame.net,🎯 全球直连
+  - DOMAIN-SUFFIX,bilivideo.com,🎯 全球直连
+  - DOMAIN-SUFFIX,bilivideo.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,douyin.com,🎯 全球直连
+  - DOMAIN-SUFFIX,douyinpic.com,🎯 全球直连
+  - DOMAIN-SUFFIX,douyinstatic.com,🎯 全球直连
+  - DOMAIN-SUFFIX,douyinvod.com,🎯 全球直连
+  - DOMAIN-SUFFIX,douyu.com,🎯 全球直连
+  - DOMAIN-SUFFIX,douyu.tv,🎯 全球直连
+  - DOMAIN-SUFFIX,douyuscdn.com,🎯 全球直连
+  - DOMAIN-SUFFIX,douyutv.com,🎯 全球直连
+  - DOMAIN-SUFFIX,iqiyi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,iqiyipic.com,🎯 全球直连
+  - DOMAIN-SUFFIX,ppsimg.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qiyi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qiyipic.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qy.net,🎯 全球直连
+  - DOMAIN-SUFFIX,360buy.com,🎯 全球直连
+  - DOMAIN-SUFFIX,360buyimg.com,🎯 全球直连
+  - DOMAIN-SUFFIX,jcloudcs.com,🎯 全球直连
+  - DOMAIN-SUFFIX,jd.com,🎯 全球直连
+  - DOMAIN-SUFFIX,jd.hk,🎯 全球直连
+  - DOMAIN-SUFFIX,jdcloud.com,🎯 全球直连
+  - DOMAIN-SUFFIX,jdpay.com,🎯 全球直连
+  - DOMAIN-SUFFIX,duokan.com,🎯 全球直连
+  - DOMAIN-SUFFIX,mi-img.com,🎯 全球直连
+  - DOMAIN-SUFFIX,mi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,miui.com,🎯 全球直连
+  - DOMAIN-SUFFIX,xiaomi.com,🎯 全球直连
+  - DOMAIN-SUFFIX,xiaomi.net,🎯 全球直连
+  - DOMAIN-SUFFIX,xiaomicp.com,🎯 全球直连
+  - DOMAIN-SUFFIX,126.com,🎯 全球直连
+  - DOMAIN-SUFFIX,126.net,🎯 全球直连
+  - DOMAIN-SUFFIX,127.net,🎯 全球直连
+  - DOMAIN-SUFFIX,163.com,🎯 全球直连
+  - DOMAIN-SUFFIX,163yun.com,🎯 全球直连
+  - DOMAIN-SUFFIX,pplive.com,🎯 全球直连
+  - DOMAIN-SUFFIX,pptv.com,🎯 全球直连
+  - DOMAIN-SUFFIX,miaopai.com,🎯 全球直连
+  - DOMAIN-SUFFIX,sina.com,🎯 全球直连
+  - DOMAIN-SUFFIX,sina.com.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,sina.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,sinaapp.com,🎯 全球直连
+  - DOMAIN-SUFFIX,sinaapp.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,sinaimg.com,🎯 全球直连
+  - DOMAIN-SUFFIX,sinaimg.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,weibo.com,🎯 全球直连
+  - DOMAIN-SUFFIX,weibo.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,weibocdn.com,🎯 全球直连
+  - DOMAIN-SUFFIX,weibocdn.cn,🎯 全球直连
+  - DOMAIN-SUFFIX,playstation.com,🎯 全球直连
+  - DOMAIN-SUFFIX,playstation.net,🎯 全球直连
+  - DOMAIN-SUFFIX,playstationnetwork.com,🎯 全球直连
+  - DOMAIN-SUFFIX,sony.com,🎯 全球直连
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com,🎯 全球直连
+  - DOMAIN-SUFFIX,myqcloud.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qq.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qqmail.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qqurl.com,🎯 全球直连
+  - DOMAIN-SUFFIX,wechat.com,🎯 全球直连
+  - DOMAIN-SUFFIX,weixin.com,🎯 全球直连
+  - DOMAIN-SUFFIX,ximalaya.com,🎯 全球直连
+  - DOMAIN-SUFFIX,10010.com,🎯 全球直连
+  - DOMAIN-SUFFIX,115.com,🎯 全球直连
+  - DOMAIN-SUFFIX,12306.com,🎯 全球直连
+  - DOMAIN-SUFFIX,oracle.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qcloud.com,🎯 全球直连
+  - DOMAIN-SUFFIX,qcloudcdn.com,🎯 全球直连
+  - DOMAIN-SUFFIX,weather.com,🎯 全球直连
+  - DOMAIN-SUFFIX,xiaohongshu.com,🎯 全球直连
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
+`;
+
+                outputText.value = output;
+            }
+
+            async function copyToClipboard() {
+                try {
+                    await navigator.clipboard.writeText(outputText.value);
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                    alert('Copy failed. Please copy manually.');
+                }
+            }
+
+            let debounceTimeout;
+            inputText.addEventListener('input', () => {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => {
+                    convertFormat();
+                }, 300);
+            });
+
+            outputText.addEventListener('click', copyToClipboard);
+            convertFormat(); // Initial call
+        });
+    </script>
+</body>
+</html>
