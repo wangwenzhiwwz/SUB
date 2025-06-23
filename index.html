@@ -214,23 +214,43 @@
             const url = new URL(link);
             const params = new URLSearchParams(url.search);
             const baseName = url.hash.replace('#', '') || 'vless';
-            return {
+            const network = params.get('type') || 'tcp';
+            const security = params.get('security') || '';
+
+            const proxy = {
                 name: generateUniqueName(baseName, nameCounts),
                 type: 'vless',
                 server: url.hostname,
                 port: parseInt(url.port) || 443,
-                udp: true,
                 uuid: url.username,
-                tls: params.get('security') === 'reality' || params.get('security') === 'tls',
-                servername: params.get('sni') || '',
-                flow: params.get('flow') || '',
-                network: params.get('type') || 'tcp',
-                'reality-opts': params.get('security') === 'reality' ? {
+                tls: security === 'reality' || security === 'tls',
+                servername: params.get('sni') || params.get('host') || url.hostname,
+                network: network
+            };
+
+            // WebSocket 特殊处理
+            if (network === 'ws') {
+                proxy['ws-opts'] = {
+                    path: params.get('path') || '/',
+                    headers: {
+                        host: params.get('host') || url.hostname
+                    }
+                };
+            }
+
+            // Reality 特殊处理
+            if (security === 'reality') {
+                proxy['reality-opts'] = {
                     'public-key': params.get('pbk') || '',
                     'short-id': params.get('sid') || ''
-                } : undefined,
-                'client-fingerprint': params.get('fp') || 'chrome'
-            };
+                };
+            }
+
+            if (params.get('fp')) {
+                proxy['client-fingerprint'] = params.get('fp');
+            }
+
+            return proxy;
         }
 
         // Parse hysteria2 link
