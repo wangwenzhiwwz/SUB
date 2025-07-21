@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -47,78 +8,58 @@
     <style>
         body {
             background-color: #f5f5f5;
-            /* 浅灰色背景 */
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #333;
-            /* 深灰色文字 */
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         .container {
             max-width: 1000px;
             width: 100%;
             margin: 0 auto;
             padding: 40px 20px;
         }
-
         .header {
             text-align: center;
             margin-bottom: 40px;
         }
-
         .header h1 {
             font-size: 2.5rem;
             font-weight: 700;
             color: #333;
             letter-spacing: -0.02em;
         }
-
         .card {
             background-color: #ffffff;
-            /* 白色背景 */
             border-radius: 12px;
-            /* 圆角设计 */
             padding: 16px;
             margin-bottom: 20px;
             box-shadow: none;
-            /* 移除阴影 */
         }
-
         textarea {
             width: 100%;
             border: none;
             border-radius: 8px;
             padding: 14px;
             font-size: 0.95rem;
-            /* 小一些的字体 */
             line-height: 1.4;
             background-color: #ffffff;
-            /* 白色背景 */
             color: #333;
-            /* 深灰色文字 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            /* 轻微阴影 */
             transition: background-color 0.2s ease;
         }
-
         textarea:focus {
             background-color: #f1f1f1;
-            /* 聚焦时背景色变浅 */
             outline: none;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* 强化阴影 */
         }
-
         button {
             background-color: #333;
-            /* 深灰色背景 */
             color: #ffffff;
             font-weight: 600;
             padding: 14px 0;
             border-radius: 30px;
-            /* 圆角按钮 */
             border: none;
             cursor: pointer;
             width: 100%;
@@ -126,24 +67,17 @@
             transition: background-color 0.3s ease;
             font-size: 1rem;
         }
-
         button:hover {
             background-color: #555;
-            /* 浅灰色背景 */
         }
-
         .button-secondary {
             background-color: #e0e0e0;
-            /* 浅灰色按钮 */
             color: #333;
             margin-top: 10px;
         }
-
         .button-secondary:hover {
             background-color: #d0d0d0;
-            /* 更浅的灰色 */
         }
-
         .feedback-message {
             display: none;
             color: #333;
@@ -151,38 +85,30 @@
             margin-top: 8px;
             text-align: center;
         }
-
         footer {
             text-align: center;
             font-size: 0.875rem;
             color: #888;
-            /* 淡灰色文字 */
             margin-top: 40px;
         }
-
         footer a {
             color: #333;
             text-decoration: none;
         }
-
         footer a:hover {
             text-decoration: underline;
         }
-
         @media (max-width: 640px) {
             .header h1 {
                 font-size: 2rem;
             }
-
             .card {
                 padding: 20px 15px;
             }
-
             button {
                 font-size: 1rem;
             }
         }
-
         @media (min-width: 1200px) {
             .container {
                 padding: 40px 60px;
@@ -274,48 +200,68 @@
             }
         }
 
-        // Parse vless link
+        // 修正版 parseVless
         function parseVless(link, nameCounts) {
-            const url = new URL(link);
-            const params = new URLSearchParams(url.search);
-            const baseName = url.hash.replace('#', '') || 'vless';
-            const network = params.get('type') || 'tcp';
-            const security = params.get('security') || '';
+            try {
+                const url = new URL(link);
+                const params = new URLSearchParams(url.search);
+                const baseName = decodeURIComponent(url.hash.replace('#', '')) || 'vless';
+                const network = params.get('type') || 'tcp';
+                const security = params.get('security') || '';
+                const flow = params.get('flow') || '';
+                const fp = params.get('fp') || '';
+                const pbk = params.get('pbk') || '';
+                const sid = params.get('sid') || '';
+                const sni = params.get('sni') || params.get('host') || url.hostname;
+                const spx = params.get('spx') || '';
+                const headerType = params.get('headerType') || '';
 
-            const proxy = {
-                name: generateUniqueName(baseName, nameCounts),
-                type: 'vless',
-                server: url.hostname,
-                port: parseInt(url.port) || 443,
-                uuid: url.username,
-                tls: security === 'reality' || security === 'tls',
-                servername: params.get('sni') || params.get('host') || url.hostname,
-                network: network
-            };
-
-            // WebSocket 特殊处理
-            if (network === 'ws') {
-                proxy['ws-opts'] = {
-                    path: params.get('path') || '/',
-                    headers: {
-                        host: params.get('host') || url.hostname
-                    }
+                // 以 Clash.Meta 兼容为主，增加 udp, flow, reality-opts, client-fingerprint
+                const proxy = {
+                    name: generateUniqueName(baseName, nameCounts),
+                    type: 'vless',
+                    server: url.hostname,
+                    port: parseInt(url.port) || 443,
+                    udp: true,
+                    uuid: url.username,
+                    tls: security === 'reality' || security === 'tls',
+                    servername: sni,
+                    network: network
                 };
-            }
 
-            // Reality 特殊处理
-            if (security === 'reality') {
-                proxy['reality-opts'] = {
-                    'public-key': params.get('pbk') || '',
-                    'short-id': params.get('sid') || ''
-                };
-            }
+                if (flow) proxy.flow = flow;
 
-            if (params.get('fp')) {
-                proxy['client-fingerprint'] = params.get('fp');
-            }
+                // WebSocket 特殊处理
+                if (network === 'ws') {
+                    proxy['ws-opts'] = {
+                        path: params.get('path') || '/',
+                        headers: {
+                            host: params.get('host') || url.hostname
+                        }
+                    };
+                }
 
-            return proxy;
+                // Reality 特殊处理
+                if (security === 'reality') {
+                    proxy['reality-opts'] = {
+                        'public-key': pbk,
+                        'short-id': sid
+                    };
+                }
+
+                if (fp) {
+                    proxy['client-fingerprint'] = fp;
+                }
+
+                // 可选：处理 spx、headerType 等参数
+                if (spx) proxy['spx'] = decodeURIComponent(spx);
+                if (headerType) proxy['headerType'] = headerType;
+
+                return proxy;
+            } catch (e) {
+                console.error("Error parsing VLESS link:", e);
+                return null;
+            }
         }
 
         // Parse hysteria2 link
@@ -1107,7 +1053,7 @@ rules:
                     proxy = parseHttp(line, index, nameCounts);
                 } else if (line.startsWith('socks5://')) {
                     proxy = parseSocks5(line, index, nameCounts);
-                } else if (line.startsWith('ss://')) { // Add this condition for SS links
+                } else if (line.startsWith('ss://')) {
                     proxy = parseSs(line, nameCounts);
                 }
                 if (proxy) proxies.push(proxy);
