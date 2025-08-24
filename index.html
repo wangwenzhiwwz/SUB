@@ -494,6 +494,12 @@ ${proxyNames.map(name => `      - ${name}`).join('\n')}
       - DIRECT
       - 🚀 节点选择
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🛑 全球拦截
+    type: select
+    proxies:
+      - REJECT
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🐟 漏网之鱼
     type: select
     proxies:
@@ -526,6 +532,27 @@ rules:
   - DOMAIN-SUFFIX,miwifi.com,🎯 全球直连
   - DOMAIN-SUFFIX,msftncsi.com,🎯 全球直连
   - DOMAIN-SUFFIX,msftconnecttest.com,🎯 全球直连
+
+  # 本碎片只包含常见广告关键字、广告联盟。无副作用，放心使用
+  # Adobe网站屏蔽
+  - DOMAIN-SUFFIX,ic.adobe.io,🛑 全球拦截
+  - DOMAIN-SUFFIX,fqaq3pq1o9.adobe.io,🛑 全球拦截
+  - DOMAIN-SUFFIX,ij0gdyrfka.adobe.io,🛑 全球拦截
+  - DOMAIN-KEYWORD,adobe,🛑 全球拦截
+  - DOMAIN-KEYWORD,admaster,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsage,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsensor,🛑 全球拦截
+  - DOMAIN-KEYWORD,adservice,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsmogo,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsrvmedia,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsserving,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsystem,🛑 全球拦截
+  - DOMAIN-KEYWORD,adwords,🛑 全球拦截
+  - DOMAIN-KEYWORD,analysis,🛑 全球拦截
+  - DOMAIN-KEYWORD,applovin,🛑 全球拦截
+  - DOMAIN-KEYWORD,appsflyer,🛑 全球拦截
+  - DOMAIN-KEYWORD,domob,🛑 全球拦截
+  
 
   # NAME: OpenAI
   # AUTHOR: blackmatrix7
