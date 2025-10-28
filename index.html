@@ -467,17 +467,17 @@ ${proxyNames.map(name => `      - ${name}`).join('\n')}
     tolerance: 50
     proxies:
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 📺 YouTube
+    type: select
+    proxies:
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🧸 OpenAI
     type: select
     proxies:
       - 🚀 节点选择
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🎵 TikTok
-    type: select
-    proxies:
-      - 🚀 节点选择
-${proxyNames.map(name => `      - ${name}`).join('\n')}
-  - name: 📺 YouTube
     type: select
     proxies:
       - 🚀 节点选择
@@ -557,7 +557,23 @@ rules:
   - DOMAIN-KEYWORD,applovin,🛑 全球拦截
   - DOMAIN-KEYWORD,appsflyer,🛑 全球拦截
   - DOMAIN-KEYWORD,domob,🛑 全球拦截
-  
+
+  # YouTube
+  - DOMAIN-KEYWORD,youtube,📺 YouTube
+  - DOMAIN-KEYWORD,youtubei,📺 YouTube
+  - DOMAIN-KEYWORD,ggpht,📺 YouTube
+  - DOMAIN,yt3.ggpht.com,📺 YouTube
+  - DOMAIN,youtubei.googleapis.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
+  - DOMAIN-SUFFIX,ytimg.com,📺 YouTube
+  - DOMAIN-SUFFIX,ggpht.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
+  - DOMAIN-SUFFIX,music.youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtubeeducation.com,📺 YouTube
+  - DOMAIN-SUFFIX,yt.be,📺 YouTube
+  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
+  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
 
   # NAME: OpenAI
   # AUTHOR: blackmatrix7
@@ -625,22 +641,6 @@ rules:
   - DOMAIN-KEYWORD,ttwstatic,🎵 TikTok
   - PROCESS-NAME,com.zhiliaoapp.musically,🎵 TikTok
   
-  # YouTube
-  - DOMAIN-KEYWORD,youtube,📺 YouTube
-  - DOMAIN-KEYWORD,youtubei,📺 YouTube
-  - DOMAIN-KEYWORD,ggpht,📺 YouTube
-  - DOMAIN,yt3.ggpht.com,📺 YouTube
-  - DOMAIN,youtubei.googleapis.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtube.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
-  - DOMAIN-SUFFIX,ytimg.com,📺 YouTube
-  - DOMAIN-SUFFIX,ggpht.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
-  - DOMAIN-SUFFIX,music.youtube.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtubeeducation.com,📺 YouTube
-  - DOMAIN-SUFFIX,yt.be,📺 YouTube
-  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
-  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
 
   
   # Microsoft Services
