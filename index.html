@@ -472,11 +472,6 @@ ${proxyNames.map(name => `      - ${name}`).join('\n')}
     proxies:
       - 🚀 节点选择
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
-  - name: 🛍️ Shopping
-    type: select
-    proxies:
-      - 🚀 节点选择
-${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🧸 OpenAI
     type: select
     proxies:
@@ -491,6 +486,12 @@ ${proxyNames.map(name => `      - ${name}`).join('\n')}
     type: select
     proxies:
       - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🛍️ 国际电商
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - DIRECT
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🍎 苹果服务
     type: select
@@ -580,21 +581,6 @@ rules:
   - DOMAIN-SUFFIX,yt.be,📺 YouTube
   - DOMAIN-SUFFIX,youtu.be,📺 YouTube
   - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
-
-  # Shopping
-  - DOMAIN-KEYWORD,amazon,🛍️ Shopping
-  - DOMAIN-KEYWORD,ebay,🛍️ Shopping
-  - DOMAIN-KEYWORD,walmart,🛍️ Shopping
-  - DOMAIN-KEYWORD,shopify,🛍️ Shopping
-  - DOMAIN-KEYWORD,shopee,🛍️ Shopping
-  - DOMAIN-KEYWORD,lazada,🛍️ Shopping
-  - DOMAIN-KEYWORD,rakuten,🛍️ Shopping
-  - DOMAIN-KEYWORD,bestbuy,🛍️ Shopping
-  - DOMAIN-KEYWORD,costco,🛍️ Shopping
-  - DOMAIN-KEYWORD,etsy,🛍️ Shopping
-  - DOMAIN-KEYWORD,allegro,🛍️ Shopping
-  - DOMAIN-KEYWORD,mercadolibre,🛍️ Shopping
-  - DOMAIN-KEYWORD,flipkart,🛍️ Shopping
 
 
   # NAME: OpenAI
@@ -743,6 +729,25 @@ rules:
   - DOMAIN-SUFFIX,wunderlist.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,yammer.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,yammerusercontent.com,Ⓜ️ 微软服务
+
+  # 国际电商
+  - DOMAIN-KEYWORD,mercadolibre,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.ar,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.br,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.mx,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.cl,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.co,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.co.cr,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.uy,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.ve,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.ec,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.pe,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.pa,🛍️ 国际电商
+
+  
+
+
   # Apple
   - DOMAIN-KEYWORD,apple,🍎 苹果服务
   - DOMAIN,apple.comscoreresearch.com,🍎 苹果服务
@@ -982,7 +987,6 @@ rules:
   - DOMAIN-KEYWORD,vpimg,🎯 全球直连
   - DOMAIN-KEYWORD,xiami,🎯 全球直连
   - DOMAIN-KEYWORD,xiaomi,🎯 全球直连
-  - DOMAIN-KEYWORD,mercadolibre,🎯 全球直连
   
   - DOMAIN-SUFFIX,joom.com,🎯 全球直连
   - DOMAIN-SUFFIX,1688.com,🎯 全球直连
