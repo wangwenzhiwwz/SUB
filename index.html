@@ -472,6 +472,11 @@ ${proxyNames.map(name => `      - ${name}`).join('\n')}
     proxies:
       - 🚀 节点选择
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🛍️ Shopping
+    type: select
+    proxies:
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🧸 OpenAI
     type: select
     proxies:
@@ -575,6 +580,22 @@ rules:
   - DOMAIN-SUFFIX,yt.be,📺 YouTube
   - DOMAIN-SUFFIX,youtu.be,📺 YouTube
   - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
+
+  # Shopping
+  - DOMAIN-KEYWORD,amazon,🛍️ Shopping
+  - DOMAIN-KEYWORD,ebay,🛍️ Shopping
+  - DOMAIN-KEYWORD,walmart,🛍️ Shopping
+  - DOMAIN-KEYWORD,shopify,🛍️ Shopping
+  - DOMAIN-KEYWORD,shopee,🛍️ Shopping
+  - DOMAIN-KEYWORD,lazada,🛍️ Shopping
+  - DOMAIN-KEYWORD,rakuten,🛍️ Shopping
+  - DOMAIN-KEYWORD,bestbuy,🛍️ Shopping
+  - DOMAIN-KEYWORD,costco,🛍️ Shopping
+  - DOMAIN-KEYWORD,etsy,🛍️ Shopping
+  - DOMAIN-KEYWORD,allegro,🛍️ Shopping
+  - DOMAIN-KEYWORD,mercadolibre,🛍️ Shopping
+  - DOMAIN-KEYWORD,flipkart,🛍️ Shopping
+
 
   # NAME: OpenAI
   # AUTHOR: blackmatrix7
