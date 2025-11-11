@@ -25,6 +25,45 @@ rules:
   - DOMAIN-SUFFIX,msftncsi.com,🎯 全球直连
   - DOMAIN-SUFFIX,msftconnecttest.com,🎯 全球直连
 
+  # 本碎片只包含常见广告关键字、广告联盟。无副作用，放心使用
+  # Adobe网站屏蔽
+  - DOMAIN-SUFFIX,ic.adobe.io,🛑 全球拦截
+  - DOMAIN-SUFFIX,fqaq3pq1o9.adobe.io,🛑 全球拦截
+  - DOMAIN-SUFFIX,ij0gdyrfka.adobe.io,🛑 全球拦截
+  - DOMAIN-KEYWORD,adobe,🛑 全球拦截
+  - DOMAIN-KEYWORD,admaster,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsage,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsensor,🛑 全球拦截
+  - DOMAIN-KEYWORD,adservice,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsmogo,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsrvmedia,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsserving,🛑 全球拦截
+  - DOMAIN-KEYWORD,adsystem,🛑 全球拦截
+  - DOMAIN-KEYWORD,adwords,🛑 全球拦截
+  - DOMAIN-KEYWORD,analysis,🛑 全球拦截
+  - DOMAIN-KEYWORD,applovin,🛑 全球拦截
+  - DOMAIN-KEYWORD,appsflyer,🛑 全球拦截
+  - DOMAIN-KEYWORD,domob,🛑 全球拦截
+
+  # YouTube
+  - DOMAIN-KEYWORD,youtube,📺 YouTube
+  - DOMAIN-KEYWORD,youtubei,📺 YouTube
+  - DOMAIN-KEYWORD,googlevideo,📺 YouTube
+  - DOMAIN-KEYWORD,ggpht,📺 YouTube
+  - DOMAIN,yt3.ggpht.com,📺 YouTube
+  - DOMAIN,youtubei.googleapis.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
+  - DOMAIN-SUFFIX,ytimg.com,📺 YouTube
+  - DOMAIN-SUFFIX,ggpht.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
+  - DOMAIN-SUFFIX,music.youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtubeeducation.com,📺 YouTube
+  - DOMAIN-SUFFIX,yt.be,📺 YouTube
+  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
+  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
+
+
   # NAME: OpenAI
   # AUTHOR: blackmatrix7
   # REPO: https://github.com/blackmatrix7/ios_rule_script
@@ -88,24 +127,9 @@ rules:
   - DOMAIN-SUFFIX,ttwebview.com,🎵 TikTok
   - DOMAIN-KEYWORD,musical.ly,🎵 TikTok
   - DOMAIN-KEYWORD,tiktok,🎵 TikTok
+  - DOMAIN-KEYWORD,ttwstatic,🎵 TikTok
   - PROCESS-NAME,com.zhiliaoapp.musically,🎵 TikTok
   
-  # YouTube
-  - DOMAIN-KEYWORD,youtube,📺 YouTube
-  - DOMAIN-KEYWORD,youtubei,📺 YouTube
-  - DOMAIN-KEYWORD,ggpht,📺 YouTube
-  - DOMAIN,yt3.ggpht.com,📺 YouTube
-  - DOMAIN,youtubei.googleapis.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtube.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
-  - DOMAIN-SUFFIX,ytimg.com,📺 YouTube
-  - DOMAIN-SUFFIX,ggpht.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
-  - DOMAIN-SUFFIX,music.youtube.com,📺 YouTube
-  - DOMAIN-SUFFIX,youtubeeducation.com,📺 YouTube
-  - DOMAIN-SUFFIX,yt.be,📺 YouTube
-  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
-  - DOMAIN-SUFFIX,youtube-nocookie.com,📺 YouTube
 
   
   # Microsoft Services
@@ -186,6 +210,26 @@ rules:
   - DOMAIN-SUFFIX,wunderlist.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,yammer.com,Ⓜ️ 微软服务
   - DOMAIN-SUFFIX,yammerusercontent.com,Ⓜ️ 微软服务
+
+  # 国际电商
+  - DOMAIN-KEYWORD,mercadolibre,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.ar,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.br,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.mx,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.cl,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.co,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.co.cr,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.uy,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.ve,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.ec,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.pe,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mercadolibre.com.pa,🛍️ 国际电商
+  - DOMAIN-SUFFIX,mlstatic.com,🛍️ 国际电商
+
+  
+
+
   # Apple
   - DOMAIN-KEYWORD,apple,🍎 苹果服务
   - DOMAIN,apple.comscoreresearch.com,🍎 苹果服务
@@ -267,6 +311,9 @@ rules:
   - DOMAIN-KEYWORD,blogspot,🚀 节点选择
   - DOMAIN-KEYWORD,dropbox,🚀 节点选择
   - DOMAIN-KEYWORD,facebook,🚀 节点选择
+  - DOMAIN-KEYWORD,fbsbx,🚀 节点选择
+  - DOMAIN-KEYWORD,rapidssl,🚀 节点选择
+  - DOMAIN-KEYWORD,threads,🚀 节点选择
   - DOMAIN-KEYWORD,fbcdn,🚀 节点选择
   - DOMAIN-KEYWORD,github,🚀 节点选择
   - DOMAIN-KEYWORD,gmail,🚀 节点选择
@@ -278,6 +325,9 @@ rules:
   - DOMAIN-KEYWORD,telegram,🚀 节点选择
   - DOMAIN-KEYWORD,twitter,🚀 节点选择
   - DOMAIN-KEYWORD,whatsapp,🚀 节点选择
+  - DOMAIN-KEYWORD,reddit,🚀 节点选择
+  - DOMAIN-KEYWORD,zoho,🚀 节点选择
+  
 
   - DOMAIN-KEYWORD,amazon,🚀 节点选择
   - DOMAIN-SUFFIX,adobedtm.com,🚀 节点选择
@@ -419,7 +469,9 @@ rules:
   - DOMAIN-KEYWORD,vpimg,🎯 全球直连
   - DOMAIN-KEYWORD,xiami,🎯 全球直连
   - DOMAIN-KEYWORD,xiaomi,🎯 全球直连
-
+  - DOMAIN-KEYWORD,jsdelivr,🎯 全球直连
+  - DOMAIN-KEYWORD,scamalytics,🎯 全球直连
+  
   - DOMAIN-SUFFIX,joom.com,🎯 全球直连
   - DOMAIN-SUFFIX,1688.com,🎯 全球直连
   - DOMAIN-SUFFIX,aliapp.org,🎯 全球直连
