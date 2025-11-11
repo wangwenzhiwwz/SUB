@@ -459,7 +459,7 @@ proxy-groups:
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: ♻️ 自动选择
     type: url-test
-    url: https://cp.cloudflare.com/generate_204
+    url: tcp://1.1.1.1:443
     interval: 300
     tolerance: 50
     proxies:
