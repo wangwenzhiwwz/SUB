@@ -179,7 +179,7 @@
             if (!decoded) return null;
             try {
                 const config = JSON.parse(decoded);
-                if (config.v !== '2') return null;
+                if (config.v && config.v !== '2') return null; // 允许 v1 格式
                 const baseName = config.ps || 'vmess';
                 return {
                     name: generateUniqueName(baseName, nameCounts),
