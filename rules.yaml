@@ -69,7 +69,6 @@ rules:
   # REPO: https://github.com/blackmatrix7/ios_rule_script
   # UPDATED: 2024-07-03 16:18:28
   - DOMAIN,chat.openai.com.cdn.cloudflare.net,🧸 OpenAI
-  - DOMAIN,gemini.google.com,🧸 OpenAI
   - DOMAIN,openai-api.arkoselabs.com,🧸 OpenAI
   - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,🧸 OpenAI
   - DOMAIN,openaicomproductionae4b.blob.core.windows.net,🧸 OpenAI
@@ -95,6 +94,21 @@ rules:
   - DOMAIN-KEYWORD,openai,🧸 OpenAI
   - IP-CIDR,24.199.123.28/32,🧸 OpenAI,no-resolve
   - IP-CIDR,64.23.132.171/32,🧸 OpenAI,no-resolve
+  # Gemini AI
+  - DOMAIN,gemini.google.com,🧸 OpenAI
+  - DOMAIN,ai.google.dev,🧸 OpenAI
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,🧸 OpenAI
+  - DOMAIN,makersuite.google.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,bard.google.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,deepmind.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,deepmind.google,🧸 OpenAI
+  - DOMAIN-SUFFIX,generativeai.google,🧸 OpenAI
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,🧸 OpenAI
+  - DOMAIN-SUFFIX,apis.google.com,🧸 OpenAI
+  - DOMAIN-KEYWORD,colab,🧸 OpenAI
+  - DOMAIN-KEYWORD,developerprofiles,🧸 OpenAI
+  - DOMAIN-KEYWORD,generativelanguage,🧸 OpenAI
+  
   
   # NAME: TikTok
   # AUTHOR: blackmatrix7
@@ -130,7 +144,6 @@ rules:
   - DOMAIN-KEYWORD,ttwstatic,🎵 TikTok
   - PROCESS-NAME,com.zhiliaoapp.musically,🎵 TikTok
   
-
   
   # Microsoft Services
   - DOMAIN-KEYWORD,1drv,Ⓜ️ 微软服务
@@ -213,21 +226,7 @@ rules:
 
   # 国际电商
   - DOMAIN-KEYWORD,mercadolibre,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.ar,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.br,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.mx,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.cl,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.co,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.co.cr,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.uy,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.ve,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.ec,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.pe,🛍️ 国际电商
-  - DOMAIN-SUFFIX,mercadolibre.com.pa,🛍️ 国际电商
   - DOMAIN-SUFFIX,mlstatic.com,🛍️ 国际电商
-
-  
 
 
   # Apple
@@ -327,6 +326,8 @@ rules:
   - DOMAIN-KEYWORD,whatsapp,🚀 节点选择
   - DOMAIN-KEYWORD,reddit,🚀 节点选择
   - DOMAIN-KEYWORD,zoho,🚀 节点选择
+  - DOMAIN-KEYWORD,parsec,🚀 节点选择
+  - DOMAIN-KEYWORD,immersivetranslate,🚀 节点选择
   
 
   - DOMAIN-KEYWORD,amazon,🚀 节点选择
@@ -390,10 +391,6 @@ rules:
   - DOMAIN-SUFFIX,googleapis.com,🚀 节点选择
   - DOMAIN-SUFFIX,gstatic.cn,🚀 节点选择
   - DOMAIN-SUFFIX,gstatic.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gvt0.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gvt1.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gvt2.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gvt3.com,🚀 节点选择
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🚀 节点选择
   - DOMAIN-SUFFIX,cdninstagram.com,🚀 节点选择
   - DOMAIN-SUFFIX,instagram.com,🚀 节点选择
@@ -442,6 +439,14 @@ rules:
   - DOMAIN-SUFFIX,telegra.ph,🚀 节点选择
   - DOMAIN-SUFFIX,telegram.me,🚀 节点选择
   - DOMAIN-SUFFIX,telegram.org,🚀 节点选择
+  - DOMAIN-SUFFIX,vscode-cdn.net,🚀 节点选择
+  - DOMAIN-SUFFIX,visualstudio.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xboxlive.com,🚀 节点选择
+  - DOMAIN-SUFFIX,hitscounter.dev,🚀 节点选择
+  - DOMAIN-SUFFIX,licdn.com,🚀 节点选择
+  - DOMAIN-SUFFIX,geotrust.com,🚀 节点选择
+
+
   # 直连列表
   # MyList
   # CN域名直连(中国|公司|网络)
