@@ -6,121 +6,23 @@
     <title>SUB.WWZ.iM</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="https://wangwenzhi.eu.org/images/favicon_io/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://wangwenzhi.eu.org/images/favicon_io/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://wangwenzhi.eu.org/images/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://wangwenzhi.eu.org/images/favicon_io/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="https://wangwenzhi.eu.org/images/favicon_io/android-chrome-512x512.png">
-    <link rel="manifest" href="https://wangwenzhi.eu.org/images/favicon_io/site.webmanifest">
     <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #333;
-            letter-spacing: -0.02em;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 20px;
-            box-shadow: none;
-        }
-        textarea {
-            width: 100%;
-            border: none;
-            border-radius: 8px;
-            padding: 14px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            background-color: #ffffff;
-            color: #333;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.2s ease;
-        }
-        textarea:focus {
-            background-color: #f1f1f1;
-            outline: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        button {
-            background-color: #333;
-            color: #ffffff;
-            font-weight: 600;
-            padding: 14px 0;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
-            font-size: 1rem;
-        }
-        button:hover {
-            background-color: #555;
-        }
-        .button-secondary {
-            background-color: #e0e0e0;
-            color: #333;
-            margin-top: 10px;
-        }
-        .button-secondary:hover {
-            background-color: #d0d0d0;
-        }
-        .feedback-message {
-            display: none;
-            color: #333;
-            font-size: 0.875rem;
-            margin-top: 8px;
-            text-align: center;
-        }
-        footer {
-            text-align: center;
-            font-size: 0.875rem;
-            color: #888;
-            margin-top: 40px;
-        }
-        footer a {
-            color: #333;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 640px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            .card {
-                padding: 20px 15px;
-            }
-            button {
-                font-size: 1rem;
-            }
-        }
-        @media (min-width: 1200px) {
-            .container {
-                padding: 40px 60px;
-            }
-        }
+        body { background-color: #f5f5f5; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; margin: 0; padding: 0; box-sizing: border-box; }
+        .container { max-width: 1000px; width: 100%; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.5rem; font-weight: 700; color: #333; letter-spacing: -0.02em; }
+        .card { background-color: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: none; }
+        textarea { width: 100%; border: none; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.4; background-color: #ffffff; color: #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); transition: background-color 0.2s ease; cursor: pointer; }
+        textarea:focus { background-color: #f1f1f1; outline: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        button { background-color: #333; color: #ffffff; font-weight: 600; padding: 14px 0; border-radius: 30px; border: none; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s ease; font-size: 1rem; }
+        button:hover { background-color: #555; }
+        .button-secondary { background-color: #e0e0e0; color: #333; margin-top: 10px; }
+        .button-secondary:hover { background-color: #d0d0d0; }
+        #toast { display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: white; padding: 0.75rem 1.5rem; border-radius: 9999px; font-size: 0.875rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        footer { text-align: center; font-size: 0.875rem; color: #888; margin-top: 40px; padding-bottom: 20px; }
+        footer a { color: #333; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { .header h1 { font-size: 2rem; } .card { padding: 20px 15px; } button { font-size: 1rem; } }
     </style>
 </head>
 <body>
@@ -129,20 +31,21 @@
             <h1>SUB.WWZ.iM</h1>
         </header>
 
-        <div class="card">
+        <div class="card" id="inputSection">
             <h2 class="text-xl font-semibold mb-4">Input Node Links</h2>
             <textarea id="inputLinks" rows="5" placeholder="Paste one vmess://, vless://, hysteria2://, trojan://, http://, socks5://, or ss:// link per line..."></textarea>
         </div>
 
-        <div class="card">
-            <h2 class="text-xl font-semibold mb-4">Clash.Meta Configuration</h2>
-            <textarea id="outputConfig" rows="12" readonly></textarea>
+        <div class="card" id="outputSection">
+            <h2 class="text-xl font-semibold mb-4">Clash.Meta Configuration (Click to Copy)</h2>
+            <textarea id="outputConfig" rows="12" readonly placeholder="Output will appear here..."></textarea>
             <div class="flex space-x-4 mt-4">
                 <button id="copyButton" class="flex-1">Copy</button>
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
             </div>
-            <span id="copiedMessage" class="feedback-message">Copied to clipboard!</span>
         </div>
+
+        <div id="toast">Copied to clipboard!</div>
 
         <footer>
             <p>Designed by WWZ.iM © 2026</p>
@@ -155,223 +58,72 @@
         </footer>
     </div>
 
+    <script src="rules.js"></script>
+
     <script>
-        // Base64 decoding function
-        function base64Decode(str) {
-            try {
-                return atob(str.replace(/-/g, '+').replace(/_/g, '/'));
-            } catch (e) {
-                return '';
-            }
-        }
+        function base64Decode(str) { try { return atob(str.replace(/-/g, '+').replace(/_/g, '/')); } catch (e) { return ''; } }
+        function generateUniqueName(baseName, nameCounts) { const safeBaseName = String(baseName); if (!nameCounts[safeBaseName]) { nameCounts[safeBaseName] = 0; return safeBaseName; } nameCounts[safeBaseName]++; return `${safeBaseName}_${nameCounts[safeBaseName] + 1}`; }
 
-        // Generate unique name based on base name and existing names
-        function generateUniqueName(baseName, nameCounts) {
-            const safeBaseName = String(baseName);
-            if (!nameCounts[safeBaseName]) {
-                nameCounts[safeBaseName] = 0;
-                return safeBaseName;
-            }
-            nameCounts[safeBaseName]++;
-            return `${safeBaseName}_${nameCounts[safeBaseName] + 1}`;
-        }
-
-        // Parse vmess link
         function parseVmess(link, nameCounts) {
             const decoded = base64Decode(link.replace('vmess://', ''));
             if (!decoded) return null;
             try {
                 const config = JSON.parse(decoded);
-                if (config.v && config.v !== '2') return null; // 允许 v1 格式
-                const baseName = config.ps || 'vmess';
-                return {
-                    name: generateUniqueName(baseName, nameCounts),
-                    type: 'vmess',
-                    server: config.add,
-                    port: parseInt(config.port) || 443,
-                    cipher: config.scy || 'auto',
-                    uuid: config.id,
-                    alterId: parseInt(config.aid) || 0,
-                    tls: config.tls === 'tls',
-                    'skip-cert-verify': true,
-                    servername: config.sni || '',
-                    network: config.net || 'ws',
-                    'ws-opts': {
-                        path: config.path || '/',
-                        headers: { host: config.host || config.add }
-                    }
-                };
-            } catch (e) {
-                return null;
-            }
+                return { name: generateUniqueName(config.ps || 'vmess', nameCounts), type: 'vmess', server: config.add, port: parseInt(config.port) || 443, cipher: config.scy || 'auto', uuid: config.id, alterId: parseInt(config.aid) || 0, tls: config.tls === 'tls', 'skip-cert-verify': true, servername: config.sni || '', network: config.net || 'ws', 'ws-opts': { path: config.path || '/', headers: { host: config.host || config.add } } };
+            } catch (e) { return null; }
         }
 
-        // 修正版 parseVless
         function parseVless(link, nameCounts) {
             try {
-                const url = new URL(link);
-                const params = new URLSearchParams(url.search);
-                const baseName = decodeURIComponent(url.hash.replace('#', '')) || 'vless';
-                const network = params.get('type') || 'tcp';
-                const security = params.get('security') || '';
-                const flow = params.get('flow') || '';
-                const fp = params.get('fp') || '';
-                const pbk = params.get('pbk') || '';
-                const sid = params.get('sid') || '';
-                const sni = params.get('sni') || params.get('host') || url.hostname;
-                const spx = params.get('spx') || '';
-                const headerType = params.get('headerType') || '';
-
-                // 以 Clash.Meta 兼容为主，增加 udp, flow, reality-opts, client-fingerprint
-                const proxy = {
-                    name: generateUniqueName(baseName, nameCounts),
-                    type: 'vless',
-                    server: url.hostname,
-                    port: parseInt(url.port) || 443,
-                    udp: true,
-                    uuid: url.username,
-                    tls: security === 'reality' || security === 'tls',
-                    servername: sni,
-                    network: network
-                };
-
-                if (flow) proxy.flow = flow;
-
-                // WebSocket 特殊处理
-                if (network === 'ws') {
-                    proxy['ws-opts'] = {
-                        path: params.get('path') || '/',
-                        headers: {
-                            host: params.get('host') || url.hostname
-                        }
-                    };
-                }
-
-                // Reality 特殊处理
-                if (security === 'reality') {
-                    proxy['reality-opts'] = {
-                        'public-key': pbk,
-                        'short-id': sid
-                    };
-                }
-
-                if (fp) {
-                    proxy['client-fingerprint'] = fp;
-                }
-
-                // 可选：处理 spx、headerType 等参数
-                if (spx) proxy['spx'] = decodeURIComponent(spx);
-                if (headerType) proxy['headerType'] = headerType;
-
+                const url = new URL(link); const params = new URLSearchParams(url.search);
+                const proxy = { name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || 'vless', nameCounts), type: 'vless', server: url.hostname, port: parseInt(url.port) || 443, udp: true, uuid: url.username, tls: params.get('security') === 'reality' || params.get('security') === 'tls', servername: params.get('sni') || params.get('host') || url.hostname, network: params.get('type') || 'tcp' };
+                if (params.get('flow')) proxy.flow = params.get('flow');
+                if (params.get('type') === 'ws') proxy['ws-opts'] = { path: params.get('path') || '/', headers: { host: params.get('host') || url.hostname } };
+                if (params.get('security') === 'reality') proxy['reality-opts'] = { 'public-key': params.get('pbk'), 'short-id': params.get('sid') };
+                if (params.get('fp')) proxy['client-fingerprint'] = params.get('fp');
                 return proxy;
-            } catch (e) {
-                console.error("Error parsing VLESS link:", e);
-                return null;
-            }
+            } catch (e) { return null; }
         }
 
-        // Parse hysteria2 link
         function parseHysteria2(link, nameCounts) {
-            const url = new URL(link);
-            const params = new URLSearchParams(url.search);
-            const baseName = url.hash.replace('#', '') || 'hysteria2';
-            return {
-                name: generateUniqueName(baseName, nameCounts),
-                type: 'hysteria2',
-                server: url.hostname,
-                port: parseInt(url.port) || 443,
-                password: url.username || '',
-                sni: params.get('sni') || '',
-                'skip-cert-verify': params.get('insecure') === '1'
-            };
+            const url = new URL(link); const params = new URLSearchParams(url.search);
+            return { name: generateUniqueName(url.hash.replace('#', '') || 'hysteria2', nameCounts), type: 'hysteria2', server: url.hostname, port: parseInt(url.port) || 443, password: url.username || '', sni: params.get('sni') || '', 'skip-cert-verify': params.get('insecure') === '1' };
         }
 
-        // Parse trojan link
         function parseTrojan(link, nameCounts) {
             const url = new URL(link);
-            const baseName = url.hash.replace('#', '') || 'trojan';
-            return {
-                name: generateUniqueName(baseName, nameCounts),
-                type: 'trojan',
-                server: url.hostname,
-                port: parseInt(url.port) || 443,
-                password: url.username,
-                udp: true,
-                'skip-cert-verify': true
-            };
+            return { name: generateUniqueName(url.hash.replace('#', '') || 'trojan', nameCounts), type: 'trojan', server: url.hostname, port: parseInt(url.port) || 443, password: url.username, udp: true, 'skip-cert-verify': true };
         }
 
-        // Parse http link
         function parseHttp(link, index, nameCounts) {
             const url = new URL(link);
-            const baseName = 'http';
-            const proxy = {
-                name: generateUniqueName(baseName, nameCounts),
-                type: 'http',
-                server: url.hostname,
-                port: parseInt(url.port) || 80
-            };
-            if (url.username) proxy.username = url.username;
-            if (url.password) proxy.password = url.password;
+            const proxy = { name: generateUniqueName('http', nameCounts), type: 'http', server: url.hostname, port: parseInt(url.port) || 80 };
+            if (url.username) proxy.username = url.username; if (url.password) proxy.password = url.password;
             return proxy;
         }
 
-        // Parse socks5 link
         function parseSocks5(link, index, nameCounts) {
             const url = new URL(link);
-            const baseName = 'socks5';
-            return {
-                name: generateUniqueName(baseName, nameCounts),
-                type: 'socks5',
-                server: url.hostname,
-                port: parseInt(url.port) || 1080
-            };
+            return { name: generateUniqueName('socks5', nameCounts), type: 'socks5', server: url.hostname, port: parseInt(url.port) || 1080 };
         }
 
-        // Parse Shadowsocks (SS) link
         function parseSs(link, nameCounts) {
             try {
-                const parts = link.replace('ss://', '').split('@');
-                if (parts.length !== 2) return null;
-
-                const auth = base64Decode(parts[0]);
-                const authParts = auth.split(':');
-                if (authParts.length !== 2) return null;
-                const [cipher, password] = authParts;
-
-                const serverInfo = parts[1].split('#');
-                const serverPort = serverInfo[0];
-                const [server, port] = serverPort.split(':');
-                const baseName = decodeURIComponent(serverInfo[1] || 'shadowsocks');
-
-                return {
-                    name: generateUniqueName(baseName, nameCounts),
-                    type: 'ss',
-                    server: server,
-                    port: parseInt(port) || 8388,
-                    cipher: cipher,
-                    password: password
-                };
-            } catch (e) {
-                console.error("Error parsing SS link:", e);
-                return null;
-            }
+                const parts = link.replace('ss://', '').split('@'); if (parts.length !== 2) return null;
+                const auth = base64Decode(parts[0]); const [cipher, password] = auth.split(':');
+                const serverInfo = parts[1].split('#'); const [server, port] = serverInfo[0].split(':');
+                return { name: generateUniqueName(decodeURIComponent(serverInfo[1] || 'shadowsocks'), nameCounts), type: 'ss', server, port: parseInt(port) || 8388, cipher, password };
+            } catch (e) { return null; }
         }
 
-        // Generate Clash.Meta YAML configuration
         function generateClashConfig(proxies) {
             const proxyNames = proxies.map(p => p.name);
-            const timestamp = new Date().toLocaleString('en-US', {
-                year: 'numeric', month: 'long', day: 'numeric',
-                hour: '2-digit', minute: '2-digit', second: '2-digit',
-                hour12: false
-            });
+            const timestamp = new Date().toLocaleString();
             return `####################################
 # 创建者：WWZ.iM
 # 客户端：Clash.Meta
 # 创建时间：${timestamp}
 ####################################
-# !!当前配置文件请使用基于 Clash.Meta 内核程序
 mixed-port: 7890
 allow-lan: true
 log-level: info
@@ -501,277 +253,53 @@ ${proxyNames.map(name => `      - ${name}`).join('\n')}
       - 🚀 节点选择
       - DIRECT
 ${proxyNames.map(name => `      - ${name}`).join('\n')}
+
 rules:
-  # 本地/局域网地址
-  - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
-  - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
-  - DOMAIN-SUFFIX,ip6-loopback,🎯 全球直连
-  - DOMAIN-SUFFIX,lan,🎯 全球直连
-  - DOMAIN-SUFFIX,local,🎯 全球直连
-  - DOMAIN-SUFFIX,localhost,🎯 全球直连
-  - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
-  - IP-CIDR,100.64.0.0/10,🎯 全球直连,no-resolve
-  - IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
-  - IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
-  - IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
-  - IP-CIDR,198.18.0.0/16,🎯 全球直连,no-resolve
-  - IP-CIDR,224.0.0.0/4,🎯 全球直连,no-resolve
-  - IP-CIDR6,::1/128,🎯 全球直连,no-resolve
-  - IP-CIDR6,fc00::/7,🎯 全球直连,no-resolve
-  - IP-CIDR6,fe80::/10,🎯 全球直连,no-resolve
-  - IP-CIDR6,fd00::/8,🎯 全球直连,no-resolve
-  - DOMAIN,router.asus.com,🎯 全球直连
-  - DOMAIN-SUFFIX,hiwifi.com,🎯 全球直连
-  - DOMAIN-SUFFIX,miwifi.com,🎯 全球直连
-  - DOMAIN-SUFFIX,msftncsi.com,🎯 全球直连
-  - DOMAIN-SUFFIX,msftconnecttest.com,🎯 全球直连
-
-  # 网站屏蔽
-  - DOMAIN-SUFFIX,ic.adobe.io,🛑 全球拦截
-  - DOMAIN-SUFFIX,fqaq3pq1o9.adobe.io,🛑 全球拦截
-  - DOMAIN-SUFFIX,ij0gdyrfka.adobe.io,🛑 全球拦截
-  - DOMAIN-KEYWORD,adobe,🛑 全球拦截
-
-  # YouTube
-  - DOMAIN-KEYWORD,googlevideo,📺 YouTube
-  - DOMAIN-KEYWORD,youtube,📺 YouTube
-  - DOMAIN-KEYWORD,youtubei,📺 YouTube
-  - DOMAIN-KEYWORD,ggpht,📺 YouTube
-  - DOMAIN-KEYWORD,ytimg,📺 YouTube
-
-  # OpenAI
-  - DOMAIN-KEYWORD,openai,🧸 OpenAI
-  - DOMAIN-KEYWORD,oaistatic,🧸 OpenAI
-  - DOMAIN-KEYWORD,revenuecat,🧸 OpenAI
-  - DOMAIN-KEYWORD,gemini,🧸 OpenAI
-  - DOMAIN-KEYWORD,googleapis,🧸 OpenAI
-  - DOMAIN-SUFFIX,openai.com,🧸 OpenAI
-  - DOMAIN-SUFFIX,ai.com,🧸 OpenAI
-  - DOMAIN-SUFFIX,auth0.com,🧸 OpenAI
-  - DOMAIN-SUFFIX,chatgpt.com,🧸 OpenAI
-
-  # Apple
-  - DOMAIN-KEYWORD,apple,🍎 苹果服务
-  - DOMAIN-KEYWORD,icloud,🍎 苹果服务
-  - DOMAIN-SUFFIX,aaplimg.com,🍎 苹果服务
-  - DOMAIN-SUFFIX,akadns.net,🍎 苹果服务
-  - DOMAIN-SUFFIX,appstore.com,🍎 苹果服务
-  - DOMAIN-SUFFIX,crashlytics.com,🍎 苹果服务
-  - DOMAIN-SUFFIX,me.com,🍎 苹果服务
-  - DOMAIN-SUFFIX,mzstatic.com,🍎 苹果服务
-  
-  # 代理列表
-  - DOMAIN-SUFFIX,eu,🚀 节点选择
-  - DOMAIN-SUFFIX,hk,🚀 节点选择
-  - DOMAIN-SUFFIX,jp,🚀 节点选择
-  - DOMAIN-SUFFIX,kr,🚀 节点选择
-  - DOMAIN-SUFFIX,sg,🚀 节点选择
-  - DOMAIN-SUFFIX,tw,🚀 节点选择
-  - DOMAIN-SUFFIX,uk,🚀 节点选择
-  - DOMAIN-SUFFIX,us,🚀 节点选择
-  - DOMAIN-KEYWORD,ip,🚀 节点选择
-  - DOMAIN-KEYWORD,wangwenzhi,🚀 节点选择
-  - DOMAIN-KEYWORD,cloudflare,🚀 节点选择
-  - DOMAIN-KEYWORD,ulefone,🚀 节点选择
-  - DOMAIN-KEYWORD,whimsical,🚀 节点选择
-  - DOMAIN-KEYWORD,tiktok,🚀 节点选择
-  - DOMAIN-KEYWORD,adguard,🚀 节点选择
-  - DOMAIN-KEYWORD,digicert,🚀 节点选择
-  - DOMAIN-KEYWORD,notion,🚀 节点选择
-  - DOMAIN-KEYWORD,scamalytics,🚀 节点选择
-  - DOMAIN-KEYWORD,jsdelivr,🚀 节点选择
-  - DOMAIN-KEYWORD,blogspot,🚀 节点选择
-  - DOMAIN-KEYWORD,discord,🚀 节点选择
-  - DOMAIN-KEYWORD,dropbox,🚀 节点选择
-  - DOMAIN-KEYWORD,facebook,🚀 节点选择
-  - DOMAIN-KEYWORD,fbsbx,🚀 节点选择
-  - DOMAIN-KEYWORD,linkedin,🚀 节点选择
-  - DOMAIN-KEYWORD,licdn,🚀 节点选择
-  - DOMAIN-KEYWORD,protechts,🚀 节点选择
-  - DOMAIN-KEYWORD,rapidssl,🚀 节点选择
-  - DOMAIN-KEYWORD,threads,🚀 节点选择
-  - DOMAIN-KEYWORD,fbcdn,🚀 节点选择
-  - DOMAIN-KEYWORD,github,🚀 节点选择
-  - DOMAIN-KEYWORD,gmail,🚀 节点选择
-  - DOMAIN-KEYWORD,google,🚀 节点选择
-  - DOMAIN-KEYWORD,gstatic,🚀 节点选择
-  - DOMAIN-KEYWORD,line,🚀 节点选择
-  - DOMAIN-KEYWORD,instagram,🚀 节点选择
-  - DOMAIN-KEYWORD,porn,🚀 节点选择
-  - DOMAIN-KEYWORD,microsoft,🚀 节点选择
-  - DOMAIN-KEYWORD,messenger,🚀 节点选择
-  - DOMAIN-KEYWORD,spotify,🚀 节点选择
-  - DOMAIN-KEYWORD,telegram,🚀 节点选择
-  - DOMAIN-KEYWORD,twitter,🚀 节点选择
-  - DOMAIN-KEYWORD,twimg,🚀 节点选择
-  - DOMAIN-KEYWORD,whatsapp,🚀 节点选择
-  - DOMAIN-KEYWORD,reddit,🚀 节点选择
-  - DOMAIN-KEYWORD,zoho,🚀 节点选择
-  - DOMAIN-KEYWORD,parsec,🚀 节点选择
-  - DOMAIN-KEYWORD,pinterest,🚀 节点选择
-  - DOMAIN-KEYWORD,onedrive,🚀 节点选择
-  - DOMAIN-KEYWORD,immersivetranslate,🚀 节点选择
-  - DOMAIN-KEYWORD,amazon,🚀 节点选择
-  - DOMAIN-KEYWORD,oracle,🚀 节点选择
-  - DOMAIN-KEYWORD,sony,🚀 节点选择
-  - DOMAIN-KEYWORD,appsflyersdk,🚀 节点选择
-  - DOMAIN-KEYWORD,vscode,🚀 节点选择
-  - DOMAIN-KEYWORD,visualstudio,🚀 节点选择
-  
-  - DOMAIN-SUFFIX,android.com,🚀 节点选择
-  - DOMAIN-SUFFIX,apkpure.com,🚀 节点选择
-  - DOMAIN-SUFFIX,bandwagonhost.com,🚀 节点选择
-  - DOMAIN-SUFFIX,bing.com,🚀 节点选择
-  - DOMAIN-SUFFIX,blogger.com,🚀 节点选择
-  - DOMAIN-SUFFIX,box.com,🚀 节点选择
-  - DOMAIN-SUFFIX,cloudfront.net,🚀 节点选择
-  - DOMAIN-SUFFIX,hulu.com,🚀 节点选择
-  - DOMAIN-SUFFIX,medium.com,🚀 节点选择
-  - DOMAIN-SUFFIX,mega.nz,🚀 节点选择
-  - DOMAIN-SUFFIX,quora.com,🚀 节点选择
-  - DOMAIN-SUFFIX,v2ex.com,🚀 节点选择
-  - DOMAIN-SUFFIX,vimeo.com,🚀 节点选择
-  - DOMAIN-SUFFIX,xnxx.com,🚀 节点选择
-  - DOMAIN-SUFFIX,xvideos.com,🚀 节点选择
-  - DOMAIN-SUFFIX,pixiv.net,🚀 节点选择
-  - DOMAIN-SUFFIX,pximg.net,🚀 节点选择
-  - DOMAIN-SUFFIX,t.co,🚀 节点选择
-  - DOMAIN-SUFFIX,t.me,🚀 节点选择
-  - DOMAIN-SUFFIX,wwz.im,🚀 节点选择
-  - DOMAIN-SUFFIX,x.com,🚀 节点选择
-  - DOMAIN-SUFFIX,duolingo.com,🚀 节点选择
-  - DOMAIN-SUFFIX,adguard.org,🚀 节点选择
-  - DOMAIN-SUFFIX,gravatar.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gist.build,🚀 节点选择
-  - DOMAIN-SUFFIX,whimsical.com,🚀 节点选择
-  - DOMAIN-SUFFIX,clearbit.com,🚀 节点选择
-  - DOMAIN-SUFFIX,cloudflare.com,🚀 节点选择
-  - DOMAIN-SUFFIX,btlibrary.me,🚀 节点选择
-  - DOMAIN-SUFFIX,behance.net,🚀 节点选择
-  - DOMAIN-SUFFIX,artlist.io,🚀 节点选择
-  - DOMAIN-SUFFIX,cloudcone.com,🚀 节点选择
-  - DOMAIN-SUFFIX,linkedin.com,🚀 节点选择
-  - DOMAIN-SUFFIX,notion.so,🚀 节点选择
-  - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
-  - DOMAIN-SUFFIX,ping.pe,🚀 节点选择
-  - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
-  - DOMAIN-SUFFIX,unsplash.com,🚀 节点选择
-
-  # 直连列表
-  # CN域名直连(中国|公司|网络)
-  - DOMAIN-SUFFIX,cn,🎯 全球直连
-  - DOMAIN-KEYWORD,115,🎯 全球直连
-  - DOMAIN-KEYWORD,12306,🎯 全球直连
-  - DOMAIN-KEYWORD,1688,🎯 全球直连
-  - DOMAIN-KEYWORD,360buy,🎯 全球直连
-  - DOMAIN-KEYWORD,ali,🎯 全球直连
-  - DOMAIN-KEYWORD,aliapp,🎯 全球直连
-  - DOMAIN-KEYWORD,alicdn,🎯 全球直连
-  - DOMAIN-KEYWORD,aliyun,🎯 全球直连
-  - DOMAIN-KEYWORD,alipay,🎯 全球直连
-  - DOMAIN-KEYWORD,amap,🎯 全球直连
-  - DOMAIN-KEYWORD,baidu,🎯 全球直连
-  - DOMAIN-KEYWORD,bili,🎯 全球直连
-  - DOMAIN-KEYWORD,bilibili,🎯 全球直连
-  - DOMAIN-KEYWORD,chinacache,🎯 全球直连
-  - DOMAIN-KEYWORD,duokan,🎯 全球直连
-  - DOMAIN-KEYWORD,dingtalk,🎯 全球直连
-  - DOMAIN-KEYWORD,teambition,🎯 全球直连
-  - DOMAIN-KEYWORD,ximalaya,🎯 全球直连
-  - DOMAIN-KEYWORD,xiami,🎯 全球直连
-  - DOMAIN-KEYWORD,xiaomi,🎯 全球直连
-  - DOMAIN-KEYWORD,mi,🎯 全球直连
-  - DOMAIN-KEYWORD,sina,🎯 全球直连
-  - DOMAIN-KEYWORD,weibo,🎯 全球直连
-  - DOMAIN-KEYWORD,weixin,🎯 全球直连
-  - DOMAIN-KEYWORD,wechat,🎯 全球直连
-  - DOMAIN-KEYWORD,douyin,🎯 全球直连
-  - DOMAIN-KEYWORD,douyu,🎯 全球直连
-  - DOMAIN-KEYWORD,qq,🎯 全球直连
-  - DOMAIN-KEYWORD,qcloud,🎯 全球直连
-  - DOMAIN-KEYWORD,jd,🎯 全球直连
-  - DOMAIN-KEYWORD,taobao,🎯 全球直连
-  - DOMAIN-KEYWORD,youku,🎯 全球直连
-  - DOMAIN-KEYWORD,iqiyi,🎯 全球直连
-  - DOMAIN-KEYWORD,playstation,🎯 全球直连
-  - DOMAIN-KEYWORD,xiaohongshu,🎯 全球直连
-  - DOMAIN-KEYWORD,xhscdn,🎯 全球直连
-  - DOMAIN-KEYWORD,sony,🎯 全球直连
-  - DOMAIN-SUFFIX,weather.com,🎯 全球直连
-  - GEOIP,CN,🎯 全球直连
-  - MATCH,🐟 漏网之鱼
-`;
+${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
         }
 
-        // Handle input and conversion
+        const toast = document.getElementById('toast');
+        const outputField = document.getElementById('outputConfig');
+
+        function showToast(msg = "Copied to clipboard!") {
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        }
+
+        const handleCopy = () => {
+            if (!outputField.value) return;
+            outputField.select();
+            document.execCommand('copy');
+            showToast();
+        };
+
+        outputField.addEventListener('click', handleCopy);
+        document.getElementById('copyButton').addEventListener('click', handleCopy);
+
         document.getElementById('inputLinks').addEventListener('input', () => {
-            const input = document.getElementById('inputLinks').value.trim();
-            const lines = input.split('\n').filter(line => line.trim());
-            const proxies = [];
-            const nameCounts = {};
-
+            const val = document.getElementById('inputLinks').value.trim();
+            const lines = val.split('\n').filter(l => l.trim());
+            const proxies = []; const nc = {};
             lines.forEach((line, index) => {
-                line = line.trim();
-                let proxy = null;
-                if (line.startsWith('vmess://')) {
-                    proxy = parseVmess(line, nameCounts);
-                } else if (line.startsWith('vless://')) {
-                    proxy = parseVless(line, nameCounts);
-                } else if (line.startsWith('hysteria2://')) {
-                    proxy = parseHysteria2(line, nameCounts);
-                } else if (line.startsWith('trojan://')) {
-                    proxy = parseTrojan(line, nameCounts);
-                } else if (line.startsWith('http://')) {
-                    proxy = parseHttp(line, index, nameCounts);
-                } else if (line.startsWith('socks5://')) {
-                    proxy = parseSocks5(line, index, nameCounts);
-                } else if (line.startsWith('ss://')) {
-                    proxy = parseSs(line, nameCounts);
-                }
-                if (proxy) proxies.push(proxy);
+                let p = null;
+                if (line.startsWith('vmess://')) p = parseVmess(line, nc);
+                else if (line.startsWith('vless://')) p = parseVless(line, nc);
+                else if (line.startsWith('hysteria2://')) p = parseHysteria2(line, nc);
+                else if (line.startsWith('trojan://')) p = parseTrojan(line, nc);
+                else if (line.startsWith('http://')) p = parseHttp(line, index, nc);
+                else if (line.startsWith('socks5://')) p = parseSocks5(line, index, nc);
+                else if (line.startsWith('ss://')) p = parseSs(line, nc);
+                if (p) proxies.push(p);
             });
-
-            const outputConfig = document.getElementById('outputConfig');
-            outputConfig.value = proxies.length > 0 ? generateClashConfig(proxies) : '';
+            outputField.value = proxies.length > 0 ? generateClashConfig(proxies) : '';
         });
 
-        // Handle copy to clipboard (button)
-        document.getElementById('copyButton').addEventListener('click', () => {
-            const outputConfig = document.getElementById('outputConfig');
-            outputConfig.select();
-            document.execCommand('copy');
-            const copiedMessage = document.getElementById('copiedMessage');
-            copiedMessage.style.display = 'inline';
-            setTimeout(() => {
-                copiedMessage.style.display = 'none';
-            }, 2000);
-        });
-
-        // Handle copy to clipboard (click on textarea)
-        document.getElementById('outputConfig').addEventListener('click', () => {
-            const outputConfig = document.getElementById('outputConfig');
-            outputConfig.select();
-            document.execCommand('copy');
-            const copiedMessage = document.getElementById('copiedMessage');
-            copiedMessage.style.display = 'inline';
-            setTimeout(() => {
-                copiedMessage.style.display = 'none';
-            }, 2000);
-        });
-
-        // Handle download configuration
         document.getElementById('downloadButton').addEventListener('click', () => {
-            const outputConfig = document.getElementById('outputConfig').value;
-            if (!outputConfig) return;
-            const blob = new Blob([outputConfig], { type: 'text/yaml' });
+            const cfg = outputField.value; if (!cfg) return;
+            const blob = new Blob([cfg], { type: 'text/yaml' });
             const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'clash-meta-config.yaml';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            const a = document.createElement('a'); a.href = url; a.download = 'config.yaml'; a.click();
         });
     </script>
 </body>
