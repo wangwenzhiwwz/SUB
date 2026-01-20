@@ -68,92 +68,88 @@ window.clashRules = `
   - DOMAIN-SUFFIX,uk,🚀 节点选择
   - DOMAIN-SUFFIX,us,🚀 节点选择
   - DOMAIN-KEYWORD,ip,🚀 节点选择
-  - DOMAIN-KEYWORD,wangwenzhi,🚀 节点选择
-  - DOMAIN-KEYWORD,cloudflare,🚀 节点选择
-  - DOMAIN-KEYWORD,ulefone,🚀 节点选择
-  - DOMAIN-KEYWORD,whimsical,🚀 节点选择
-  - DOMAIN-KEYWORD,tiktok,🚀 节点选择
-  - DOMAIN-KEYWORD,adguard,🚀 节点选择
-  - DOMAIN-KEYWORD,digicert,🚀 节点选择
-  - DOMAIN-KEYWORD,notion,🚀 节点选择
-  - DOMAIN-KEYWORD,scamalytics,🚀 节点选择
-  - DOMAIN-KEYWORD,jsdelivr,🚀 节点选择
+- DOMAIN-KEYWORD,adguard,🚀 节点选择
+  - DOMAIN-KEYWORD,amazon,🚀 节点选择
+  - DOMAIN-KEYWORD,appsflyersdk,🚀 节点选择
+  - DOMAIN-KEYWORD,artlist,🚀 节点选择
   - DOMAIN-KEYWORD,blogspot,🚀 节点选择
+  - DOMAIN-KEYWORD,cloudflare,🚀 节点选择
   - DOMAIN-KEYWORD,discord,🚀 节点选择
   - DOMAIN-KEYWORD,dropbox,🚀 节点选择
   - DOMAIN-KEYWORD,facebook,🚀 节点选择
-  - DOMAIN-KEYWORD,fbsbx,🚀 节点选择
-  - DOMAIN-KEYWORD,linkedin,🚀 节点选择
-  - DOMAIN-KEYWORD,licdn,🚀 节点选择
-  - DOMAIN-KEYWORD,protechts,🚀 节点选择
-  - DOMAIN-KEYWORD,rapidssl,🚀 节点选择
-  - DOMAIN-KEYWORD,threads,🚀 节点选择
   - DOMAIN-KEYWORD,fbcdn,🚀 节点选择
+  - DOMAIN-KEYWORD,fbsbx,🚀 节点选择
   - DOMAIN-KEYWORD,github,🚀 节点选择
   - DOMAIN-KEYWORD,gmail,🚀 节点选择
   - DOMAIN-KEYWORD,google,🚀 节点选择
   - DOMAIN-KEYWORD,gstatic,🚀 节点选择
-  - DOMAIN-KEYWORD,line,🚀 节点选择
+  - DOMAIN-KEYWORD,immersivetranslate,🚀 节点选择
   - DOMAIN-KEYWORD,instagram,🚀 节点选择
-  - DOMAIN-KEYWORD,porn,🚀 节点选择
-  - DOMAIN-KEYWORD,microsoft,🚀 节点选择
+  - DOMAIN-KEYWORD,jsdelivr,🚀 节点选择
+  - DOMAIN-KEYWORD,licdn,🚀 节点选择
+  - DOMAIN-KEYWORD,line,🚀 节点选择
+  - DOMAIN-KEYWORD,linkedin,🚀 节点选择
   - DOMAIN-KEYWORD,messenger,🚀 节点选择
-  - DOMAIN-KEYWORD,spotify,🚀 节点选择
-  - DOMAIN-KEYWORD,telegram,🚀 节点选择
-  - DOMAIN-KEYWORD,twitter,🚀 节点选择
-  - DOMAIN-KEYWORD,twimg,🚀 节点选择
-  - DOMAIN-KEYWORD,whatsapp,🚀 节点选择
-  - DOMAIN-KEYWORD,reddit,🚀 节点选择
-  - DOMAIN-KEYWORD,zoho,🚀 节点选择
+  - DOMAIN-KEYWORD,microsoft,🚀 节点选择
+  - DOMAIN-KEYWORD,notion,🚀 节点选择
+  - DOMAIN-KEYWORD,onedrive,🚀 节点选择
+  - DOMAIN-KEYWORD,oracle,🚀 节点选择
   - DOMAIN-KEYWORD,parsec,🚀 节点选择
   - DOMAIN-KEYWORD,pinterest,🚀 节点选择
-  - DOMAIN-KEYWORD,onedrive,🚀 节点选择
-  - DOMAIN-KEYWORD,immersivetranslate,🚀 节点选择
-  - DOMAIN-KEYWORD,amazon,🚀 节点选择
-  - DOMAIN-KEYWORD,oracle,🚀 节点选择
+  - DOMAIN-KEYWORD,porn,🚀 节点选择
+  - DOMAIN-KEYWORD,protechts,🚀 节点选择
+  - DOMAIN-KEYWORD,rapidssl,🚀 节点选择
+  - DOMAIN-KEYWORD,reddit,🚀 节点选择
+  - DOMAIN-KEYWORD,scamalytics,🚀 节点选择
   - DOMAIN-KEYWORD,sony,🚀 节点选择
-  - DOMAIN-KEYWORD,appsflyersdk,🚀 节点选择
-  - DOMAIN-KEYWORD,vscode,🚀 节点选择
+  - DOMAIN-KEYWORD,spotify,🚀 节点选择
+  - DOMAIN-KEYWORD,telegram,🚀 节点选择
+  - DOMAIN-KEYWORD,threads,🚀 节点选择
+  - DOMAIN-KEYWORD,tiktok,🚀 节点选择
+  - DOMAIN-KEYWORD,twimg,🚀 节点选择
+  - DOMAIN-KEYWORD,twitter,🚀 节点选择
+  - DOMAIN-KEYWORD,ulefone,🚀 节点选择
   - DOMAIN-KEYWORD,visualstudio,🚀 节点选择
+  - DOMAIN-KEYWORD,vscode,🚀 节点选择
+  - DOMAIN-KEYWORD,wangwenzhi,🚀 节点选择
+  - DOMAIN-KEYWORD,whatsapp,🚀 节点选择
+  - DOMAIN-KEYWORD,whimsical,🚀 节点选择
+  - DOMAIN-KEYWORD,zoho,🚀 节点选择
   
   - DOMAIN-SUFFIX,android.com,🚀 节点选择
   - DOMAIN-SUFFIX,apkpure.com,🚀 节点选择
   - DOMAIN-SUFFIX,bandwagonhost.com,🚀 节点选择
+  - DOMAIN-SUFFIX,behance.net,🚀 节点选择
   - DOMAIN-SUFFIX,bing.com,🚀 节点选择
   - DOMAIN-SUFFIX,blogger.com,🚀 节点选择
   - DOMAIN-SUFFIX,box.com,🚀 节点选择
+  - DOMAIN-SUFFIX,btlibrary.me,🚀 节点选择
+  - DOMAIN-SUFFIX,clearbit.com,🚀 节点选择
+  - DOMAIN-SUFFIX,cloudcone.com,🚀 节点选择
+  - DOMAIN-SUFFIX,cloudflare.com,🚀 节点选择
   - DOMAIN-SUFFIX,cloudfront.net,🚀 节点选择
+  - DOMAIN-SUFFIX,duolingo.com,🚀 节点选择
+  - DOMAIN-SUFFIX,gist.build,🚀 节点选择
+  - DOMAIN-SUFFIX,gravatar.com,🚀 节点选择
   - DOMAIN-SUFFIX,hulu.com,🚀 节点选择
+  - DOMAIN-SUFFIX,linkedin.com,🚀 节点选择
   - DOMAIN-SUFFIX,medium.com,🚀 节点选择
   - DOMAIN-SUFFIX,mega.nz,🚀 节点选择
+  - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
+  - DOMAIN-SUFFIX,notion.so,🚀 节点选择
+  - DOMAIN-SUFFIX,ping.pe,🚀 节点选择
   - DOMAIN-SUFFIX,quora.com,🚀 节点选择
-  - DOMAIN-SUFFIX,v2ex.com,🚀 节点选择
-  - DOMAIN-SUFFIX,vimeo.com,🚀 节点选择
-  - DOMAIN-SUFFIX,xnxx.com,🚀 节点选择
-  - DOMAIN-SUFFIX,xvideos.com,🚀 节点选择
-  - DOMAIN-SUFFIX,pixiv.net,🚀 节点选择
-  - DOMAIN-SUFFIX,pximg.net,🚀 节点选择
+  - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
   - DOMAIN-SUFFIX,t.co,🚀 节点选择
   - DOMAIN-SUFFIX,t.me,🚀 节点选择
+  - DOMAIN-SUFFIX,unsplash.com,🚀 节点选择
+  - DOMAIN-SUFFIX,v2ex.com,🚀 节点选择
+  - DOMAIN-SUFFIX,vimeo.com,🚀 节点选择
+  - DOMAIN-SUFFIX,whimsical.com,🚀 节点选择
   - DOMAIN-SUFFIX,wwz.im,🚀 节点选择
   - DOMAIN-SUFFIX,x.com,🚀 节点选择
-  - DOMAIN-SUFFIX,duolingo.com,🚀 节点选择
-  - DOMAIN-SUFFIX,adguard.org,🚀 节点选择
-  - DOMAIN-SUFFIX,gravatar.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gist.build,🚀 节点选择
-  - DOMAIN-SUFFIX,whimsical.com,🚀 节点选择
-  - DOMAIN-SUFFIX,clearbit.com,🚀 节点选择
-  - DOMAIN-SUFFIX,cloudflare.com,🚀 节点选择
-  - DOMAIN-SUFFIX,btlibrary.me,🚀 节点选择
-  - DOMAIN-SUFFIX,behance.net,🚀 节点选择
-  - DOMAIN-SUFFIX,artlist.io,🚀 节点选择
-  - DOMAIN-SUFFIX,cloudcone.com,🚀 节点选择
-  - DOMAIN-SUFFIX,linkedin.com,🚀 节点选择
-  - DOMAIN-SUFFIX,notion.so,🚀 节点选择
-  - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
-  - DOMAIN-SUFFIX,ping.pe,🚀 节点选择
-  - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
-  - DOMAIN-SUFFIX,unsplash.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xnxx.com,🚀 节点选择
+  - DOMAIN-SUFFIX,xvideos.com,🚀 节点选择
 
   # 直连列表
   - DOMAIN-SUFFIX,cn,🎯 全球直连
@@ -162,16 +158,9 @@ window.clashRules = `
   - DOMAIN-KEYWORD,1688,🎯 全球直连
   - DOMAIN-KEYWORD,360buy,🎯 全球直连
   - DOMAIN-KEYWORD,ali,🎯 全球直连
-  - DOMAIN-KEYWORD,aliapp,🎯 全球直连
-  - DOMAIN-KEYWORD,alicdn,🎯 全球直连
-  - DOMAIN-KEYWORD,aliyun,🎯 全球直连
-  - DOMAIN-KEYWORD,alipay,🎯 全球直连
   - DOMAIN-KEYWORD,amap,🎯 全球直连
   - DOMAIN-KEYWORD,baidu,🎯 全球直连
   - DOMAIN-KEYWORD,bili,🎯 全球直连
-  - DOMAIN-KEYWORD,bilibili,🎯 全球直连
-  - DOMAIN-KEYWORD,chinacache,🎯 全球直连
-  - DOMAIN-KEYWORD,duokan,🎯 全球直连
   - DOMAIN-KEYWORD,dingtalk,🎯 全球直连
   - DOMAIN-KEYWORD,teambition,🎯 全球直连
   - DOMAIN-KEYWORD,ximalaya,🎯 全球直连
