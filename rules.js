@@ -68,6 +68,7 @@ window.clashRules = `
   - DOMAIN-SUFFIX,uk,🚀 节点选择
   - DOMAIN-SUFFIX,us,🚀 节点选择
   - DOMAIN-KEYWORD,ip,🚀 节点选择
+  - DOMAIN-KEYWORD,global,🚀 节点选择
   - DOMAIN-KEYWORD,adguard,🚀 节点选择
   - DOMAIN-KEYWORD,amazon,🚀 节点选择
   - DOMAIN-KEYWORD,appsflyersdk,🚀 节点选择
@@ -188,3 +189,4 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
