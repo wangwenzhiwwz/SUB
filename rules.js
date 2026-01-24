@@ -29,6 +29,32 @@ window.clashRules = `
   - DOMAIN-SUFFIX,fqaq3pq1o9.adobe.io,🛑 全球拦截
   - DOMAIN-SUFFIX,ij0gdyrfka.adobe.io,🛑 全球拦截
   - DOMAIN-KEYWORD,adobe,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-ads.de,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-app.fr,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-business.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-echo.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-etop1.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-free.lol,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-free.online,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-from-russia.ru,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-haru.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-in-russia.ru,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-maloy.lol,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-meta-generator.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-now.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-playback.space,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-revanced.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-rus.online,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-totranscript.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-vofi.lol,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtube-vpn.ru,🛑 全球拦截
+  - DOMAIN-SUFFIX,ads.youtube.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,analytics.youtube.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,fcmatch.youtube.com,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtubecreate.fr,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtuber-cash.buzz,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtubesave.org,🛑 全球拦截
+  - DOMAIN-SUFFIX,youtubevanced.tools,🛑 全球拦截
 
   # YouTube
   - DOMAIN-KEYWORD,googlevideo,📺 YouTube
@@ -189,5 +215,6 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
