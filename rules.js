@@ -30,19 +30,16 @@ window.clashRules = `
   # YouTube
   - DOMAIN-KEYWORD,googlevideo,📺 YouTube
   - DOMAIN-KEYWORD,youtube,📺 YouTube
-  - DOMAIN-KEYWORD,ggpht,📺 YouTube
-  - DOMAIN-KEYWORD,ytimg,📺 YouTube
 
   # OpenAI
+  - DOMAIN-KEYWORD,auth0,🧸 OpenAI
   - DOMAIN-KEYWORD,openai,🧸 OpenAI
+  - DOMAIN-KEYWORD,chatgpt,🧸 OpenAI
   - DOMAIN-KEYWORD,oaistatic,🧸 OpenAI
   - DOMAIN-KEYWORD,revenuecat,🧸 OpenAI
   - DOMAIN-KEYWORD,gemini,🧸 OpenAI
   - DOMAIN-KEYWORD,googleapis,🧸 OpenAI
-  - DOMAIN-SUFFIX,openai.com,🧸 OpenAI
   - DOMAIN-SUFFIX,ai.com,🧸 OpenAI
-  - DOMAIN-SUFFIX,auth0.com,🧸 OpenAI
-  - DOMAIN-SUFFIX,chatgpt.com,🧸 OpenAI
 
   # Apple
   - DOMAIN-KEYWORD,apple,🍎 苹果服务
@@ -80,6 +77,8 @@ window.clashRules = `
   - DOMAIN-KEYWORD,gmail,🚀 节点选择
   - DOMAIN-KEYWORD,google,🚀 节点选择
   - DOMAIN-KEYWORD,gstatic,🚀 节点选择
+  - DOMAIN-KEYWORD,ggpht,🚀 节点选择
+  - DOMAIN-KEYWORD,ytimg,🚀 节点选择
   - DOMAIN-KEYWORD,immersivetranslate,🚀 节点选择
   - DOMAIN-KEYWORD,instagram,🚀 节点选择
   - DOMAIN-KEYWORD,jsdelivr,🚀 节点选择
@@ -178,6 +177,7 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
 
