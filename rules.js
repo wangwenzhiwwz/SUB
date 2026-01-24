@@ -25,41 +25,11 @@ window.clashRules = `
   - DOMAIN-SUFFIX,msftconnecttest.com,🎯 全球直连
 
   # 网站屏蔽
-  - DOMAIN-SUFFIX,ic.adobe.io,🛑 全球拦截
-  - DOMAIN-SUFFIX,fqaq3pq1o9.adobe.io,🛑 全球拦截
-  - DOMAIN-SUFFIX,ij0gdyrfka.adobe.io,🛑 全球拦截
   - DOMAIN-KEYWORD,adobe,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-ads.de,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-app.fr,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-business.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-echo.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-etop1.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-free.lol,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-free.online,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-from-russia.ru,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-haru.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-in-russia.ru,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-maloy.lol,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-meta-generator.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-now.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-playback.space,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-revanced.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-rus.online,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-totranscript.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-vofi.lol,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtube-vpn.ru,🛑 全球拦截
-  - DOMAIN-SUFFIX,ads.youtube.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,analytics.youtube.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,fcmatch.youtube.com,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtubecreate.fr,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtuber-cash.buzz,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtubesave.org,🛑 全球拦截
-  - DOMAIN-SUFFIX,youtubevanced.tools,🛑 全球拦截
 
   # YouTube
   - DOMAIN-KEYWORD,googlevideo,📺 YouTube
   - DOMAIN-KEYWORD,youtube,📺 YouTube
-  - DOMAIN-KEYWORD,youtubei,📺 YouTube
   - DOMAIN-KEYWORD,ggpht,📺 YouTube
   - DOMAIN-KEYWORD,ytimg,📺 YouTube
 
@@ -149,23 +119,16 @@ window.clashRules = `
   - DOMAIN-SUFFIX,behance.net,🚀 节点选择
   - DOMAIN-SUFFIX,bing.com,🚀 节点选择
   - DOMAIN-SUFFIX,blogger.com,🚀 节点选择
-  - DOMAIN-SUFFIX,box.com,🚀 节点选择
-  - DOMAIN-SUFFIX,btlibrary.me,🚀 节点选择
-  - DOMAIN-SUFFIX,clearbit.com,🚀 节点选择
   - DOMAIN-SUFFIX,cloudcone.com,🚀 节点选择
   - DOMAIN-SUFFIX,cloudflare.com,🚀 节点选择
   - DOMAIN-SUFFIX,cloudfront.net,🚀 节点选择
   - DOMAIN-SUFFIX,duolingo.com,🚀 节点选择
-  - DOMAIN-SUFFIX,gist.build,🚀 节点选择
   - DOMAIN-SUFFIX,gravatar.com,🚀 节点选择
   - DOMAIN-SUFFIX,hulu.com,🚀 节点选择
   - DOMAIN-SUFFIX,linkedin.com,🚀 节点选择
   - DOMAIN-SUFFIX,medium.com,🚀 节点选择
-  - DOMAIN-SUFFIX,mega.nz,🚀 节点选择
   - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
   - DOMAIN-SUFFIX,notion.so,🚀 节点选择
-  - DOMAIN-SUFFIX,ping.pe,🚀 节点选择
-  - DOMAIN-SUFFIX,quora.com,🚀 节点选择
   - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
   - DOMAIN-SUFFIX,t.co,🚀 节点选择
   - DOMAIN-SUFFIX,t.me,🚀 节点选择
@@ -215,6 +178,7 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
 
