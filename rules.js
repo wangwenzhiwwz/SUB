@@ -141,7 +141,6 @@ window.clashRules = `
   - DOMAIN-SUFFIX,xvideos.com,🚀 节点选择
 
   # 直连列表
-  - DOMAIN-SUFFIX,cn,🎯 全球直连
   - DOMAIN-KEYWORD,115,🎯 全球直连
   - DOMAIN-KEYWORD,12306,🎯 全球直连
   - DOMAIN-KEYWORD,1688,🎯 全球直连
@@ -177,6 +176,7 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
 
