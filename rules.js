@@ -124,7 +124,7 @@ window.clashRules = `
   - DOMAIN-SUFFIX,duolingo.com,🚀 节点选择
   - DOMAIN-SUFFIX,gravatar.com,🚀 节点选择
   - DOMAIN-SUFFIX,hulu.com,🚀 节点选择
-  - DOMAIN-SUFFIX,linkedin.com,🚀 节点选择
+  - DOMAIN-SUFFIX,linkedin.cn,🚀 节点选择
   - DOMAIN-SUFFIX,medium.com,🚀 节点选择
   - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
   - DOMAIN-SUFFIX,notion.so,🚀 节点选择
@@ -178,6 +178,7 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
 
