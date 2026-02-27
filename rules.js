@@ -141,6 +141,7 @@ window.clashRules = `
   - DOMAIN-SUFFIX,xvideos.com,🚀 节点选择
 
   # 直连列表
+  - DOMAIN-SUFFIX,cn,🎯 全球直连
   - DOMAIN-KEYWORD,115,🎯 全球直连
   - DOMAIN-KEYWORD,12306,🎯 全球直连
   - DOMAIN-KEYWORD,1688,🎯 全球直连
@@ -160,6 +161,7 @@ window.clashRules = `
   - DOMAIN-KEYWORD,weixin,🎯 全球直连
   - DOMAIN-KEYWORD,wechat,🎯 全球直连
   - DOMAIN-KEYWORD,douyin,🎯 全球直连
+  - DOMAIN-KEYWORD,jimeng,🎯 全球直连
   - DOMAIN-KEYWORD,douyu,🎯 全球直连
   - DOMAIN-KEYWORD,qq,🎯 全球直连
   - DOMAIN-KEYWORD,qcloud,🎯 全球直连
@@ -176,6 +178,7 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
 
