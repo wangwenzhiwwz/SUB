@@ -63,6 +63,7 @@ window.clashRules = `
   - DOMAIN-KEYWORD,ip,🚀 节点选择
   - DOMAIN-KEYWORD,adguard,🚀 节点选择
   - DOMAIN-KEYWORD,amazon,🚀 节点选择
+  - DOMAIN-KEYWORD,bing,🚀 节点选择
   - DOMAIN-KEYWORD,appsflyersdk,🚀 节点选择
   - DOMAIN-KEYWORD,artlist,🚀 节点选择
   - DOMAIN-KEYWORD,blogspot,🚀 节点选择
@@ -116,7 +117,6 @@ window.clashRules = `
   - DOMAIN-SUFFIX,apkpure.com,🚀 节点选择
   - DOMAIN-SUFFIX,bandwagonhost.com,🚀 节点选择
   - DOMAIN-SUFFIX,behance.net,🚀 节点选择
-  - DOMAIN-SUFFIX,bing.com,🚀 节点选择
   - DOMAIN-SUFFIX,blogger.com,🚀 节点选择
   - DOMAIN-SUFFIX,cloudcone.com,🚀 节点选择
   - DOMAIN-SUFFIX,cloudflare.com,🚀 节点选择
@@ -178,6 +178,7 @@ window.clashRules = `
   - MATCH,🐟 漏网之鱼
 
 `;
+
 
 
 
