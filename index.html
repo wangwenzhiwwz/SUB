@@ -80,18 +80,33 @@
         .icon-btn { width: 32px; height: 32px; padding: 0; margin: 0; background-color: var(--badge-bg); color: var(--badge-text); border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: background-color 0.2s, color 0.2s; cursor: pointer; border: none; }
         .icon-btn:hover { background-color: var(--btn-sec-hover); color: var(--btn-sec-text); }
         
-        .btn-clear { position: absolute; top: 10px; right: 10px; background-color: var(--clear-btn-bg); color: var(--text-color); opacity: 0; visibility: hidden; transition: all 0.2s ease; }
+        .btn-clear { 
+            position: absolute; top: 10px; right: 10px; 
+            background-color: var(--clear-btn-bg); color: var(--text-color); 
+            opacity: 0; visibility: hidden; 
+            transition: all 0.2s ease;
+        }
         .btn-clear:hover { background-color: var(--clear-btn-hover); }
-        .relative-wrapper.has-text:hover .btn-clear, .relative-wrapper.has-text:focus-within .btn-clear { opacity: 1; visibility: visible; }
+
+        .relative-wrapper.has-text:hover .btn-clear,
+        .relative-wrapper.has-text:focus-within .btn-clear {
+            opacity: 1; visibility: visible;
+        }
         
         .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color 0.3s, color 0.3s; }
         
         #toast { display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--toast-bg); color: var(--toast-text); padding: 0.75rem 1.5rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         
-        footer { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-top: 40px; padding-bottom: 20px; }
-        footer a { color: var(--text-color); text-decoration: none; font-weight: 500; }
+        footer { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-top: 40px; padding-bottom: 20px; transition: color 0.3s; }
+        footer a { color: var(--text-color); text-decoration: none; transition: color 0.3s; font-weight: 500; }
+        footer a:hover { text-decoration: underline; }
         
-        @media (max-width: 640px) { .header h1 { font-size: 2rem; } .header-logo { width: 36px; height: 36px; } }
+        @media (max-width: 640px) { 
+            .container { padding: 40px 15px 30px; }
+            .header { margin-bottom: 36px; gap: 14px; }
+            .header h1 { font-size: 2rem; } 
+            .header-logo { width: 36px; height: 36px; }
+        }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -115,7 +130,7 @@
                 <span id="nodeCount" class="badge text-sm font-medium px-3 py-1 hidden"></span>
             </div>
             <div class="relative-wrapper" id="inputWrapper">
-                <textarea id="inputLinks" rows="5" placeholder="Base64, Clash YAML, or Node links..." autofocus></textarea>
+                <textarea id="inputLinks" rows="5" placeholder="Paste Base64, vless, vmess, trojan, hysteria2..." autofocus></textarea>
                 <button id="clearButton" class="icon-btn btn-clear" title="Clear">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -124,7 +139,7 @@
 
         <div class="card" id="outputSection">
             <h2 class="text-lg font-semibold mb-4 cursor-default">Clash.Meta Configuration (Click to Copy)</h2>
-            <textarea id="outputConfig" rows="12" readonly placeholder="Output..."></textarea>
+            <textarea id="outputConfig" rows="12" readonly placeholder="Generated configuration..."></textarea>
             <div class="flex space-x-4 mt-4">
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
                 <button id="copyButton" class="flex-1">Copy</button>
@@ -146,60 +161,49 @@
     <script src="rules.js"></script>
 
     <script>
-        // --- 工具函数 ---
         function base64Decode(str) { try { return decodeURIComponent(escape(atob(str.replace(/-/g, '+').replace(/_/g, '/')))); } catch (e) { try { return atob(str.replace(/-/g, '+').replace(/_/g, '/')); } catch (e2) { return ''; } } }
-        function generateUniqueName(baseName, nameCounts) { 
-            let name = String(baseName).trim() || 'unnamed';
-            // 简单的节点名清洗
-            name = name.replace(/(剩余流量|官网|到期|通知|群组|地址|订阅|Expires|Traffic|Bandwidth).*$/i, '').trim();
-            if (!nameCounts[name]) { nameCounts[name] = 0; return name; } 
-            nameCounts[name]++; return `${name}_${nameCounts[name] + 1}`; 
-        }
+        function generateUniqueName(baseName, nameCounts) { const safeBaseName = String(baseName); if (!nameCounts[safeBaseName]) { nameCounts[safeBaseName] = 0; return safeBaseName; } nameCounts[safeBaseName]++; return `${safeBaseName}_${nameCounts[safeBaseName] + 1}`; }
 
-        // --- 多格式订阅解析逻辑 ---
-        function extractProxiesFromYaml(text) {
-            const proxies = [];
-            try {
-                // 寻找 proxies: 之后的内容
-                const proxySection = text.split(/proxies\s*:/)[1]?.split(/proxy-groups\s*:/)[0];
-                if (!proxySection) return [];
-                // 简单的正则提取 YAML 数组对象
-                const matches = proxySection.matchAll(/-\s*\{([^}]+)\}/g);
-                for (const match of matches) {
-                    try {
-                        const content = '{' + match[1].replace(/([a-zA-Z0-9_-]+):/g, '"$1":') + '}';
-                        proxies.push(JSON.parse(content));
-                    } catch(e) {}
-                }
-            } catch(e) {}
-            return proxies;
+        function tryDecodeBase64Sub(text) {
+            const trimmed = text.trim();
+            if (trimmed.includes('://')) return text; 
+            const decoded = base64Decode(trimmed);
+            if (decoded && decoded.includes('://')) return decoded;
+            return text;
         }
 
         function parseNodeLink(line, nc) {
             if (line.startsWith('vmess://')) {
                 const decoded = base64Decode(line.replace('vmess://', ''));
                 if (!decoded) return null;
-                const config = JSON.parse(decoded);
-                return { name: generateUniqueName(config.ps || 'vmess', nc), type: 'vmess', server: config.add, port: parseInt(config.port) || 443, cipher: config.scy || 'auto', uuid: config.id, alterId: parseInt(config.aid) || 0, tls: config.tls === 'tls', 'skip-cert-verify': true, servername: config.sni || '', network: config.net || 'ws', 'ws-opts': { path: config.path || '/', headers: { host: config.host || config.add } } };
+                try {
+                    const config = JSON.parse(decoded);
+                    return { name: generateUniqueName(config.ps || 'vmess', nc), type: 'vmess', server: config.add, port: parseInt(config.port) || 443, cipher: config.scy || 'auto', uuid: config.id, alterId: parseInt(config.aid) || 0, tls: config.tls === 'tls', 'skip-cert-verify': true, servername: config.sni || '', network: config.net || 'ws', 'ws-opts': { path: config.path || '/', headers: { host: config.host || config.add } } };
+                } catch(e) { return null; }
             }
             if (line.startsWith('vless://') || line.startsWith('trojan://')) {
                 try {
                     const url = new URL(line); const params = new URLSearchParams(url.search);
                     const type = line.split('://')[0];
-                    const proxy = { name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || type, nc), type: type, server: url.hostname, port: parseInt(url.port) || 443, uuid: url.username, password: url.username, udp: true, tls: params.get('security') === 'reality' || params.get('security') === 'tls' || type==='trojan', servername: params.get('sni') || params.get('host') || url.hostname };
+                    const proxy = { name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || type, nc), type: type, server: url.hostname, port: parseInt(url.port) || 443, udp: true, tls: params.get('security') === 'reality' || params.get('security') === 'tls' || type === 'trojan', servername: params.get('sni') || params.get('host') || url.hostname };
                     if (type === 'vless') {
+                        proxy.uuid = url.username;
                         proxy.network = params.get('type') || 'tcp';
                         if (params.get('flow')) proxy.flow = params.get('flow');
                         if (params.get('type') === 'ws') proxy['ws-opts'] = { path: params.get('path') || '/', headers: { host: params.get('host') || url.hostname } };
                         if (params.get('security') === 'reality') proxy['reality-opts'] = { 'public-key': params.get('pbk'), 'short-id': params.get('sid') };
+                    } else {
+                        proxy.password = url.username;
+                        proxy['skip-cert-verify'] = true;
                     }
-                    if (type === 'trojan') proxy['skip-cert-verify'] = true;
                     return proxy;
                 } catch (e) { return null; }
             }
             if (line.startsWith('hysteria2://')) {
-                const url = new URL(line); const params = new URLSearchParams(url.search);
-                return { name: generateUniqueName(url.hash.replace('#', '') || 'hysteria2', nc), type: 'hysteria2', server: url.hostname, port: parseInt(url.port) || 443, password: url.username || '', sni: params.get('sni') || '', 'skip-cert-verify': params.get('insecure') === '1' };
+                try {
+                    const url = new URL(line); const params = new URLSearchParams(url.search);
+                    return { name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || 'hysteria2', nc), type: 'hysteria2', server: url.hostname, port: parseInt(url.port) || 443, password: url.username || '', sni: params.get('sni') || '', 'skip-cert-verify': params.get('insecure') === '1' };
+                } catch(e) { return null; }
             }
             if (line.startsWith('ss://')) {
                 try {
@@ -212,7 +216,7 @@
             return null;
         }
 
-        // --- Clash 配置生成器 ---
+        // 恢复原来的 YAML 格式
         function generateClashConfig(proxies) {
             const proxyNames = proxies.map(p => p.name);
             const timestamp = new Date().toLocaleString();
@@ -229,11 +233,28 @@ dns:
   enabled: true
   listen: 0.0.0.0:1053
   ipv6: true
+  default-nameserver:
+    - 223.5.5.5
+    - 114.114.114.114
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - '*.linksys.com'
+    - swscan.apple.com
+    - mesu.apple.com
+    - time.*.com
+    - ntp.*.com
+    - +.pool.ntp.org
+    - localhost.ptlogin2.qq.com
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
+  fallback-filter:
+    geoip: false
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
 
 proxies:
 ${proxies.map(p => `  - ${JSON.stringify(p)}`).join('\n')}
@@ -241,42 +262,62 @@ ${proxies.map(p => `  - ${JSON.stringify(p)}`).join('\n')}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    proxies: [♻️ 自动选择, DIRECT, ${proxyNames.join(', ')}]
+    proxies:
+      - ♻️ 自动选择
+      - DIRECT
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
-    proxies: [${proxyNames.join(', ')}]
+    tolerance: 50
+    proxies:
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 📺 YouTube
     type: select
-    proxies: [🚀 节点选择, ${proxyNames.join(', ')}]
+    proxies:
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🧸 OpenAI
     type: select
-    proxies: [🚀 节点选择, ${proxyNames.join(', ')}]
+    proxies:
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🍎 苹果服务
     type: select
-    proxies: [🎯 全球直连, DIRECT, ${proxyNames.join(', ')}]
+    proxies:
+      - 🎯 全球直连
+      - DIRECT
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🎯 全球直连
     type: select
-    proxies: [DIRECT, 🚀 节点选择]
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🛑 全球拦截
     type: select
-    proxies: [REJECT, 🚀 节点选择]
+    proxies:
+      - REJECT
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
   - name: 🐟 漏网之鱼
     type: select
-    proxies: [🚀 节点选择, DIRECT]
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+${proxyNames.map(name => `      - ${name}`).join('\n')}
 
 rules:
 ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
         }
 
-        // --- 核心交互逻辑 ---
         const outputField = document.getElementById('outputConfig');
         const inputField = document.getElementById('inputLinks');
         const nodeCountSpan = document.getElementById('nodeCount');
         const copyBtn = document.getElementById('copyButton');
+        const inputWrapper = document.getElementById('inputWrapper');
 
-        // 输入防抖
         let debounceTimer;
         inputField.addEventListener('input', () => {
             clearTimeout(debounceTimer);
@@ -288,39 +329,35 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             localStorage.setItem('subDraft_wwz_im', val);
             
             if (!val) {
-                document.getElementById('inputWrapper').classList.remove('has-text');
+                inputWrapper.classList.remove('has-text');
                 outputField.value = '';
                 nodeCountSpan.classList.add('hidden');
                 return;
             }
-            document.getElementById('inputWrapper').classList.add('has-text');
+            inputWrapper.classList.add('has-text');
 
-            let proxies = [];
-            const nc = {};
+            let processText = tryDecodeBase64Sub(val);
+            const rawLines = processText.split(/\s+/).filter(l => l.includes('://'));
+            const uniqueLines = [...new Set(rawLines)];
+
+            const proxies = []; const nc = {};
             let invalidCount = 0;
 
-            // 1. 尝试解析为 Clash YAML
-            if (val.includes('proxies:')) {
-                proxies = extractProxiesFromYaml(val);
-            } else {
-                // 2. 尝试 Base64 解码并处理 Node Links
-                let decodedText = base64Decode(val) || val;
-                const lines = [...new Set(decodedText.split(/\s+/).filter(l => l.includes('://')))];
-                lines.forEach(line => {
-                    const p = parseNodeLink(line, nc);
-                    if (p) proxies.push(p); else invalidCount++;
-                });
-            }
-
+            uniqueLines.forEach(line => {
+                const p = parseNodeLink(line, nc);
+                if (p) proxies.push(p); else invalidCount++;
+            });
+            
             outputField.value = proxies.length > 0 ? generateClashConfig(proxies) : '';
             
             if (proxies.length > 0 || invalidCount > 0) {
                 nodeCountSpan.innerText = `✓ ${proxies.length}${invalidCount ? ` | ✕ ${invalidCount}` : ''}`;
                 nodeCountSpan.classList.remove('hidden');
+            } else {
+                nodeCountSpan.classList.add('hidden');
             }
         }
 
-        // --- 按钮与拖拽逻辑 ---
         copyBtn.addEventListener('click', () => {
             if (!outputField.value) return;
             outputField.select(); document.execCommand('copy');
