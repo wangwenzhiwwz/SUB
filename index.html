@@ -12,24 +12,29 @@
         .header { text-align: center; margin-bottom: 40px; }
         .header h1 { font-size: 2.5rem; font-weight: 700; color: #333; letter-spacing: -0.02em; }
         .card { background-color: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: none; }
+        .relative-wrapper { position: relative; }
         textarea { width: 100%; border: none; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.4; background-color: #ffffff; color: #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); transition: background-color 0.2s ease; cursor: pointer; resize: vertical; }
         textarea:focus { background-color: #f1f1f1; outline: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-        button { background-color: #333; color: #ffffff; font-weight: 600; padding: 14px 0; border-radius: 30px; border: none; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s ease; font-size: 1rem; }
+        button { background-color: #333; color: #ffffff; font-weight: 600; padding: 14px 0; border-radius: 30px; border: none; cursor: pointer; width: 100%; margin-top: 10px; transition: all 0.3s ease; font-size: 1rem; }
         button:hover { background-color: #555; }
         .button-secondary { background-color: #e0e0e0; color: #333; margin-top: 10px; }
         .button-secondary:hover { background-color: #d0d0d0; }
+        
+        /* Clear 按钮专属样式 */
+        .btn-clear { position: absolute; top: 10px; right: 10px; width: auto; margin: 0; padding: 6px 14px; font-size: 0.85rem; font-weight: 500; background-color: #f1f1f1; color: #666; border-radius: 6px; box-shadow: none; }
+        .btn-clear:hover { background-color: #e0e0e0; color: #333; }
+        
         #toast { display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: white; padding: 0.75rem 1.5rem; border-radius: 9999px; font-size: 0.875rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         footer { text-align: center; font-size: 0.875rem; color: #888; margin-top: 40px; padding-bottom: 20px; }
         footer a { color: #333; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
         @media (max-width: 640px) { .header h1 { font-size: 2rem; } .card { padding: 20px 15px; } button { font-size: 1rem; } }
 
-        /* 优化滚动条显示，降低视觉复杂度 */
+        /* 优化滚动条显示 */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #c0c0c0; }
-        /* 针对 Firefox 的细微调整 */
         * { scrollbar-width: thin; scrollbar-color: #e0e0e0 transparent; }
     </style>
 </head>
@@ -40,8 +45,14 @@
         </header>
 
         <div class="card" id="inputSection">
-            <h2 class="text-xl font-semibold mb-4">Input Node Links</h2>
-            <textarea id="inputLinks" rows="5" placeholder="Paste one vmess://, vless://, hysteria2://, trojan://, http://, socks5://, or ss:// link per line..." autofocus></textarea>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Input Node Links</h2>
+                <span id="nodeCount" class="text-sm font-medium text-gray-700 bg-gray-200 px-3 py-1 rounded-full hidden"></span>
+            </div>
+            <div class="relative-wrapper">
+                <textarea id="inputLinks" rows="5" placeholder="Paste Base64 subscription or vmess://, vless://, hysteria2://, trojan://, http://, socks5://, ss:// links..." autofocus></textarea>
+                <button id="clearButton" class="btn-clear hidden">Clear</button>
+            </div>
         </div>
 
         <div class="card" id="outputSection">
@@ -61,7 +72,6 @@
                 <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/index.html">Clash</a>
                 <a href="https://github.com/wangwenzhiwwz/Clash6/edit/main/index.html">Clash6</a>
                 <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/Wangwenzhi/index.html">WangWenzhi</a>
-            
             </div>
         </footer>
     </div>
@@ -69,8 +79,17 @@
     <script src="rules.js"></script>
 
     <script>
-        function base64Decode(str) { try { return atob(str.replace(/-/g, '+').replace(/_/g, '/')); } catch (e) { return ''; } }
+        function base64Decode(str) { try { return decodeURIComponent(escape(atob(str.replace(/-/g, '+').replace(/_/g, '/')))); } catch (e) { try { return atob(str.replace(/-/g, '+').replace(/_/g, '/')); } catch (e2) { return ''; } } }
         function generateUniqueName(baseName, nameCounts) { const safeBaseName = String(baseName); if (!nameCounts[safeBaseName]) { nameCounts[safeBaseName] = 0; return safeBaseName; } nameCounts[safeBaseName]++; return `${safeBaseName}_${nameCounts[safeBaseName] + 1}`; }
+
+        // 尝试解析整段 Base64 订阅内容
+        function tryDecodeBase64Sub(text) {
+            const trimmed = text.trim();
+            if (trimmed.includes('://')) return text; 
+            const decoded = base64Decode(trimmed);
+            if (decoded && decoded.includes('://')) return decoded;
+            return text;
+        }
 
         function parseVmess(link, nameCounts) {
             const decoded = base64Decode(link.replace('vmess://', ''));
@@ -268,6 +287,10 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
 
         const toast = document.getElementById('toast');
         const outputField = document.getElementById('outputConfig');
+        const inputField = document.getElementById('inputLinks');
+        const clearBtn = document.getElementById('clearButton');
+        const nodeCountSpan = document.getElementById('nodeCount');
+        const copyBtn = document.getElementById('copyButton');
 
         function showToast(msg = "Copied to clipboard!") {
             toast.innerText = msg;
@@ -280,16 +303,54 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             outputField.select();
             document.execCommand('copy');
             showToast();
+            
+            const originalText = copyBtn.innerText;
+            const originalBg = copyBtn.style.backgroundColor;
+            copyBtn.innerText = '✓ Copied!';
+            copyBtn.style.backgroundColor = '#000'; 
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+                copyBtn.style.backgroundColor = originalBg;
+            }, 2000);
         };
 
         outputField.addEventListener('click', handleCopy);
-        document.getElementById('copyButton').addEventListener('click', handleCopy);
+        copyBtn.addEventListener('click', handleCopy);
 
-        document.getElementById('inputLinks').addEventListener('input', () => {
-            const val = document.getElementById('inputLinks').value.trim();
-            const lines = val.split('\n').filter(l => l.trim());
-            const proxies = []; const nc = {};
-            lines.forEach((line, index) => {
+        clearBtn.addEventListener('click', () => {
+            inputField.value = '';
+            outputField.value = '';
+            localStorage.removeItem('subDraft_wwz_im'); // 清理缓存
+            clearBtn.classList.add('hidden');
+            nodeCountSpan.classList.add('hidden');
+            inputField.focus();
+        });
+
+        function processInput() {
+            const val = inputField.value;
+            localStorage.setItem('subDraft_wwz_im', val); // 保存至 LocalStorage
+            
+            if (val.trim().length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+                outputField.value = '';
+                nodeCountSpan.classList.add('hidden');
+                return;
+            }
+
+            // 支持 Base64 解析
+            let processText = tryDecodeBase64Sub(val);
+
+            // 自动去重 (Deduplication)
+            const rawLines = processText.split('\n').map(l => l.trim()).filter(l => l);
+            const uniqueLines = [...new Set(rawLines)];
+
+            const proxies = []; 
+            const nc = {};
+            let invalidCount = 0;
+
+            uniqueLines.forEach((line, index) => {
                 let p = null;
                 if (line.startsWith('vmess://')) p = parseVmess(line, nc);
                 else if (line.startsWith('vless://')) p = parseVless(line, nc);
@@ -298,10 +359,31 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
                 else if (line.startsWith('http://')) p = parseHttp(line, index, nc);
                 else if (line.startsWith('socks5://')) p = parseSocks5(line, index, nc);
                 else if (line.startsWith('ss://')) p = parseSs(line, nc);
-                if (p) proxies.push(p);
+                
+                if (p) {
+                    proxies.push(p);
+                } else {
+                    invalidCount++; // 统计无效链接
+                }
             });
+            
             outputField.value = proxies.length > 0 ? generateClashConfig(proxies) : '';
-        });
+            
+            // 徽章反馈：展示成功解析和无效数量
+            if (proxies.length > 0 || invalidCount > 0) {
+                let statusText = `✓ ${proxies.length} Nodes`;
+                if (invalidCount > 0) {
+                    statusText += ` | ${invalidCount} Invalid`;
+                }
+                nodeCountSpan.innerText = statusText;
+                nodeCountSpan.classList.remove('hidden');
+            } else {
+                nodeCountSpan.classList.add('hidden');
+            }
+        }
+
+        // 监听输入事件
+        inputField.addEventListener('input', processInput);
 
         document.getElementById('downloadButton').addEventListener('click', () => {
             const cfg = outputField.value; if (!cfg) return;
@@ -310,9 +392,14 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             const a = document.createElement('a'); a.href = url; a.download = 'config.yaml'; a.click();
         });
 
-        // 页面加载完成后自动聚焦输入框
+        // 页面加载完成后，恢复草稿并自动解析
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('inputLinks').focus();
+            inputField.focus();
+            const savedDraft = localStorage.getItem('subDraft_wwz_im');
+            if (savedDraft) {
+                inputField.value = savedDraft;
+                processInput(); // 触发解析逻辑
+            }
         });
     </script>
 </body>
