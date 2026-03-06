@@ -12,7 +12,7 @@
         .header { text-align: center; margin-bottom: 40px; }
         .header h1 { font-size: 2.5rem; font-weight: 700; color: #333; letter-spacing: -0.02em; }
         .card { background-color: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: none; }
-        textarea { width: 100%; border: none; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.4; background-color: #ffffff; color: #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); transition: background-color 0.2s ease; cursor: pointer; }
+        textarea { width: 100%; border: none; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.4; background-color: #ffffff; color: #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); transition: background-color 0.2s ease; cursor: pointer; resize: vertical; }
         textarea:focus { background-color: #f1f1f1; outline: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
         button { background-color: #333; color: #ffffff; font-weight: 600; padding: 14px 0; border-radius: 30px; border: none; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s ease; font-size: 1rem; }
         button:hover { background-color: #555; }
@@ -23,6 +23,14 @@
         footer a { color: #333; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
         @media (max-width: 640px) { .header h1 { font-size: 2rem; } .card { padding: 20px 15px; } button { font-size: 1rem; } }
+
+        /* 优化滚动条显示，降低视觉复杂度 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c0c0c0; }
+        /* 针对 Firefox 的细微调整 */
+        * { scrollbar-width: thin; scrollbar-color: #e0e0e0 transparent; }
     </style>
 </head>
 <body>
@@ -33,15 +41,15 @@
 
         <div class="card" id="inputSection">
             <h2 class="text-xl font-semibold mb-4">Input Node Links</h2>
-            <textarea id="inputLinks" rows="5" placeholder="Paste one vmess://, vless://, hysteria2://, trojan://, http://, socks5://, or ss:// link per line..."></textarea>
+            <textarea id="inputLinks" rows="5" placeholder="Paste one vmess://, vless://, hysteria2://, trojan://, http://, socks5://, or ss:// link per line..." autofocus></textarea>
         </div>
 
         <div class="card" id="outputSection">
             <h2 class="text-xl font-semibold mb-4">Clash.Meta Configuration (Click to Copy)</h2>
             <textarea id="outputConfig" rows="12" readonly placeholder="Output will appear here..."></textarea>
             <div class="flex space-x-4 mt-4">
-                <button id="copyButton" class="flex-1">Copy</button>
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
+                <button id="copyButton" class="flex-1">Copy</button>
             </div>
         </div>
 
@@ -300,6 +308,11 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             const blob = new Blob([cfg], { type: 'text/yaml' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a'); a.href = url; a.download = 'config.yaml'; a.click();
+        });
+
+        // 页面加载完成后自动聚焦输入框
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('inputLinks').focus();
         });
     </script>
 </body>
