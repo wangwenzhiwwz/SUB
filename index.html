@@ -185,7 +185,20 @@
                 try {
                     const url = new URL(line); const params = new URLSearchParams(url.search);
                     const type = line.split('://')[0];
-                    const proxy = { name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || type, nc), type: type, server: url.hostname, port: parseInt(url.port) || 443, udp: true, tls: params.get('security') === 'reality' || params.get('security') === 'tls' || type === 'trojan', servername: params.get('sni') || params.get('host') || url.hostname };
+                    const proxy = { 
+                        name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || type, nc), 
+                        type: type, 
+                        server: url.hostname, 
+                        port: parseInt(url.port) || 443, 
+                        udp: true, 
+                        tls: params.get('security') === 'reality' || params.get('security') === 'tls' || type === 'trojan', 
+                        servername: params.get('sni') || params.get('host') || url.hostname 
+                    };
+                    
+                    if (params.get('fp')) {
+                        proxy['client-fingerprint'] = params.get('fp');
+                    }
+
                     if (type === 'vless') {
                         proxy.uuid = url.username;
                         proxy.network = params.get('type') || 'tcp';
@@ -216,7 +229,6 @@
             return null;
         }
 
-        // 恢复原来的 YAML 格式
         function generateClashConfig(proxies) {
             const proxyNames = proxies.map(p => p.name);
             const timestamp = new Date().toLocaleString();
