@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUB.WWZ.iM</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="https://wangwenzhi.eu.org/images/favicon_io/favicon.ico">
+    <style>
+        body { background-color: #f5f5f5; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; margin: 0; padding: 0; box-sizing: border-box; }
+        .container { max-width: 1000px; width: 100%; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.5rem; font-weight: 700; color: #333; letter-spacing: -0.02em; }
+        .card { background-color: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: none; }
+        textarea { width: 100%; border: none; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.4; background-color: #ffffff; color: #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); transition: background-color 0.2s ease; cursor: pointer; }
+        textarea:focus { background-color: #f1f1f1; outline: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        button { background-color: #333; color: #ffffff; font-weight: 600; padding: 14px 0; border-radius: 30px; border: none; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color 0.3s ease; font-size: 1rem; }
+        button:hover { background-color: #555; }
+        .button-secondary { background-color: #e0e0e0; color: #333; margin-top: 10px; }
+        .button-secondary:hover { background-color: #d0d0d0; }
+        #toast { display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: white; padding: 0.75rem 1.5rem; border-radius: 9999px; font-size: 0.875rem; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        footer { text-align: center; font-size: 0.875rem; color: #888; margin-top: 40px; padding-bottom: 20px; }
+        footer a { color: #333; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { .header h1 { font-size: 2rem; } .card { padding: 20px 15px; } button { font-size: 1rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>SUB.WWZ.iM</h1>
+        </header>
+
+        <div class="card" id="inputSection">
+            <h2 class="text-xl font-semibold mb-4">Input Node Links</h2>
+            <textarea id="inputLinks" rows="5" placeholder="Paste one vmess://, vless://, hysteria2://, trojan://, http://, socks5://, or ss:// link per line..."></textarea>
+        </div>
+
+        <div class="card" id="outputSection">
+            <h2 class="text-xl font-semibold mb-4">Clash.Meta Configuration (Click to Copy)</h2>
+            <textarea id="outputConfig" rows="12" readonly placeholder="Output will appear here..."></textarea>
+            <div class="flex space-x-4 mt-4">
+                <button id="copyButton" class="flex-1">Copy</button>
+                <button id="downloadButton" class="flex-1 button-secondary">Download</button>
+            </div>
+        </div>
+
+        <div id="toast">Copied to clipboard!</div>
+
+        <footer>
+            <p>Designed by WWZ.iM © 2026</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/index.html">Clash</a>
+                <a href="https://github.com/wangwenzhiwwz/Clash6/edit/main/index.html">Clash6</a>
+                <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/Wangwenzhi/index.html">WangWenzhi</a>
+            
+            </div>
+        </footer>
+    </div>
+
+    <script src="rules.js"></script>
+
+    <script>
+        function base64Decode(str) { try { return atob(str.replace(/-/g, '+').replace(/_/g, '/')); } catch (e) { return ''; } }
+        function generateUniqueName(baseName, nameCounts) { const safeBaseName = String(baseName); if (!nameCounts[safeBaseName]) { nameCounts[safeBaseName] = 0; return safeBaseName; } nameCounts[safeBaseName]++; return `${safeBaseName}_${nameCounts[safeBaseName] + 1}`; }
+
+        function parseVmess(link, nameCounts) {
+            const decoded = base64Decode(link.replace('vmess://', ''));
+            if (!decoded) return null;
+            try {
+                const config = JSON.parse(decoded);
+                return { name: generateUniqueName(config.ps || 'vmess', nameCounts), type: 'vmess', server: config.add, port: parseInt(config.port) || 443, cipher: config.scy || 'auto', uuid: config.id, alterId: parseInt(config.aid) || 0, tls: config.tls === 'tls', 'skip-cert-verify': true, servername: config.sni || '', network: config.net || 'ws', 'ws-opts': { path: config.path || '/', headers: { host: config.host || config.add } } };
+            } catch (e) { return null; }
+        }
+
+        function parseVless(link, nameCounts) {
+            try {
+                const url = new URL(link); const params = new URLSearchParams(url.search);
+                const proxy = { name: generateUniqueName(decodeURIComponent(url.hash.replace('#', '')) || 'vless', nameCounts), type: 'vless', server: url.hostname, port: parseInt(url.port) || 443, udp: true, uuid: url.username, tls: params.get('security') === 'reality' || params.get('security') === 'tls', servername: params.get('sni') || params.get('host') || url.hostname, network: params.get('type') || 'tcp' };
+                if (params.get('flow')) proxy.flow = params.get('flow');
+                if (params.get('type') === 'ws') proxy['ws-opts'] = { path: params.get('path') || '/', headers: { host: params.get('host') || url.hostname } };
+                if (params.get('security') === 'reality') proxy['reality-opts'] = { 'public-key': params.get('pbk'), 'short-id': params.get('sid') };
+                if (params.get('fp')) proxy['client-fingerprint'] = params.get('fp');
+                return proxy;
+            } catch (e) { return null; }
+        }
+
+        function parseHysteria2(link, nameCounts) {
+            const url = new URL(link); const params = new URLSearchParams(url.search);
+            return { name: generateUniqueName(url.hash.replace('#', '') || 'hysteria2', nameCounts), type: 'hysteria2', server: url.hostname, port: parseInt(url.port) || 443, password: url.username || '', sni: params.get('sni') || '', 'skip-cert-verify': params.get('insecure') === '1' };
+        }
+
+        function parseTrojan(link, nameCounts) {
+            const url = new URL(link);
+            return { name: generateUniqueName(url.hash.replace('#', '') || 'trojan', nameCounts), type: 'trojan', server: url.hostname, port: parseInt(url.port) || 443, password: url.username, udp: true, 'skip-cert-verify': true };
+        }
+
+        function parseHttp(link, index, nameCounts) {
+            const url = new URL(link);
+            const proxy = { name: generateUniqueName('http', nameCounts), type: 'http', server: url.hostname, port: parseInt(url.port) || 80 };
+            if (url.username) proxy.username = url.username; if (url.password) proxy.password = url.password;
+            return proxy;
+        }
+
+        function parseSocks5(link, index, nameCounts) {
+            const url = new URL(link);
+            return { name: generateUniqueName('socks5', nameCounts), type: 'socks5', server: url.hostname, port: parseInt(url.port) || 1080 };
+        }
+
+        function parseSs(link, nameCounts) {
+            try {
+                const parts = link.replace('ss://', '').split('@'); if (parts.length !== 2) return null;
+                const auth = base64Decode(parts[0]); const [cipher, password] = auth.split(':');
+                const serverInfo = parts[1].split('#'); const [server, port] = serverInfo[0].split(':');
+                return { name: generateUniqueName(decodeURIComponent(serverInfo[1] || 'shadowsocks'), nameCounts), type: 'ss', server, port: parseInt(port) || 8388, cipher, password };
+            } catch (e) { return null; }
+        }
+
+        function generateClashConfig(proxies) {
+            const proxyNames = proxies.map(p => p.name);
+            const timestamp = new Date().toLocaleString();
+            return `####################################
+# 创建者：WWZ.iM
+# 客户端：Clash.Meta
+# 创建时间：${timestamp}
+####################################
+mixed-port: 7890
+allow-lan: true
+log-level: info
+external-controller: 0.0.0.0:9090
+dns:
+  enabled: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  default-nameserver:
+    - 223.5.5.5
+    - 114.114.114.114
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.lan'
+    - '*.linksys.com'
+    - '*.linksyssmartwifi.com'
+    - swscan.apple.com
+    - mesu.apple.com
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - '*.time.edu.cn'
+    - '*.ntp.org.cn'
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - +.music.163.com
+    - '*.126.net'
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - '*.kuwo.cn'
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - +.y.qq.com
+    - +.music.tc.qq.com
+    - aqqmusic.tc.qq.com
+    - +.stream.qqmusic.qq.com
+    - '*.xiami.com'
+    - +.music.migu.cn
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - xbox.*.microsoft.com
+    - +.xboxlive.com
+    - localhost.ptlogin2.qq.com
+    - proxy.golang.org
+    - stun.*.*
+    - stun.*.*.*
+    - '*.mcdn.bilivideo.cn'
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback-filter:
+    geoip: false
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+
+proxies:
+${proxies.map(p => `  - ${JSON.stringify(p).replace(/"/g, '"')}`).join('\n')}
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - DIRECT
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 📺 YouTube
+    type: select
+    proxies:
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🧸 OpenAI
+    type: select
+    proxies:
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - DIRECT
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🛑 全球拦截
+    type: select
+    proxies:
+      - REJECT
+      - 🚀 节点选择
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+${proxyNames.map(name => `      - ${name}`).join('\n')}
+
+rules:
+${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
+        }
+
+        const toast = document.getElementById('toast');
+        const outputField = document.getElementById('outputConfig');
+
+        function showToast(msg = "Copied to clipboard!") {
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        }
+
+        const handleCopy = () => {
+            if (!outputField.value) return;
+            outputField.select();
+            document.execCommand('copy');
+            showToast();
+        };
+
+        outputField.addEventListener('click', handleCopy);
+        document.getElementById('copyButton').addEventListener('click', handleCopy);
+
+        document.getElementById('inputLinks').addEventListener('input', () => {
+            const val = document.getElementById('inputLinks').value.trim();
+            const lines = val.split('\n').filter(l => l.trim());
+            const proxies = []; const nc = {};
+            lines.forEach((line, index) => {
+                let p = null;
+                if (line.startsWith('vmess://')) p = parseVmess(line, nc);
+                else if (line.startsWith('vless://')) p = parseVless(line, nc);
+                else if (line.startsWith('hysteria2://')) p = parseHysteria2(line, nc);
+                else if (line.startsWith('trojan://')) p = parseTrojan(line, nc);
+                else if (line.startsWith('http://')) p = parseHttp(line, index, nc);
+                else if (line.startsWith('socks5://')) p = parseSocks5(line, index, nc);
+                else if (line.startsWith('ss://')) p = parseSs(line, nc);
+                if (p) proxies.push(p);
+            });
+            outputField.value = proxies.length > 0 ? generateClashConfig(proxies) : '';
+        });
+
+        document.getElementById('downloadButton').addEventListener('click', () => {
+            const cfg = outputField.value; if (!cfg) return;
+            const blob = new Blob([cfg], { type: 'text/yaml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'config.yaml'; a.click();
+        });
+    </script>
+</body>
+</html>
