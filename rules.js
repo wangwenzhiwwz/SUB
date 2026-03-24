@@ -89,6 +89,7 @@ window.clashRules = `
   - DOMAIN-KEYWORD,messenger,🚀 节点选择
   - DOMAIN-KEYWORD,microsoft,🚀 节点选择
   - DOMAIN-KEYWORD,notion,🚀 节点选择
+  - DOMAIN-KEYWORD,nvidia,🚀 节点选择
   - DOMAIN-KEYWORD,onedrive,🚀 节点选择
   - DOMAIN-KEYWORD,oracle,🚀 节点选择
   - DOMAIN-KEYWORD,parsec,🚀 节点选择
@@ -129,7 +130,6 @@ window.clashRules = `
   - DOMAIN-SUFFIX,linkedin.cn,🚀 节点选择
   - DOMAIN-SUFFIX,medium.com,🚀 节点选择
   - DOMAIN-SUFFIX,milanote.com,🚀 节点选择
-  - DOMAIN-SUFFIX,notion.so,🚀 节点选择
   - DOMAIN-SUFFIX,reddit.com,🚀 节点选择
   - DOMAIN-SUFFIX,t.co,🚀 节点选择
   - DOMAIN-SUFFIX,t.me,🚀 节点选择
