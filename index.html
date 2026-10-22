@@ -95,7 +95,10 @@
         
         .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color 0.3s, color 0.3s; }
         
-        #toast { display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--toast-bg); color: var(--toast-text); padding: 0.75rem 1.5rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        #toast { display: block; position: fixed; left: 50%; bottom: 2rem; transform: translate(-50%, 12px); background: var(--toast-bg); color: var(--toast-text); padding: 0.75rem 1.25rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; white-space: nowrap; }
+        #toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+        #toast.error { --toast-bg: #b42318; --toast-text: #ffffff; }
+        @media (max-width: 640px) { #toast { bottom: 1.25rem; max-width: calc(100vw - 32px); text-align: center; } }
         
         footer { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-top: 40px; padding-bottom: 20px; transition: color 0.3s; }
         footer a { color: var(--text-color); text-decoration: none; transition: color 0.3s; font-weight: 500; }
@@ -418,13 +421,47 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             }
         }
 
-        copyBtn.addEventListener('click', () => {
-            if (!outputField.value) return;
-            outputField.select(); document.execCommand('copy');
-            const oldText = copyBtn.innerText;
-            copyBtn.innerText = '✓ Copied';
-            setTimeout(() => copyBtn.innerText = oldText, 2000);
-        });
+        let toastTimer;
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.toggle('error', isError);
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show', 'error');
+            }, 2200);
+        }
+
+        async function copyConfiguration() {
+            const text = outputField.value;
+            if (!text.trim()) {
+                showToast('没有可复制的配置', true);
+                return false;
+            }
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    outputField.focus();
+                    outputField.select();
+                    const copied = document.execCommand('copy');
+                    if (!copied) throw new Error('Copy command failed');
+                    outputField.setSelectionRange(0, 0);
+                }
+                showToast('✓ 配置已复制到剪贴板');
+                const oldText = copyBtn.innerText;
+                copyBtn.innerText = '✓ 已复制';
+                clearTimeout(copyBtn._resetTimer);
+                copyBtn._resetTimer = setTimeout(() => copyBtn.innerText = oldText, 2000);
+                return true;
+            } catch (error) {
+                showToast('复制失败，请手动选择并复制', true);
+                return false;
+            }
+        }
+
+        copyBtn.addEventListener('click', copyConfiguration);
 
         document.getElementById('clearButton').addEventListener('click', () => {
             inputField.value = ''; processInput(); inputField.focus();
