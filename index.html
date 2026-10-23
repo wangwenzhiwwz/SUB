@@ -107,7 +107,7 @@
         
         .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color 0.3s, color 0.3s; }
         
-        .copy-status { min-height: 0; margin-top: 0; text-align: center; font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); transition: margin-top .18s ease; }\n        .copy-status:not(:empty) { min-height: 1.2rem; margin-top: 8px; }
+
         .copy-status[data-state="success"] { color: #16803c; }
         .copy-status[data-state="error"] { color: #c0392b; }
         @media (prefers-color-scheme: dark) {
@@ -195,7 +195,6 @@
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
                 <button id="copyButton" class="flex-1">Copy</button>
             </div>
-            <p id="copyStatus" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
         </div>
 
         <div class="quick-links-wrap">
@@ -470,19 +469,12 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             }
         }
 
-        const copyStatus = document.getElementById('copyStatus');
         let copyFeedbackTimer;
-
-        function showCopyStatus(message, state = 'idle') {
-            copyStatus.textContent = message;
-            copyStatus.dataset.state = state;
-        }
 
         async function copyConfiguration() {
             const text = outputField.value;
             clearTimeout(copyFeedbackTimer);
             if (!text.trim()) {
-                showCopyStatus('Nothing to copy yet. Add valid node links first.', 'error');
                 return false;
             }
 
@@ -502,7 +494,6 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
                     if (!copied) throw new Error('Clipboard copy command was rejected');
                 }
 
-                showCopyStatus('✓ Configuration copied to clipboard.', 'success');
                 const oldText = copyBtn.dataset.originalLabel || copyBtn.innerText;
                 copyBtn.dataset.originalLabel = oldText === '✓ Copied' ? 'Copy' : oldText;
                 copyBtn.innerText = '✓ Copied';
@@ -511,7 +502,6 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
                 }, 2000);
                 return true;
             } catch (error) {
-                showCopyStatus('Copy failed. Allow clipboard access, or select the configuration and press Ctrl+C / ⌘C.', 'error');
                 return false;
             }
         }
