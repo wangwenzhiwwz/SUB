@@ -64,18 +64,21 @@
         .header-logo { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease; }
         .header-logo:hover { transform: scale(1.08); }
 
-        .card { background-color: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: none; transition: background-color 0.3s, border 0.3s; border: 2px solid transparent; }
-        .card.drag-active { border: 2px dashed var(--drag-border); background-color: var(--input-focus); }
-        
+        .card { background-color: var(--card-bg); border-radius: 18px; padding: 20px; margin-bottom: 22px; box-shadow: 0 1px 2px rgba(0,0,0,.025); transition: background-color .25s ease, box-shadow .25s ease; border: 1px solid transparent; }
+        .card.drag-active { border-color: var(--text-muted); background-color: var(--input-focus); }
+        .card h2 { letter-spacing: -0.015em; }
         .relative-wrapper { position: relative; }
-        textarea { width: 100%; border: none; border-radius: 8px; padding: 14px; font-size: 0.95rem; line-height: 1.4; background-color: var(--input-bg); color: var(--text-color); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); transition: background-color 0.2s ease, color 0.3s; cursor: pointer; resize: vertical; }
-        textarea:focus { background-color: var(--input-focus); outline: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-        textarea::placeholder { color: var(--text-muted); opacity: 0.4; font-weight: 400; }
-        
-        button { background-color: var(--btn-bg); color: var(--btn-text); font-weight: 600; padding: 14px 0; border-radius: 9999px; border: none; cursor: pointer; width: 100%; margin-top: 10px; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; font-size: 1rem; }
-        button:hover { background-color: var(--btn-hover); }
-        .button-secondary { background-color: var(--btn-sec-bg); color: var(--btn-sec-text); margin-top: 10px; }
-        .button-secondary:hover { background-color: var(--btn-sec-hover); }
+        textarea { display: block; width: 100%; border: 1px solid transparent; border-radius: 12px; padding: 14px 16px; font-size: .95rem; line-height: 1.5; background-color: var(--input-bg); color: var(--text-color); box-shadow: none; transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; cursor: text; resize: vertical; }
+        #outputConfig { cursor: copy; }
+        textarea:hover { background-color: var(--input-focus); }
+        textarea:focus { background-color: var(--input-focus); outline: none; border-color: rgba(128,128,128,.28); box-shadow: 0 0 0 3px rgba(128,128,128,.08); }
+        textarea::placeholder { color: var(--text-muted); opacity: .65; font-weight: 400; }
+        button { background-color: var(--btn-bg); color: var(--btn-text); font-weight: 600; padding: 13px 0; border-radius: 9999px; border: 1px solid transparent; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; display: flex; justify-content: center; align-items: center; font-size: 1rem; }
+        button:hover { background-color: var(--btn-hover); transform: translateY(-1px); }
+        button:active { transform: translateY(0) scale(.985); }
+        button:focus-visible { outline: 2px solid var(--text-muted); outline-offset: 3px; }
+        .button-secondary { background-color: transparent; color: var(--text-color); margin-top: 10px; border-color: rgba(128,128,128,.2); }
+        .button-secondary:hover { background-color: var(--input-focus); border-color: rgba(128,128,128,.35); }
         
         .icon-btn { width: 32px; height: 32px; padding: 0; margin: 0; background-color: var(--badge-bg); color: var(--badge-text); border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: background-color 0.2s, color 0.2s; cursor: pointer; border: none; }
         .icon-btn:hover { background-color: var(--btn-sec-hover); color: var(--btn-sec-text); }
@@ -102,8 +105,7 @@
             .copy-status[data-state="success"] { color: #6ee7a0; }
             .copy-status[data-state="error"] { color: #ff8f8f; }
         }
-        #outputConfig { cursor: copy; }
-        #outputConfig:focus-visible { outline: 2px solid var(--text-muted); outline-offset: 2px; }
+        #outputConfig:focus-visible { outline: none; }
         .quick-links-wrap { position: relative; min-height: 54px; display: flex; align-items: center; justify-content: center; }
         #quickLinks { transition: opacity 0.18s ease; }
         #quickLinks a { transition: opacity 0.18s ease; }
@@ -114,11 +116,13 @@
         footer a:hover { text-decoration: underline; }
         .quick-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem; margin: 0.1rem 0 0.5rem; }
         .quick-links a { display: inline-flex; align-items: center; justify-content: center; padding: 0.28rem 0.6rem; border-radius: 9999px; background: transparent; color: var(--text-color); font-size: 0.9rem; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease; }
-        .quick-links a:hover, .quick-links a:focus-visible { background: #eeeeee; color: #333333; text-decoration: none; box-shadow: none; transform: none; outline: none; }
+        .quick-links a:hover, .quick-links a:focus-visible { background: var(--input-focus); color: var(--text-color); text-decoration: none; box-shadow: none; transform: none; outline: none; }
         .quick-links a:active { transform: scale(0.97); }
         @media (prefers-reduced-motion: reduce) { .quick-links a { transition: none; } }
         
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
         @media (max-width: 640px) { 
+            .card { padding: 14px; border-radius: 15px; }
             .container { padding: 40px 15px 30px; }
             .header { margin-bottom: 36px; gap: 14px; }
             .header h1 { font-size: 2rem; } 
