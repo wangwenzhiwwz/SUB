@@ -98,10 +98,6 @@
         .quick-links-wrap { position: relative; min-height: 54px; display: flex; align-items: center; justify-content: center; }
         #quickLinks { transition: opacity 0.18s ease; }
         #quickLinks a { transition: opacity 0.18s ease; }
-        #toast { position: absolute; left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 6px)); background: var(--toast-bg); color: var(--toast-text); padding: 0.7rem 1.35rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; z-index: 5; box-shadow: 0 4px 12px rgba(0,0,0,0.14); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; white-space: nowrap; max-width: calc(100vw - 32px); text-align: center; }
-        #toast.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
-        #toast.error { --toast-bg: #b42318; --toast-text: #ffffff; }
-        .quick-links-wrap.toast-active #quickLinks { opacity: 0; }
         @media (max-width: 640px) { .quick-links-wrap { min-height: 52px; } #toast { font-size: 0.82rem; padding: 0.68rem 1rem; } }
         
         footer { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-top: 40px; padding-bottom: 20px; transition: color 0.3s; }
@@ -164,7 +160,6 @@
                 <a href="https://github.com/wangwenzhiwwz/Clash6/edit/main/index.html">Clash6</a>
                 <a href="https://github.com/wangwenzhiwwz/Clash/edit/main/Wangwenzhi/index.html">WangWenzhi</a>
             </div>
-            <div id="toast" role="status" aria-live="polite">✓ 配置已复制到剪贴板</div>
         </div>
 
         <footer>
@@ -431,24 +426,16 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             }
         }
 
-        let toastTimer;
         function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.toggle('error', isError);
-            toast.closest('.quick-links-wrap').classList.add('toast-active');
-            toast.classList.add('show');
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('show', 'error');
-                toast.closest('.quick-links-wrap').classList.remove('toast-active');
-            }, 2200);
+            // Feedback is shown directly on the Copy button; no floating toast.
+            copyBtn.setAttribute('aria-live', 'polite');
+            copyBtn.title = message;
         }
 
         async function copyConfiguration() {
             const text = outputField.value;
             if (!text.trim()) {
-                showToast('没有可复制的配置', true);
+                showToast('Nothing to copy', true);
                 return false;
             }
             try {
@@ -461,14 +448,14 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
                     if (!copied) throw new Error('Copy command failed');
                     outputField.setSelectionRange(0, 0);
                 }
-                showToast('✓ 配置已复制到剪贴板');
+                showToast('Configuration copied');
                 const oldText = copyBtn.innerText;
-                copyBtn.innerText = '✓ 已复制';
+                copyBtn.innerText = '✓ Copied';
                 clearTimeout(copyBtn._resetTimer);
                 copyBtn._resetTimer = setTimeout(() => copyBtn.innerText = oldText, 2000);
                 return true;
             } catch (error) {
-                showToast('复制失败，请手动选择并复制', true);
+                showToast('Copy failed. Please select and copy manually.', true);
                 return false;
             }
         }
