@@ -117,11 +117,11 @@
         #outputConfig:focus-visible { outline: none; }
         #outputSection { position: relative; }
         .output-wrap { position: relative; overflow: hidden; border-radius: 12px; }
-        .output-wrap::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 64px; pointer-events: none; background: linear-gradient(to bottom, rgba(247,247,248,0), rgba(247,247,248,.48) 45%, rgba(247,247,248,.78)); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); mask-image: linear-gradient(to bottom, transparent, black 48%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 48%); transition: opacity .18s ease; }
+        .output-wrap::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 96px; pointer-events: none; background: linear-gradient(to bottom, rgba(247,247,248,0) 0%, rgba(247,247,248,.02) 20%, rgba(247,247,248,.07) 40%, rgba(247,247,248,.18) 60%, rgba(247,247,248,.4) 80%, rgba(247,247,248,.68) 100%); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.06) 20%, rgba(0,0,0,.22) 42%, rgba(0,0,0,.55) 70%, black 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.06) 20%, rgba(0,0,0,.22) 42%, rgba(0,0,0,.55) 70%, black 100%); transition: opacity .25s ease; }
         @media (prefers-color-scheme: dark) {
-            .output-wrap::after { background: linear-gradient(to bottom, rgba(29,29,32,0), rgba(29,29,32,.48) 45%, rgba(29,29,32,.82)); }
+            .output-wrap::after { background: linear-gradient(to bottom, rgba(29,29,32,0) 0%, rgba(29,29,32,.02) 20%, rgba(29,29,32,.07) 40%, rgba(29,29,32,.17) 60%, rgba(29,29,32,.42) 80%, rgba(29,29,32,.72) 100%); }
         }
-        .output-wrap:focus-within::after { opacity: .22; }
+        .output-wrap:focus-within::after { opacity: .1; }
         #outputSection h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
         .copy-hint { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-muted); font-size: .75rem; font-weight: 500; letter-spacing: 0; opacity: .85; transition: color .18s ease; }
         .copy-hint svg { width: 14px; height: 14px; }
