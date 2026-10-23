@@ -107,7 +107,7 @@
         
         .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color 0.3s, color 0.3s; }
         
-        .copy-status { min-height: 1.35rem; margin-top: 10px; text-align: center; font-size: 0.9rem; color: var(--text-muted); }
+        .copy-status { min-height: 0; margin-top: 0; text-align: center; font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); transition: margin-top .18s ease; }\n        .copy-status:not(:empty) { min-height: 1.2rem; margin-top: 8px; }
         .copy-status[data-state="success"] { color: #16803c; }
         .copy-status[data-state="error"] { color: #c0392b; }
         @media (prefers-color-scheme: dark) {
@@ -195,7 +195,7 @@
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
                 <button id="copyButton" class="flex-1">Copy</button>
             </div>
-            <p id="copyStatus" class="copy-status" role="status" aria-live="polite" aria-atomic="true">Click the configuration or Copy to copy it.</p>
+            <p id="copyStatus" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
         </div>
 
         <div class="quick-links-wrap">
