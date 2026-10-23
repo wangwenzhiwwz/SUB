@@ -106,6 +106,13 @@
             .copy-status[data-state="error"] { color: #ff8f8f; }
         }
         #outputConfig:focus-visible { outline: none; }
+        #outputSection { position: relative; }
+        #outputSection h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .copy-hint { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-muted); font-size: .75rem; font-weight: 500; letter-spacing: 0; opacity: .85; transition: color .18s ease, opacity .18s ease; }
+        .copy-hint svg { width: 14px; height: 14px; }
+        #outputSection:hover .copy-hint { color: var(--text-color); opacity: 1; }
+        #outputConfig:hover { background-color: var(--input-focus); }
+        #outputConfig:active { background-color: var(--card-bg); }
         .quick-links-wrap { position: relative; min-height: 54px; display: flex; align-items: center; justify-content: center; }
         #quickLinks { transition: opacity 0.18s ease; }
         #quickLinks a { transition: opacity 0.18s ease; }
@@ -159,7 +166,13 @@
         </div>
 
         <div class="card" id="outputSection">
-            <h2 class="text-lg font-semibold mb-4 cursor-default">Clash.Meta Configuration (Click to Copy)</h2>
+            <h2 class="text-lg font-semibold mb-4 cursor-default">
+                <span>Clash.Meta Configuration</span>
+                <span class="copy-hint" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
+                    <span>Click to copy</span>
+                </span>
+            </h2>
             <textarea id="outputConfig" rows="12" readonly placeholder="Generated configuration..."></textarea>
             <div class="flex space-x-4 mt-4">
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
