@@ -12,8 +12,8 @@
             --text-color: #252525;
             --text-muted: #77777d;
             --card-bg: #ffffff;
-            --input-bg: #f1f1f2;
-            --input-focus: #eaeaec;
+            --input-bg: #f7f7f8;
+            --input-focus: #f0f0f1;
             --btn-bg: #262626;
             --btn-text: #ffffff;
             --btn-hover: #404040;
@@ -35,8 +35,8 @@
                 --text-color: #ededf0;
                 --text-muted: #92929a;
                 --card-bg: #19191c;
-                --input-bg: #222225;
-                --input-focus: #2a2a2e;
+                --input-bg: #1d1d20;
+                --input-focus: #242428;
                 --btn-bg: #ededf0;
                 --btn-text: #18181b;
                 --btn-hover: #ffffff;
@@ -108,6 +108,13 @@
         }
         #outputConfig:focus-visible { outline: none; }
         #outputSection { position: relative; }
+        .output-wrap { position: relative; overflow: hidden; border-radius: 12px; }
+        .output-wrap::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 58px; pointer-events: none; background: linear-gradient(to bottom, rgba(247,247,248,0), rgba(247,247,248,.88)); }
+        @media (prefers-color-scheme: dark) {
+            .output-wrap::after { background: linear-gradient(to bottom, rgba(29,29,32,0), rgba(29,29,32,.9)); }
+        }
+        .output-wrap:focus-within::after { opacity: .35; }
+        .output-wrap::after { transition: opacity .18s ease; }
         #outputSection h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
         .copy-hint { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-muted); font-size: .75rem; font-weight: 500; letter-spacing: 0; opacity: .85; transition: color .18s ease; }
         .copy-hint svg { width: 14px; height: 14px; }
@@ -174,7 +181,9 @@
                     <span>Click to copy</span>
                 </span>
             </h2>
-            <textarea id="outputConfig" rows="12" readonly placeholder="Generated configuration..."></textarea>
+            <div class="output-wrap">
+                <textarea id="outputConfig" rows="12" readonly placeholder="Generated configuration..." aria-label="Generated configuration. Click to copy."></textarea>
+            </div>
             <div class="flex space-x-4 mt-4">
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
                 <button id="copyButton" class="flex-1">Copy</button>
