@@ -72,6 +72,9 @@
         #outputConfig { cursor: copy; }
         textarea:hover { background-color: var(--input-focus); }
         textarea:focus { background-color: var(--input-focus); outline: none; box-shadow: none; }
+        textarea:focus-visible { outline: 1px solid rgba(128,128,128,.22); outline-offset: 2px; }
+        #inputLinks:focus { background-image: linear-gradient(135deg, rgba(255,255,255,.12), transparent 45%); }
+        @media (prefers-color-scheme: dark) { #inputLinks:focus { background-image: linear-gradient(135deg, rgba(255,255,255,.035), transparent 45%); } }
         textarea::placeholder { color: var(--text-muted); opacity: .65; font-weight: 400; }
         button { position: relative; isolation: isolate; overflow: hidden; background: rgba(128,128,128,.10); color: var(--text-color); font-weight: 600; padding: 13px 0; border-radius: 9999px; border: 1px solid rgba(128,128,128,.14); cursor: pointer; width: 100%; margin-top: 10px; transition: background-color .18s ease, color .18s ease, transform .18s ease, border-color .18s ease; display: flex; justify-content: center; align-items: center; font-size: 1rem; backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); }
         button::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, rgba(255,255,255,.48), rgba(255,255,255,.06) 55%, rgba(128,128,128,.08)); pointer-events: none; }
@@ -105,7 +108,11 @@
             opacity: 1; visibility: visible;
         }
         
-        .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color 0.3s, color 0.3s; }
+        .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color .25s ease, color .25s ease, transform .22s ease, opacity .22s ease; }
+        .badge.count-updated { animation: count-pop .28s ease-out; }
+        @keyframes count-pop { 0% { transform: scale(.94); opacity: .65; } 65% { transform: scale(1.035); } 100% { transform: scale(1); opacity: 1; } }
+        #outputConfig.output-updated { animation: output-reveal .26s ease-out; }
+        @keyframes output-reveal { from { opacity: .72; } to { opacity: 1; } }
         
 
         .copy-status[data-state="success"] { color: #16803c; }
@@ -442,6 +449,7 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             if (!val) {
                 inputWrapper.classList.remove('has-text');
                 outputField.value = '';
+                outputField.classList.remove('output-updated');
                 nodeCountSpan.classList.add('hidden');
                 return;
             }
@@ -459,11 +467,25 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
                 if (p) proxies.push(p); else invalidCount++;
             });
             
-            outputField.value = proxies.length > 0 ? generateClashConfig(proxies) : '';
+            const nextOutput = proxies.length > 0 ? generateClashConfig(proxies) : '';
+            const outputChanged = outputField.value !== nextOutput;
+            outputField.value = nextOutput;
+            if (outputChanged && nextOutput) {
+                outputField.classList.remove('output-updated');
+                void outputField.offsetWidth;
+                outputField.classList.add('output-updated');
+            }
             
             if (proxies.length > 0 || invalidCount > 0) {
-                nodeCountSpan.innerText = `✓ ${proxies.length}${invalidCount ? ` | ✕ ${invalidCount}` : ''}`;
+                const nextCount = `✓ ${proxies.length}${invalidCount ? ` | ✕ ${invalidCount}` : ''}`;
+                const countChanged = nodeCountSpan.innerText !== nextCount;
+                nodeCountSpan.innerText = nextCount;
                 nodeCountSpan.classList.remove('hidden');
+                if (countChanged) {
+                    nodeCountSpan.classList.remove('count-updated');
+                    void nodeCountSpan.offsetWidth;
+                    nodeCountSpan.classList.add('count-updated');
+                }
             } else {
                 nodeCountSpan.classList.add('hidden');
             }
@@ -496,7 +518,7 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
 
                 const oldText = copyBtn.dataset.originalLabel || copyBtn.innerText;
                 copyBtn.dataset.originalLabel = oldText === '✓ Copied' ? 'Copy' : oldText;
-                copyBtn.innerText = '✓ Copied';
+                copyBtn.innerHTML = '<span aria-hidden="true">✓</span>&nbsp;Copied';
                 copyFeedbackTimer = setTimeout(() => {
                     copyBtn.innerText = copyBtn.dataset.originalLabel || 'Copy';
                 }, 2000);
