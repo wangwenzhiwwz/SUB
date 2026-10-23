@@ -64,21 +64,22 @@
         .header-logo { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease; }
         .header-logo:hover { transform: scale(1.08); }
 
-        .card { background-color: var(--card-bg); border-radius: 18px; padding: 20px; margin-bottom: 22px; box-shadow: 0 1px 2px rgba(0,0,0,.025); transition: background-color .25s ease, box-shadow .25s ease; border: 1px solid transparent; }
+        .card { background-color: var(--card-bg); border-radius: 18px; padding: 20px; margin-bottom: 22px; box-shadow: none; transition: background-color .2s ease; border: none; }
         .card.drag-active { border-color: var(--text-muted); background-color: var(--input-focus); }
         .card h2 { letter-spacing: -0.015em; }
         .relative-wrapper { position: relative; }
-        textarea { display: block; width: 100%; border: 1px solid transparent; border-radius: 12px; padding: 14px 16px; font-size: .95rem; line-height: 1.5; background-color: var(--input-bg); color: var(--text-color); box-shadow: none; transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; cursor: text; resize: vertical; }
+        textarea { display: block; width: 100%; border: none; border-radius: 12px; padding: 14px 16px; font-size: .95rem; line-height: 1.5; background-color: var(--input-bg); color: var(--text-color); box-shadow: none; transition: background-color .18s ease; cursor: text; resize: vertical; }
         #outputConfig { cursor: copy; }
         textarea:hover { background-color: var(--input-focus); }
-        textarea:focus { background-color: var(--input-focus); outline: none; border-color: rgba(128,128,128,.28); box-shadow: 0 0 0 3px rgba(128,128,128,.08); }
+        textarea:focus { background-color: var(--input-focus); outline: none; box-shadow: none; }
         textarea::placeholder { color: var(--text-muted); opacity: .65; font-weight: 400; }
         button { background-color: var(--btn-bg); color: var(--btn-text); font-weight: 600; padding: 13px 0; border-radius: 9999px; border: 1px solid transparent; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; display: flex; justify-content: center; align-items: center; font-size: 1rem; }
         button:hover { background-color: var(--btn-hover); transform: translateY(-1px); }
         button:active { transform: translateY(0) scale(.985); }
         button:focus-visible { outline: 2px solid var(--text-muted); outline-offset: 3px; }
-        .button-secondary { background-color: transparent; color: var(--text-color); margin-top: 10px; border-color: rgba(128,128,128,.2); }
-        .button-secondary:hover { background-color: var(--input-focus); border-color: rgba(128,128,128,.35); }
+        .card, textarea, button { box-shadow: none !important; }
+        .button-secondary { background-color: var(--btn-sec-bg); color: var(--btn-sec-text); margin-top: 10px; border-color: transparent; }
+        .button-secondary:hover { background-color: var(--btn-sec-hover); }
         
         .icon-btn { width: 32px; height: 32px; padding: 0; margin: 0; background-color: var(--badge-bg); color: var(--badge-text); border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: background-color 0.2s, color 0.2s; cursor: pointer; border: none; }
         .icon-btn:hover { background-color: var(--btn-sec-hover); color: var(--btn-sec-text); }
@@ -108,9 +109,9 @@
         #outputConfig:focus-visible { outline: none; }
         #outputSection { position: relative; }
         #outputSection h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-        .copy-hint { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-muted); font-size: .75rem; font-weight: 500; letter-spacing: 0; opacity: .85; transition: color .18s ease, opacity .18s ease; }
+        .copy-hint { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-muted); font-size: .75rem; font-weight: 500; letter-spacing: 0; opacity: .85; transition: color .18s ease; }
         .copy-hint svg { width: 14px; height: 14px; }
-        #outputSection:hover .copy-hint { color: var(--text-color); opacity: 1; }
+        #outputSection:hover .copy-hint { color: var(--text-color); }
         #outputConfig:hover { background-color: var(--input-focus); }
         #outputConfig:active { background-color: var(--card-bg); }
         .quick-links-wrap { position: relative; min-height: 54px; display: flex; align-items: center; justify-content: center; }
