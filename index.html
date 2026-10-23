@@ -73,13 +73,21 @@
         textarea:hover { background-color: var(--input-focus); }
         textarea:focus { background-color: var(--input-focus); outline: none; box-shadow: none; }
         textarea::placeholder { color: var(--text-muted); opacity: .65; font-weight: 400; }
-        button { background-color: var(--btn-bg); color: var(--btn-text); font-weight: 600; padding: 13px 0; border-radius: 9999px; border: 1px solid transparent; cursor: pointer; width: 100%; margin-top: 10px; transition: background-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; display: flex; justify-content: center; align-items: center; font-size: 1rem; }
-        button:hover { background-color: var(--btn-hover); transform: translateY(-1px); }
-        button:active { transform: translateY(0) scale(.985); }
+        button { position: relative; isolation: isolate; overflow: hidden; background: rgba(128,128,128,.10); color: var(--text-color); font-weight: 600; padding: 13px 0; border-radius: 9999px; border: 1px solid rgba(128,128,128,.14); cursor: pointer; width: 100%; margin-top: 10px; transition: background-color .18s ease, color .18s ease, transform .18s ease, border-color .18s ease; display: flex; justify-content: center; align-items: center; font-size: 1rem; backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); }
+        button::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, rgba(255,255,255,.48), rgba(255,255,255,.06) 55%, rgba(128,128,128,.08)); pointer-events: none; }
+        button:hover { background: rgba(128,128,128,.17); border-color: rgba(128,128,128,.24); transform: translateY(-1px); }
+        button:active { background: rgba(128,128,128,.22); transform: translateY(0) scale(.985); }
+        @media (prefers-color-scheme: dark) {
+            button { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.1); color: var(--text-color); }
+            button::before { background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.015) 55%, rgba(255,255,255,.04)); }
+            button:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.18); }
+            button:active { background: rgba(255,255,255,.16); }
+        }
         button:focus-visible { outline: 2px solid var(--text-muted); outline-offset: 3px; }
         .card, textarea, button { box-shadow: none !important; }
-        .button-secondary { background-color: var(--btn-sec-bg); color: var(--btn-sec-text); margin-top: 10px; border-color: transparent; }
-        .button-secondary:hover { background-color: var(--btn-sec-hover); }
+        .button-secondary { background: rgba(128,128,128,.07); color: var(--text-color); margin-top: 10px; border-color: rgba(128,128,128,.12); }
+        .button-secondary:hover { background: rgba(128,128,128,.14); }
+        @media (prefers-color-scheme: dark) { .button-secondary { background: rgba(255,255,255,.045); color: var(--text-color); border-color: rgba(255,255,255,.08); } .button-secondary:hover { background: rgba(255,255,255,.1); } }
         
         .icon-btn { width: 32px; height: 32px; padding: 0; margin: 0; background-color: var(--badge-bg); color: var(--badge-text); border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: background-color 0.2s, color 0.2s; cursor: pointer; border: none; }
         .icon-btn:hover { background-color: var(--btn-sec-hover); color: var(--btn-sec-text); }
@@ -109,12 +117,11 @@
         #outputConfig:focus-visible { outline: none; }
         #outputSection { position: relative; }
         .output-wrap { position: relative; overflow: hidden; border-radius: 12px; }
-        .output-wrap::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 58px; pointer-events: none; background: linear-gradient(to bottom, rgba(247,247,248,0), rgba(247,247,248,.88)); }
+        .output-wrap::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 64px; pointer-events: none; background: linear-gradient(to bottom, rgba(247,247,248,0), rgba(247,247,248,.48) 45%, rgba(247,247,248,.78)); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); mask-image: linear-gradient(to bottom, transparent, black 48%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 48%); transition: opacity .18s ease; }
         @media (prefers-color-scheme: dark) {
-            .output-wrap::after { background: linear-gradient(to bottom, rgba(29,29,32,0), rgba(29,29,32,.9)); }
+            .output-wrap::after { background: linear-gradient(to bottom, rgba(29,29,32,0), rgba(29,29,32,.48) 45%, rgba(29,29,32,.82)); }
         }
-        .output-wrap:focus-within::after { opacity: .35; }
-        .output-wrap::after { transition: opacity .18s ease; }
+        .output-wrap:focus-within::after { opacity: .22; }
         #outputSection h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
         .copy-hint { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; color: var(--text-muted); font-size: .75rem; font-weight: 500; letter-spacing: 0; opacity: .85; transition: color .18s ease; }
         .copy-hint svg { width: 14px; height: 14px; }
