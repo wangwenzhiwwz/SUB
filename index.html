@@ -95,6 +95,15 @@
         
         .badge { background-color: var(--badge-bg); color: var(--badge-text); border-radius: 9999px; transition: background-color 0.3s, color 0.3s; }
         
+        .copy-status { min-height: 1.35rem; margin-top: 10px; text-align: center; font-size: 0.9rem; color: var(--text-muted); }
+        .copy-status[data-state="success"] { color: #16803c; }
+        .copy-status[data-state="error"] { color: #c0392b; }
+        @media (prefers-color-scheme: dark) {
+            .copy-status[data-state="success"] { color: #6ee7a0; }
+            .copy-status[data-state="error"] { color: #ff8f8f; }
+        }
+        #outputConfig { cursor: copy; }
+        #outputConfig:focus-visible { outline: 2px solid var(--text-muted); outline-offset: 2px; }
         .quick-links-wrap { position: relative; min-height: 54px; display: flex; align-items: center; justify-content: center; }
         #quickLinks { transition: opacity 0.18s ease; }
         #quickLinks a { transition: opacity 0.18s ease; }
@@ -152,6 +161,7 @@
                 <button id="downloadButton" class="flex-1 button-secondary">Download</button>
                 <button id="copyButton" class="flex-1">Copy</button>
             </div>
+            <p id="copyStatus" class="copy-status" role="status" aria-live="polite" aria-atomic="true">Click the configuration or Copy to copy it.</p>
         </div>
 
         <div class="quick-links-wrap">
@@ -426,41 +436,60 @@ ${window.clashRules || '  - MATCH,🐟 漏网之鱼'}`;
             }
         }
 
-        function showToast(message, isError = false) {
-            // Feedback is shown directly on the Copy button; no floating toast.
-            copyBtn.setAttribute('aria-live', 'polite');
-            copyBtn.title = message;
+        const copyStatus = document.getElementById('copyStatus');
+        let copyFeedbackTimer;
+
+        function showCopyStatus(message, state = 'idle') {
+            copyStatus.textContent = message;
+            copyStatus.dataset.state = state;
         }
 
         async function copyConfiguration() {
             const text = outputField.value;
+            clearTimeout(copyFeedbackTimer);
             if (!text.trim()) {
-                showToast('Nothing to copy', true);
+                showCopyStatus('Nothing to copy yet. Add valid node links first.', 'error');
                 return false;
             }
+
             try {
                 if (navigator.clipboard && window.isSecureContext) {
                     await navigator.clipboard.writeText(text);
                 } else {
+                    // Legacy fallback for browsers or contexts without the Clipboard API.
+                    const previousFocus = document.activeElement;
+                    const start = outputField.selectionStart;
+                    const end = outputField.selectionEnd;
                     outputField.focus();
                     outputField.select();
                     const copied = document.execCommand('copy');
-                    if (!copied) throw new Error('Copy command failed');
-                    outputField.setSelectionRange(0, 0);
+                    outputField.setSelectionRange(start, end);
+                    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+                    if (!copied) throw new Error('Clipboard copy command was rejected');
                 }
-                showToast('Configuration copied');
-                const oldText = copyBtn.innerText;
+
+                showCopyStatus('✓ Configuration copied to clipboard.', 'success');
+                const oldText = copyBtn.dataset.originalLabel || copyBtn.innerText;
+                copyBtn.dataset.originalLabel = oldText === '✓ Copied' ? 'Copy' : oldText;
                 copyBtn.innerText = '✓ Copied';
-                clearTimeout(copyBtn._resetTimer);
-                copyBtn._resetTimer = setTimeout(() => copyBtn.innerText = oldText, 2000);
+                copyFeedbackTimer = setTimeout(() => {
+                    copyBtn.innerText = copyBtn.dataset.originalLabel || 'Copy';
+                }, 2000);
                 return true;
             } catch (error) {
-                showToast('Copy failed. Please select and copy manually.', true);
+                showCopyStatus('Copy failed. Allow clipboard access, or select the configuration and press Ctrl+C / ⌘C.', 'error');
                 return false;
             }
         }
 
         copyBtn.addEventListener('click', copyConfiguration);
+        outputField.addEventListener('click', () => copyConfiguration());
+        outputField.addEventListener('keydown', event => {
+            if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+                event.preventDefault();
+                copyConfiguration();
+            }
+        });
 
         document.getElementById('clearButton').addEventListener('click', () => {
             inputField.value = ''; processInput(); inputField.focus();
